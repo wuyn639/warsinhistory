@@ -1,6 +1,6 @@
 --- 
-title: "YOUR TITLE HERE"
-author: "YOUR NAMES HERE"
+title: "Wars in History, 1816-2007"
+author: "Priyanka Lahoti, Hima Bindu Bhardwaj, Jasmine Bao, Yingnan Wu"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
