@@ -1,1 +1,3 @@
 # Data transformation
+
+Describe the process of getting the data into a form in which you could work with it in R.
