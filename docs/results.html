@@ -24,7 +24,7 @@
 <meta name="author" content="Priyanka Lahoti, Hima Bindu Bhardwaj, Jasmine Bao, Yingnan Wu" />
 
 
-<meta name="date" content="2019-12-02" />
+<meta name="date" content="2019-12-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -73,7 +73,9 @@
 <li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
-<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
+<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a><ul>
+<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#war-types"><i class="fa fa-check"></i><b>5.1</b> War Types</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
 <li class="divider"></li>
@@ -98,19 +100,18 @@
 <div id="results" class="section level1">
 <h1><span class="header-section-number">Chapter 5</span> Results</h1>
 <p>Provide a short nontechnical summary of the most revealing findings of your analysis written for a nontechnical audience. Take extra care to clean up your graphs, ensuring that best practices for presentation are followed, as described in the audience ready style section below.</p>
+<div id="war-types" class="section level2">
+<h2><span class="header-section-number">5.1</span> War Types</h2>
+<p>In the first place, we are interested in what types of wars happened most frequently in that the original data sets are divided into 4 types: intra-state, inter-state, extra-state, and non-state wars. It is observed from <em>Figure 1</em> that there are most intra-state wars with number over 400, and then inter-state wars, extra-state wars with non-state wars are the least. Considering that the scale of inter-state wars is usually larger than scale of intra-state wars, the larger number of intra-state wars is expected and non-state wars are not very common with least occurences. In addition, according to <em>Figure 2</em> and definitions of wars types, we found that:</p>
 <ul>
-<li><p>Title, axis labels, tick mark labels, and legends should be comprehensible (easy to understand) and legible (easy to read / decipher).</p></li>
-<li><p>Tick marks should not be labeled in scientific notation or with long strings of zeros, such as 3000000000. Instead, convert to smaller numbers and change the units: 3000000000 becomes “3” and the axis label “billions of views”.</p></li>
-<li><p>Units should be intuitive (An axis labeled in month/day/year format is intuitive; one labeled in seconds since January 1, 1970 is not.)</p></li>
-<li><p>The font size should be large enough to read clearly. The default in ggplot2 is generally too small. You can easily change it by passing the base font size to the theme, such as + theme_grey(16) (The default base font size is 11).</p></li>
-<li><p>The order of items on the axes and legends should be logical. (Alphabetical is usually not the best option.)</p></li>
-<li><p>Colors should be color-vision-deficiency-friendly.</p></li>
-<li><p>If categorical variable levels are long, set up the graph so the categorical variable is on the y-axis and the names are horizontal. A better option, if possible, is to shorten the names of the levels.</p></li>
-<li><p>Not all EDA graphs lend themselves to presentation, either because the graph form is hard to understand without practice or it’s not well labeled. The labeling problem can be solved by adding text in an image editor. The downside is that it is not reproducible. If you want to go this route, for the Mac, Keynote and Paintbrush are good, free options.</p></li>
-<li><p>Err on the side of simplicity. Don’t, for example, overuse color when it’s not necessary. Ask yourself: does color make this graph any clearer? If it doesn’t, leave it out.</p></li>
-<li><p>Test your graphs on nontechnical friends and family and ask for feedback.</p></li>
+<li>Within extra-state wars, there are two thrids of extra-state wars are imperial and one third of extra-state wars are colonial.</li>
+<li>All inter-state wars only have one type as inter-state.</li>
+<li>More than hald of the intra-state wars are civil wars for central control, while 40% are civil wars for local issues. In terms of the remaining intr-state wars, there are approximately twice intercommunal wars as regional internal wars.</li>
+<li>Among all non-state wars, the majority wars happened in non-state territories while little were cross state borders (actually there was one).</li>
 </ul>
+<p><img src="_main_files/figure-html/unnamed-chunk-4-1.png" width="1027.2" /></p>
 
+</div>
 </div>
             </section>
 

@@ -3,22 +3,129 @@
 Provide a short nontechnical summary of the most revealing findings of your analysis written for a nontechnical audience. Take extra care to clean up your graphs, ensuring that best practices for presentation are followed, as described in the audience ready style section below.
 
 
-* Title, axis labels, tick mark labels, and legends should be comprehensible (easy to understand) and legible (easy to read / decipher).
+```{r, include=FALSE}
+# mute all warnings and messgaes, and set codes not shown
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
 
-* Tick marks should not be labeled in scientific notation or with long strings of zeros, such as 3000000000. Instead, convert to smaller numbers and change the units: 3000000000 becomes “3” and the axis label “billions of views”.
+# install and load the libraries
+if(!require("ggplot2")) { install.packages("ggplot2"); library("ggplot2")}
+if(!require("dplyr")) { install.packages("dplyr"); library("dplyr")}
+if(!require("tidyverse")) { install.packages("tidyverse"); library("tidyverse")}
+if(!require("maps")) { install.packages("maps"); library("maps")}
+if(!require("GGally")) { install.packages("GGally"); library("GGally")}
+if(!require("RColorBrewer")) { install.packages("RColorBrewer"); library("RColorBrewer")}
+if(!require("parcoords")) { install.packages("parcoords"); library("parcoords")}
+if(!require("gridExtra")) { install.packages("gridExtra"); library("gridExtra")}
+if(!require("cowplot")) { install.packages("cowplot"); library("cowplot")}
+if(!require("plotly")) { install.packages("plotly"); library("plotly")}
+if(!require("vcd")) { install.packages("vcd"); library("vcd")}
+if(!require("ggmosaic")) { install.packages("ggmosaic"); library("ggmosaic")}
+if(!require("ggthemes")) { install.packages("ggthemes"); library("ggthemes")}
+```
 
-* Units should be intuitive (An axis labeled in month/day/year format is intuitive; one labeled in seconds since January 1, 1970 is not.)
 
-* The font size should be large enough to read clearly. The default in ggplot2 is generally too small. You can easily change it by passing the base font size to the theme, such as + theme_grey(16) (The default base font size is 11).
+## War Types
 
-* The order of items on the axes and legends should be logical. (Alphabetical is usually not the best option.)
+In the first place, we are interested in what types of wars happened most frequently in that the original data sets are divided into 4 types: intra-state, inter-state, extra-state, and non-state wars. It is observed from *Figure 1* that there are most intra-state wars with number over 400, and then inter-state wars, extra-state wars with non-state wars are the least. Considering that the scale of inter-state wars is usually larger than scale of intra-state wars, the larger number of intra-state wars is expected and non-state wars are not very common with least occurences. In addition, according to *Figure 2* and definitions of wars types, we found that:  
 
-* Colors should be color-vision-deficiency-friendly.
+* Within extra-state wars, there are two thrids of extra-state wars are imperial and one third of extra-state wars are colonial.
+* All inter-state wars only have one type as inter-state.
+* More than hald of the intra-state wars are civil wars for central control, while 40% are civil wars for local issues. In terms of the remaining intr-state wars, there are approximately twice intercommunal wars as regional internal wars.
+* Among all non-state wars, the majority wars happened in non-state territories while little were cross state borders (actually there was one).
 
-* If categorical variable levels are long, set up the graph so the categorical variable is on the y-axis and the names are horizontal. A better option, if possible, is to shorten the names of the levels.
+```{r fig.width=5}
+# import data
+inter_state <- read.csv('data/raw/Inter-StateWarData_v4.0.csv')
+intra_state <- read.csv('data/raw/Intra-StateWarData_v4.1.csv')
+extra_state <- read.csv('data/raw/Extra-StateWarData_v4.0.csv')
+non_state <- read.csv('data/raw/Non-StateWarData_v4.0.csv')
 
-* Not all EDA graphs lend themselves to presentation, either because the graph form is hard to understand without practice or it’s not well labeled. The labeling problem can be solved by adding text in an image editor. The downside is that it is not reproducible. If you want to go this route, for the Mac, Keynote and Paintbrush are good, free options.
+# Intra state wars are further categorized into 3 types as follows
+Civil_intra_state <- intra_state %>% filter(WarType==4 | WarType==5)
+Regional_internal_intra_state <- intra_state %>% filter(WarType==6)
+Intercommunal_intra_state <-intra_state %>% filter(WarType==7)
 
-* Err on the side of simplicity. Don’t, for example, overuse color when it’s not necessary. Ask yourself: does color make this graph any clearer? If it doesn’t, leave it out.
+intra <- intra_state %>% 
+  select(WarNum, WarName, WarType) %>% 
+  mutate(Type="Intra-state") %>%
+  mutate(SubType=ifelse(WarType==4, "4: Intra-Civil war for central control",
+                        ifelse(WarType==5, "5: Intra-Civil war over local issues",
+                               ifelse(WarType==6, "6: Intra-Regional internal","7: Intra-Intercommunal"))))
 
-* Test your graphs on nontechnical friends and family and ask for feedback.
+inter <- inter_state %>% 
+  select(WarNum, WarName, WarType) %>% 
+  mutate(Type="Inter-state") %>%
+  mutate(SubType="1: Inter")
+
+extra <- extra_state %>% 
+  select(WarNum, WarName, WarType) %>% 
+  mutate(Type="Extra-state") %>%
+  mutate(SubType=ifelse(WarType==2, "2: Extra-Colonial", "3: Extra-Imperial"))
+
+non <- non_state %>% 
+  select(WarNum, WarName, WarType) %>% 
+  mutate(Type="Non-state") %>%
+  mutate(SubType=ifelse(WarType==8, "8: Non-In nonstate territory", "9: Non-Across state borders"))
+
+total <- rbind(intra, inter, extra, non)
+total$Type<- as.factor(total$Type)
+total$SubType<- as.factor(total$SubType)
+
+total_stacked <- total %>%
+  group_by(Type, SubType) %>%
+  summarise(count = n())
+```
+
+
+
+```{r}
+# http://www.sthda.com/english/wiki/wiki.php?id_contents=7930#add-a-common-legend-for-multiple-ggplot2-graphs
+get_legend<-function(myggplot){
+  tmp <- ggplot_gtable(ggplot_build(myggplot))
+  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+  legend <- tmp$grobs[[leg]]
+  return(legend)
+}
+
+theme1 = theme(
+  plot.title = element_text(hjust = 0.5, size=14),
+  axis.text.y = element_text(size = 12),
+  axis.text.x = element_text(size = 11),
+  axis.title = element_text(size = 13),
+  legend.text=element_text(size = 9.5),
+  legend.title=element_text(size = 10.5))
+
+p1<- ggplot(total_stacked, aes(y=count, x=Type, fill=SubType)) + 
+  geom_bar(stat="identity") + 
+  ggtitle("Figure 1: Stacked bar chart\nof war types") + 
+  theme1 + 
+  scale_y_continuous(limits=c(0,450)) + 
+  scale_colour_colorblind() 
+
+p2 <- ggplot(total_stacked, aes(y=count, x=Type, fill=SubType)) + 
+  geom_bar(position="fill", stat="identity") + 
+  ylab("percent") +
+  ggtitle("Figure 2: Percent stacked bar chart\nof war types") + 
+  theme(legend.position = "none") +
+  theme1 + 
+  scale_y_continuous(labels = scales::percent_format()) + 
+  scale_colour_colorblind()
+
+legend <- get_legend(p1)
+
+p1 <- p1 + theme(legend.position="none")
+
+lankPlot <- ggplot() + 
+  geom_blank(aes(1,1)) + 
+  cowplot::theme_nothing()
+```
+
+
+
+```{r fig.width=10.7, fig.height=6.5}
+grid.arrange(p1, p2, legend,
+             ncol=3, nrow = 1, 
+             widths = c(2.5,2.5,1.5), 
+             heights = c(4))
+```
+
