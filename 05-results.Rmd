@@ -35,10 +35,10 @@ In the first place, we are interested in **what types of wars happened most freq
 
 ```{r fig.width=5}
 # import data
-inter_state <- read.csv('data/raw/Inter-StateWarData_v4.0.csv')
-intra_state <- read.csv('data/raw/Intra-StateWarData_v4.1.csv')
-extra_state <- read.csv('data/raw/Extra-StateWarData_v4.0.csv')
-non_state <- read.csv('data/raw/Non-StateWarData_v4.0.csv')
+inter_state <- read.csv('docs/data/raw/Inter-StateWarData_v4.0.csv')
+intra_state <- read.csv('docs/data/raw/Intra-StateWarData_v4.1.csv')
+extra_state <- read.csv('docs/data/raw/Extra-StateWarData_v4.0.csv')
+non_state <- read.csv('docs/data/raw/Non-StateWarData_v4.0.csv')
 
 # Intra state wars are further categorized into 3 types as follows
 Civil_intra_state <- intra_state %>% filter(WarType==4 | WarType==5)
@@ -133,7 +133,7 @@ grid.arrange(p1, p2, legend,
 ## Number of wars by state
 
 ```{r}
-country_codes <- read.csv('data/raw/COW country codes.csv')
+country_codes <- read.csv('docs/data/raw/COW country codes.csv')
 # Intra-state:
 # if a war appears with two sides, then:
 #   * if CcodeA is valid, add new row (WarNum, WarName, WarType, ccode=CcodeA) to data frame
@@ -627,7 +627,7 @@ world_wars <- rbind(world_war1, world_war2)
 
 world_wars$WarName <- as.factor(world_wars$WarName)
 
-write_csv(world_wars, "data/clean/world_wars.csv")
+write_csv(world_wars, "docs/data/clean/world_wars.csv")
 ```
 
 ```{r eval=FALSE}
