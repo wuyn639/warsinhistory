@@ -690,3 +690,4 @@ ggplot(world_wars, aes(map_id = StateName)) +
 While the state with the most battle deaths in both wars is USSR, it is not the country that stayed in the war the longest. For most countries that participated in both wars, the number of days they were in the war increased from WWI to WWI. Some European countries such as France were in the WWII for a shorter amount of time than WWI while Germany stayed in WWII longer than it stayed in WWI. 
 
 
+## Part C
