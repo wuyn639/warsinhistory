@@ -26,7 +26,7 @@ if(!require("ggthemes")) { install.packages("ggthemes"); library("ggthemes")}
 
 ## War Types
 
-In the first place, we are interested in what types of wars happened most frequently in that the original data sets are divided into 4 types: intra-state, inter-state, extra-state, and non-state wars. It is observed from *Figure 1* that there are most intra-state wars with number over 400, and then inter-state wars, extra-state wars with non-state wars are the least. Considering that the scale of inter-state wars is usually larger than scale of intra-state wars, the larger number of intra-state wars is expected and non-state wars are not very common with least occurences. In addition, according to *Figure 2* and definitions of wars types, we found that:  
+In the first place, we are interested in **what types of wars happened most frequently** in that the original data sets are divided into 4 types: intra-state, inter-state, extra-state, and non-state wars. It is observed from *Figure 1* that there are most intra-state wars with number over 400, and then inter-state wars, extra-state wars with non-state wars are the least. Considering that the scale of inter-state wars is usually larger than scale of intra-state wars, the larger number of intra-state wars is expected and non-state wars are not very common with least occurences. In addition, according to *Figure 2* and definitions of wars types, we found that:  
 
 * Within extra-state wars, there are two thrids of extra-state wars are imperial and one third of extra-state wars are colonial.
 * All inter-state wars only have one type as inter-state.
@@ -128,4 +128,115 @@ grid.arrange(p1, p2, legend,
              widths = c(2.5,2.5,1.5), 
              heights = c(4))
 ```
+
+
+## Active States in Wars
+
+```{r}
+country_codes <- read.csv('data/raw/COW country codes.csv')
+# Intra-state:
+# if a war appears with two sides, then:
+#   * if CcodeA is valid, add new row (WarNum, WarName, WarType, ccode=CcodeA) to data frame
+#   * if CcodeB is valid, add new row (WarNum, WarName, WarType, ccode=CcodeB) to data frame
+
+dfa2_intra_sidea <- intra_state %>% 
+  select(WarNum, WarName, WarType, CcodeA, SideA, SideADeaths) %>%
+  mutate(Type = "Intra-state", BatDeath = SideADeaths) %>%
+  filter(CcodeA != -8) %>%
+  mutate(StateName = SideA) %>%
+  select(-CcodeA, -SideA, -SideADeaths)
+
+dfa2_intra_sideb <- intra_state %>% 
+  select(WarNum, WarName, WarType, CcodeB, SideB, SideBDeaths) %>%
+  mutate(Type = "Intra-state", BatDeath = SideBDeaths) %>%
+  filter(CcodeB != -8) %>%
+  mutate(StateName = SideB) %>%
+  select(-CcodeB, -SideB, -SideBDeaths)
+
+dfa2_intra <- rbind(dfa2_intra_sidea, dfa2_intra_sideb)
+dfa2_intra <- dfa2_intra[order(dfa2_intra$WarNum), ]
+
+# Inter-state:
+#  * if ccode is valid, add new row (WarNum, WarName, Type, ccode) to data frame
+dfa2_inter <- inter_state %>%
+  select(WarNum, WarName, WarType, StateName, BatDeath) %>%
+  mutate(Type = "Inter-state")
+
+# Extra-state:
+#   * there are no war with both SideA and SideB existing, which means each row represents a war with one side record
+#   * we can then safely add BatDeath and NonStateDeaths as total BatDeath
+dfa2_extra_both_side <- extra_state %>% 
+  select(WarNum, WarName, WarType, ccode1, SideA, ccode2, SideB, BatDeath) %>%
+  filter(ccode1 != -8 & ccode2 != -8)
+
+#nrow(dfa2_extra_both_side)
+
+dfa2_extra_sidea <- extra_state %>% 
+  select(WarNum, WarName, WarType, ccode1, SideA, BatDeath) %>%
+  mutate(Type = "Extra-state")  %>%
+  filter(ccode1 != -8) %>%
+  mutate(StateName = SideA) %>%
+  select(-ccode1, -SideA)
+
+dfa2_extra_sideb <- extra_state %>% 
+  select(WarNum, WarName, WarType, ccode2, SideB, BatDeath) %>%
+  mutate(Type = "Extra-state")  %>%
+  filter(ccode2 != -8) %>%
+  mutate(StateName = SideB) %>%
+  select(-ccode2, -SideB)
+
+dfa2_extra <- rbind(dfa2_extra_sidea, dfa2_extra_sideb)
+
+# Non-state: these wars are not about countries or states, and thus we don't take them into consideration. 
+```
+
+
+It is also interesting to explore what states participated most actively in the wars. Foe this question, we do not take non-state wars into consideration because non-state wars are not about state or countries.  
+
+
+```{r fig.height=8, fig.width=6}
+dfa2 <- rbind(dfa2_extra, dfa2_inter, dfa2_intra) %>%
+  group_by(StateName) %>%
+  summarise(Count = n())
+# nrow(dfa2) 
+# There are 160 countries in total
+
+dfa2.1 <- dfa2[order(-dfa2$Count), ][1:100, ]
+
+theme_dotplot <- theme_bw(15) + 
+  theme(axis.text.x = element_text(size = rel(.75)),
+        axis.text.y = element_text(size = rel(.5)),
+        panel.grid.major.y = element_line(size = 0.5),
+        panel.grid.minor.x = element_blank(),
+        plot.title = element_text(hjust = 0.5, size = 14))
+
+
+ggplot(dfa2.1, aes(x = Count, y = fct_reorder(StateName, Count))) +
+  geom_point(color = "blue", size = 1) + 
+  xlab("Number of Wars") +
+  ylab("State Name") +
+  ggtitle("Figure 3: Number of Wars for Each State") +
+  scale_x_continuous(breaks = seq(0,100,5)) + 
+  theme_dotplot 
+```
+
+
+
+
+```{r fig.height=8, fig.width=9}
+dfa2.2 <- rbind(dfa2_extra, dfa2_inter, dfa2_intra) %>%
+  group_by(StateName, Type) %>%
+  summarise(Count = n())
+
+ggplot(dfa2.2, aes(x = Count, y = fct_reorder2(StateName, Type=="Inter-state", Count, .desc = FALSE))) +
+  geom_point(color = "blue", size = 1) + 
+  xlab("Number of Wars") +
+  ylab("State Name") +
+  ggtitle("Figure 4: Number of Wars of State for Each War Type") +
+  facet_wrap(Type~., scales = "free_y", ncol = 3) +
+  scale_x_continuous(breaks = seq(0,60,5)) + 
+  theme_dotplot 
+```
+
+
 
