@@ -130,3 +130,566 @@ grid.arrange(p1, p2, legend,
 ```
 
 
+## Number of wars by state
+
+```{r}
+country_codes <- read.csv('data/raw/COW country codes.csv')
+# Intra-state:
+# if a war appears with two sides, then:
+#   * if CcodeA is valid, add new row (WarNum, WarName, WarType, ccode=CcodeA) to data frame
+#   * if CcodeB is valid, add new row (WarNum, WarName, WarType, ccode=CcodeB) to data frame
+
+dfa2_intra_sidea <- intra_state %>% 
+  select(WarNum, WarName, WarType, CcodeA, SideA, SideADeaths) %>%
+  mutate(Type = "Intra-state", BatDeath = SideADeaths) %>%
+  filter(CcodeA != -8) %>%
+  mutate(StateName = SideA) %>%
+  select(-CcodeA, -SideA, -SideADeaths)
+
+dfa2_intra_sideb <- intra_state %>% 
+  select(WarNum, WarName, WarType, CcodeB, SideB, SideBDeaths) %>%
+  mutate(Type = "Intra-state", BatDeath = SideBDeaths) %>%
+  filter(CcodeB != -8) %>%
+  mutate(StateName = SideB) %>%
+  select(-CcodeB, -SideB, -SideBDeaths)
+
+dfa2_intra <- rbind(dfa2_intra_sidea, dfa2_intra_sideb)
+dfa2_intra <- dfa2_intra[order(dfa2_intra$WarNum), ]
+
+# Inter-state:
+#  * if ccode is valid, add new row (WarNum, WarName, Type, ccode) to data frame
+dfa2_inter <- inter_state %>%
+  select(WarNum, WarName, WarType, StateName, BatDeath) %>%
+  mutate(Type = "Inter-state")
+
+# Extra-state:
+#   * there are no war with both SideA and SideB existing, which means each row represents a war with one side record
+#   * we can then safely add BatDeath and NonStateDeaths as total BatDeath
+dfa2_extra_both_side <- extra_state %>% 
+  select(WarNum, WarName, WarType, ccode1, SideA, ccode2, SideB, BatDeath) %>%
+  filter(ccode1 != -8 & ccode2 != -8)
+
+#nrow(dfa2_extra_both_side)
+
+dfa2_extra_sidea <- extra_state %>% 
+  select(WarNum, WarName, WarType, ccode1, SideA, BatDeath) %>%
+  mutate(Type = "Extra-state")  %>%
+  filter(ccode1 != -8) %>%
+  mutate(StateName = SideA) %>%
+  select(-ccode1, -SideA)
+
+dfa2_extra_sideb <- extra_state %>% 
+  select(WarNum, WarName, WarType, ccode2, SideB, BatDeath) %>%
+  mutate(Type = "Extra-state")  %>%
+  filter(ccode2 != -8) %>%
+  mutate(StateName = SideB) %>%
+  select(-ccode2, -SideB)
+
+dfa2_extra <- rbind(dfa2_extra_sidea, dfa2_extra_sideb)
+
+# Non-state: these wars are not about countries or states, and thus we don't take them into consideration. 
+```
+
+
+
+It is also interesting to explore what states participated most frequently in the wars, either actively or passively. For this question, we do not take non-state wars into consideration because non-state wars are not about state or countries. For *Figure 3*, after combining intra-state, extra-state and inter-state wars by state name, there are 160 states (rows) in total and we picked the first 80 states that were ever involved in the wars most frequently, to make cleveland plots more clear. Based on *Figure 3*, United Kingdom, France, China, Russia, and Ottoman Empire were involved in the wars more frequently, which is not exceptional considering these states' history and size. In addition, the numbers of wars in which United Kingdom and France participated are far more than that of remaining states.
+
+
+```{r  fig.height=11, fig.width=7}
+dfa2 <- rbind(dfa2_extra, dfa2_inter, dfa2_intra) %>%
+  group_by(StateName) %>%
+  summarise(Count = n())
+# nrow(dfa2) 
+# There are 160 countries in total
+
+dfa2.1 <- dfa2[order(-dfa2$Count), ][1:80, ]
+
+theme_dotplot <- theme_bw(13) + 
+  theme(axis.text.x = element_text(size = rel(.9)),
+        axis.text.y = element_text(size = rel(.85)),
+        panel.grid.major.y = element_line(size = 0.5),
+        panel.grid.minor.x = element_blank(),
+        plot.title = element_text(hjust = 0.5, size = 12))
+
+
+ggplot(dfa2.1, aes(x = Count, y = fct_reorder(StateName, Count))) +
+  geom_point(color = "blue", size = 1.5) + 
+  xlab("Number of Wars") +
+  ylab("State Name") +
+  ggtitle("Figure 3: Number of wars for each state") +
+  scale_x_continuous(breaks = seq(0,87,3)) + 
+  theme_dotplot 
+```
+
+
+```{r}
+theme2 = theme(
+  plot.title = element_text(hjust = 0.5, size=15),
+  axis.text.y = element_text(size = 11.5),
+  axis.text.x = element_text(size = 11.5),
+  axis.title = element_text(size = 13))
+
+dfa2_extra.g <- dfa2_extra %>%
+  group_by(StateName) %>%
+  summarise(Count = n())
+
+dfa2_extra.g <- dfa2_extra.g[order(-dfa2_extra.g$Count), ][1:40, ]
+
+b1 <- ggplot(dfa2_extra.g, aes(x = reorder(StateName, Count), y = Count)) +
+  geom_bar(stat="identity", color = "grey50", fill = "lightblue") +
+  xlab("State Name") +
+  ylab("Number of Wars") +
+  coord_flip() + 
+  ggtitle("Figure 4: Bar chart of number of\nextra-state wars\nfor each state") +
+  theme2
+
+dfa2_intra.g <- dfa2_intra %>%
+  group_by(StateName) %>%
+  summarise(Count = n())
+
+dfa2_intra.g <- dfa2_intra.g[order(-dfa2_intra.g$Count), ][1:40, ]
+
+b2 <- ggplot(dfa2_intra.g, aes(x = reorder(StateName, Count), y = Count)) +
+  geom_bar(stat="identity", color = "grey50", fill = "lightblue") +
+  xlab("State Name") +
+  ylab("Number of Wars") + 
+  coord_flip() + 
+  ggtitle("Figure 5: Bar chart of number of\nintra-state wars\nfor each state") +
+  theme2
+
+dfa2_inter.g <- dfa2_inter %>%
+  group_by(StateName) %>%
+  summarise(Count = n())
+
+dfa2_inter.g <- dfa2_inter.g[order(-dfa2_inter.g$Count), ][1:40, ]
+
+b3 <- ggplot(dfa2_inter.g, aes(x = reorder(StateName, Count), y = Count)) +
+  geom_bar(stat="identity", color = "grey50", fill = "lightblue") +
+  xlab("State Name") +
+  ylab("Number of Wars") + 
+  coord_flip() +
+  ggtitle("Figure 6: Bar chart of number of\ninter-state wars\nfor each state") +
+  theme2
+```
+
+
+When we look into each war type, there is new information based on *Figure 4*, *Figure 5*, and *Figure 6*. United Kingdom only appeared to be most involved in extra-state wars, which is resonable in terms of its colonization before 19th century. France and Spain rank second and thrid for participating in extra-state wars as states that developed in the First Industrial Revolution and seeked colonial expansion. China has most intra-state wars with Ottoman Empire and Russia rank as second and third, which may be related to state's larger population and longer history. Finally, France, United States of America, and United Kingkom have been involved in most inter-state wars. There is another point worth notice that are much more intra-state and inter-state wars than extra-state wars for each state, corresponding to the findings in *Figure 1*.
+
+
+```{r fig.height=9, fig.width=15}
+grid.arrange(b1, b2, b3,
+             ncol=3, nrow = 1, 
+             widths = c(2,2,2))
+```
+
+
+
+## Number of war deaths
+
+
+A part we can never ignore about wars is the number of deaths caused. For this project, we only demonstrate the number of battle deaths [may need to be defined again here as a reminder to audience]. 
+
+
+```{r}
+dfa4_non <- non_state %>%
+  select(WarNum, WarName, WarType, TotalCombatDeaths) %>%
+  mutate(Type = "Non-state", BatDeath = TotalCombatDeaths) %>%
+  select(-TotalCombatDeaths)
+
+dfa4_inter <- dfa2_inter %>% 
+  select(-StateName)
+
+dfa4_intra <- dfa2_intra %>% 
+  select(-StateName)
+
+dfa4_extra <- dfa2_extra %>% 
+  select(-StateName)
+
+dfa4 <- rbind(dfa4_extra, dfa4_inter, dfa4_intra, dfa4_non) %>%
+  mutate(BatDeath2 = as.numeric(sub(",", "", BatDeath, fixed = TRUE))) %>%
+  mutate(BatDeath3 = ifelse(BatDeath2 == -9, NA, BatDeath2)) %>%
+  filter(BatDeath3 != 0) %>% # remove NA and 0 number of deaths
+  group_by(WarType) %>%
+  summarise(WarDeath=sum(BatDeath3))
+```
+
+
+We first explored which war type caused the most number of battle deaths and it can be observed from *Figure 7* the war type is **inter-state** wars, with a number over 30 million standing out among all other types.  
+
+
+```{r}
+plot_ly(dfa4, x = ~WarType, y = ~WarDeath, type = "bar") %>%
+  layout(yaxis = list(title = 'Number of deaths'),
+         xaxis = list(title = 'War type'),
+         title = 'Figure 7: Interactive bar chart of number of deaths for each war type')
+```
+
+
+Now please think of one war in history that you believe caused most battle deaths and scroll down to *Figure 8* to check your answer. 
+
+Notice that we took log of the number of battle deaths due to the large number. The two wars with most humanity losses are World War II and World War I and the number of deaths for World War II (over 16.5 million) is almost twice of the number for World War I (about 8 million). This might be one of the reasons that these are the two most famous wars in history. Another war causing a large number of deaths is Iran-Iraq war (about 1.5 million), but an obvious break of link between world wars and other wars can be seen clearly.  
+
+
+
+```{r fig.height=7, fig.width=6.5}
+dfa5 <- rbind(dfa4_extra, dfa4_inter, dfa4_intra, dfa4_non) %>%
+  mutate(BatDeath2 = as.numeric(sub(",", "", BatDeath, fixed = TRUE))) %>%
+  mutate(BatDeath3 = ifelse(BatDeath2 == -9, NA, BatDeath2)) %>%
+  filter(BatDeath3 != 0) %>% # remove NA and 0 number of deaths
+  group_by(WarType, WarName) %>%
+  summarise(SumDeath=sum(BatDeath3))
+
+dfa5.4 <- dfa5 %>%
+  filter(SumDeath != 0)
+
+dfa5.4 <- dfa5.4[order(-dfa5.4$SumDeath), ][1:40, ]
+
+ggplot(dfa5.4, aes(x = log(SumDeath), y = fct_reorder(WarName, SumDeath))) +
+  geom_point(color = "blue", size = 1.5) + 
+  xlab("Log of number of battle deaths") +
+  ylab("War name") +
+  ggtitle("Figure 8: Number of battle deaths\nfor each war") +
+  scale_x_continuous(breaks = seq(0,20,0.5)) + 
+  theme_dotplot
+```
+
+
+Here is another question from the perspective of each state: what states had most losses of human lives due to the war? According to *Figure 9*, three states lost far more human lives than other states, which are USSR, Germany, and China. Russia ranked fourth, Japan is the fifth with France as the sixth. Russia appeared here simultaneously with USSR since we treated USSR (WWI) and Russia (WWII) as separate states in that they existed in different periods. 
+
+
+
+```{r fig.height=8, fig.width=6.5}
+dfa8 <- rbind(dfa2_inter, dfa2_intra, dfa2_extra) %>%
+  mutate(BatDeath2 = as.numeric(sub(",", "", BatDeath, fixed = TRUE))) %>%
+  mutate(BatDeath3 = ifelse(BatDeath2 == -9, NA, BatDeath2)) %>%
+  group_by(StateName) %>%
+  summarise(CountryBatDeath=sum(BatDeath3, na.rm = TRUE))
+
+dfa8.1 <- dfa8 %>%
+  filter(CountryBatDeath != 0)
+
+dfa8.1 <- dfa8.1[order(-dfa8.1$CountryBatDeath), ][1:60, ]
+
+ggplot(dfa8.1, aes(x = log(CountryBatDeath), y = fct_reorder(StateName, CountryBatDeath))) +
+  geom_point(color = "blue", size = 1.5) + 
+  xlab("Log of number of battle deaths") +
+  ylab("State name") +
+  ggtitle("Figure 9: Number of battle deaths for each state") +
+  scale_x_continuous(breaks = seq(0,20,0.5)) + 
+  theme_dotplot
+```
+
+
+
+Germany's high ranking is unexpected considering its population but also makes sense because Germany is one of the members on both World War I Alliance and World War II Axis Powers. Russia, Japan, and France showed up close in a group in the cleveland plot in addition to the first three states. On the other hand, the majority of states suffered losses of human lives in wars with a number less than 1 million.  
+
+
+
+## Correlation between number of wars and number of battle deaths
+
+
+From the precious exploraty data visualizations, it is reasonable to infer there should be a correlation between the number of wars and number of battle deaths for states. As a result, in this part we explored in more details for this question of the relationship between two categorical variables.  
+
+
+```{r}
+dfa9 <- merge(dfa2, dfa8, by="StateName") %>%
+  filter(CountryBatDeath != 0)
+
+sp <- ggplot(dfa9, aes(y=log(CountryBatDeath), x=Count)) + 
+  geom_point(aes(text=StateName), color = "blue") +
+  xlab("Number of wars") +
+  ylab("Log of number of total battle deaths") + 
+  ggtitle("Figure 10: Number of battle deaths vs. Number of wars\nfor each state") + 
+  theme(plot.title = element_text(hjust = 0.5, size=12))
+
+ggplotly(sp, tooltip = c("text"))
+```
+
+
+There seems to be a very week positive correlation between number of wars a country participated in and the number of total battle deaths in those wars based on *Figure 10* and *Figure 11*. While France and UK participated in the most wars, with France participating in more than 60 wars and UK participating in more than 80 wars, their battle deaths are still lower than Germany, USSR, China and Russia, even though those countries/states are in way fewer wars. While France and Japan have around the same total battle deaths, those deaths were from fewer than 20 wars for Japan while for France, those deaths were from more than 60 wars. Germany and USSR participated in under 20 wars but their total battle deaths were higher than any other countries.
+
+
+
+```{r}
+theme_heatmap <- theme_bw(15) + 
+  theme(axis.text.x = element_text(size = rel(.8)),
+        axis.text.y = element_text(size = rel(.8)),
+        axis.title.x = element_text(size = rel(.8)),
+        axis.title.y = element_text(size = rel(.8)),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.background = element_rect(fill = "transparent"), 
+        plot.background = element_rect(fill = "transparent", color = NA),
+        plot.title = element_text(hjust = 0.5, size = 10),
+        legend.text = element_text(size = rel(.6)),
+        legend.title = element_text(size = rel(.6)))
+
+ggplot(dfa9, aes(y=log(CountryBatDeath), x=Count)) +
+  ggtitle("Figure 11: Hexagonal heatmap of bin counts") + 
+  geom_hex(binwidth=c(4,1), alpha = 0.9) + 
+  geom_point(size=0.8) +
+  xlab("Number of wars") +
+  ylab("Log of number of total battle deaths") + 
+  scale_fill_gradient(low = "#cccccc", high = "#09005F", trans = "log10") + 
+  theme_heatmap 
+```
+
+
+
+## Inter-state wars: Correlation between initiators and winners
+
+
+We might think more initiators lose the war they initiated(thinking about WWI and WWII) but the mosaic plot *Figure 12* tells us that there does not seem to be a pattern between initiators and winners of inter-state wars. For winners of a war, a higher percentage are non-initiators. For losers of a war, a higher percentage of participants are non-initiators. If more initiators truly lose the war than non-initiators, we would expect a higher percentage of losers to be initiators which is the opposite case. 
+
+
+```{r}
+dfa7 <- inter_state %>% select(WarNum, WarName, WarType, ccode, StateName, Side, Initiator, Outcome, BatDeath) %>%
+  mutate(Initiator = as.factor(Initiator), Outcome = as.factor(Outcome), BatDeath = as.numeric(BatDeath))
+
+# not sure how to change the font size of this mosaic plot
+vcd::mosaic(Initiator ~ Outcome, 
+            data = dfa7,
+            main = "Figure 12: Mosaic plot between Outcome versus Initiator")
+```
+
+
+
+More specially, according to *Figure 13*, France initiated the most inter-state wars (8 wars), while U.S., Russia and Japan initiated the second most inter-state wars (7 wars). Syria, Thailand, Saudi Arabia, South Africa and Uganda initiated 0 inter-state wars. 
+
+There seems to be a positive correlation between the number of wars a country is in and the number of wars it initiated. France initiated the most inter-state wars and were in the most number of wars. Syria, Thailand, Saudi Arabia, South Africa and Uganda initiated no inter-state wars and are among the countries that participated in the least number of wars.
+
+
+
+```{r}
+dfa3.1 <- dfa7 %>% 
+  group_by(StateName) %>%
+  filter(Initiator == 1) %>%
+  summarise(NumInit = n())
+
+dfa3.2 <- dfa7 %>%
+  group_by(StateName) %>%
+  summarise(NumPart = n())
+
+dfa3 <- merge(dfa3.1, dfa3.2, by = "StateName", all = TRUE)
+
+sp2 <- ggplot(dfa3, aes(y=NumPart, x=NumInit)) + 
+  geom_point(aes(text=StateName), color = "blue") +
+  xlab("Number of initiating wars") +
+  ylab("Number of wars") + 
+  ggtitle("Figure 13: Number of initiating wars versus Number of wars") + 
+  theme(plot.title = element_text(hjust = 0.5, size=12))
+
+ggplotly(sp2, tooltip = c("text"))
+```
+
+
+
+```{r}
+dfa6 <- inter_state %>% select(StartYear1, Initiator, Outcome, BatDeath)
+
+# need to add caption
+# not sure if we need StartYear1
+# need more explanations
+# not sure why Initiator is not a factor and if it should be fixed
+parcoords(dfa6, 
+          rownames=FALSE,
+          brushMode="1D-axes",
+          reorderable=TRUE,
+          queue=TRUE,
+          alphaOnBrushed=0.5,
+          color=list(colorBy="Initiator"),
+          withD3=TRUE)
+```
+
+
+## World War I and World War II
+
+[Why we focus on WWI and WWII specifically?]
+
+```{r}
+df1=inter_state%>%group_by(StateName)%>%summarise(total_deaths=sum(BatDeath))
+
+world <- map_data("world")
+
+df1 <- df1 %>%
+  ## Recode certain entries
+  mutate(StateName = recode(str_trim(StateName), 
+                            "United States of America" = "USA",
+                            "United Kingdom" = "UK",
+                            "China (PRC)"="China",
+                            "Taiwan (ROC)"="Taiwan",
+                            "Yemen Arab Republic"="Yemen"))
+
+df1$total_deaths=df1$total_deaths/1000
+
+ggplot(df1, aes(map_id = StateName)) + 
+  geom_map(aes(fill = total_deaths), map = world) +
+  expand_limits(x = world$long, y = world$lat) +
+  borders(database = "world", 
+          regions = ".", 
+          fill = NA,
+          colour = "grey50", 
+          xlim = NULL, 
+          ylim = NULL) +
+  scale_fill_distiller(type = "seq", 
+                       palette = "Spectral",
+                       direction = -1,
+                       limits = c(min(df1$total_deaths), max(df1$total_deaths)), 
+                       na.value = "white", 
+                       name = "Number of deaths in thousands") +
+  coord_fixed(1.3) +
+  labs(title = "Figure 15: Deaths of inter-state wars by states (1816-2007)", x=" ", y=" ")
+```
+
+
+Germany, China and Russia are the three countries with the most number of total deaths in all inter-state wars(in that same order). South American Countries, Canada and Australia are among the countries with the least number of total battle deaths. 
+
+
+
+```{r}
+# maps
+world <- map_data("world") %>%
+  mutate(region = recode(str_trim(region), 
+                            "Russia" = "USSR",
+                            "Georgia" = "USSR",
+                            "Ukraine" = "USSR", 
+                            "Moldova" = "USSR", 
+                            "Belarus" = "USSR", 
+                            "Armenia" = "USSR", 
+                            "Azerbaijan" = "USSR", 
+                            "Kazakhstan" = "USSR", 
+                            "Uzbekistan" = "USSR", 
+                            "Turkmenistan" = "USSR", 
+                            "Kyrgyzstan" = "USSR", 
+                            "Tajikistan" = "USSR",
+                         "Bosnia and Herzegovina" = "Yugoslavia",
+                         "Croatia" = "Yugoslavia",
+                         "Macedonia" = "Yugoslavia",
+                         "Montenegro" = "Yugoslavia",
+                         "Serbia" = "Yugoslavia",
+                         "Slovenia" = "Yugoslavia", 
+                         "Czech Republic" = "Austria-Hungary",
+                         "Hungary" = "Austria-Hungary",
+                         "Montenegro" = "Austria-Hungary",
+                         "Poland" = "Austria-Hungary",
+                         "Serbia" = "Austria-Hungary",
+                         "Slovakia" = "Austria-Hungary",
+                         "Slovenia" = "Austria-Hungary",
+                         "Ukraine" = "Austria-Hungary"))
+
+
+Russia <- map_data("world") %>% filter(region == "Russia")
+world <- rbind(world, Russia)
+```
+
+
+```{r}
+# world_war1:: Years: 1914-1918
+world_war1=inter_state%>%filter(WarName=='World War I')
+world_war1$StateName=as.character(world_war1$StateName)
+
+world_war1 <- world_war1 %>%
+  ## Recode certain entries
+  mutate(StateName = recode(str_trim(StateName), 
+                            "United States of America" = "USA",
+                            "United Kingdom" = "UK"))
+
+world_war1 <- world_war1 %>% mutate(number_of_days = as.Date(with(world_war1, paste(EndYear1, EndMonth1, EndDay1,sep="-")), "%Y-%m-%d")-as.Date(with(world_war1, paste(StartYear1, StartMonth1, StartDay1,sep="-")), "%Y-%m-%d"))
+
+world_war1$number_of_days <- as.numeric(world_war1$number_of_days )
+
+# world_war2:: Years: 1939-1945
+world_war2=inter_state%>%filter(WarName=='World War II')
+world_war2$StateName=as.character(world_war2$StateName)
+
+# maps
+world_war2 <- world_war2 %>%
+  ## Recode certain entries
+  mutate(StateName = recode(str_trim(StateName), 
+                            "United States of America" = "USA",
+                            "United Kingdom" = "UK"))
+
+
+world_war21 <- world_war2 %>% filter(StartYear2 !=-8) 
+
+world_war21=world_war21%>%  mutate(number_of_days = as.Date(with(world_war21, paste(EndYear1, EndMonth1, EndDay1,sep="-")), "%Y-%m-%d")-as.Date(with(world_war21, paste(StartYear1, StartMonth1, StartDay1,sep="-")), "%Y-%m-%d")+as.Date(with(world_war21, paste(EndYear2, EndMonth2, EndDay2,sep="-")), "%Y-%m-%d")-as.Date(with(world_war21, paste(StartYear2, StartMonth2, StartDay2,sep="-")), "%Y-%m-%d"))
+
+world_war22 <- world_war2 %>% filter(StartYear2 ==-8)
+
+world_war22=world_war22 %>%  mutate(number_of_days = as.Date(with(world_war22, paste(EndYear1, EndMonth1, EndDay1,sep="-")), "%Y-%m-%d")-as.Date(with(world_war22, paste(StartYear1, StartMonth1, StartDay1,sep="-")), "%Y-%m-%d"))
+
+world_war2=rbind(world_war21,world_war22)
+
+world_war2$number_of_days <- as.numeric(world_war2$number_of_days)
+
+
+world_wars <- rbind(world_war1, world_war2)
+
+world_wars$WarName <- as.factor(world_wars$WarName)
+
+write_csv(world_wars, "data/clean/world_wars.csv")
+```
+
+```{r eval=FALSE}
+world2 <- map_data("world") %>% filter(region == "Bosnia and Herzegovina")
+for (val in unique(world_war1$StateName) ) {
+  if (!(val %in%  unique(world$region)))  {print(val)}}
+```
+
+
+
+
+```{r fig.width=12, fig.height=5}
+ggplot(world_wars, aes(map_id = StateName)) + 
+  geom_map(aes(fill = BatDeath), map = world, col = "white") +
+  expand_limits(x = world$long, y = world$lat) +
+  scale_fill_distiller(name = "Number of battle deaths", palette = "Spectral") +
+  borders(database = "world", 
+          regions = ".", 
+          fill = NA,
+          colour = "grey50", 
+          xlim = NULL, 
+          ylim = NULL) +
+  labs(title = "Figure 16: Battle deaths for WWI versus WWII", 
+       x = "Longitude", 
+       y = "Latitude") +
+  facet_wrap(~WarName, scales = "free", ncol = 2) +
+  theme(plot.title = element_text(hjust = 0.5, size = 16),
+        strip.text.x = element_text(size = 8),
+        legend.position="top",
+        legend.key.width=unit(1.5,"cm"))
+```
+
+
+The state with the most death in both wars is USSR and its battle deaths more than tripled in WWII: it had 2 million battle deaths during WWI and more than 6 million battle deaths during WWII.  The overall battle death level is high than WWII than WWI. We can observe that a lot more countries participated in WWII than WWI. For the countries that participated in both wars, all of them suffered more battle deaths in WWII than WWI. 
+
+
+
+```{r fig.width=12, fig.height=5}
+ggplot(world_wars, aes(map_id = StateName)) + 
+  geom_map(aes(fill = number_of_days), map = world, col = "white") +
+  expand_limits(x = world$long, y = world$lat) +
+  scale_fill_distiller(name = "Number of battle deaths", palette = "Spectral") +
+  borders(database = "world", 
+          regions = ".", 
+          fill = NA,
+          colour = "grey50", 
+          xlim = NULL, 
+          ylim = NULL) +
+  labs(title = "Figure 17: Number of war days for WWI versus WWII", 
+       x = "Longitude", 
+       y = "Latitude") +
+  facet_wrap(~WarName, scales = "free", ncol = 2) +
+  theme(plot.title = element_text(hjust = 0.5, size = 16),
+        strip.text.x = element_text(size = 8),
+        legend.position="top",
+        legend.key.width=unit(1.5,"cm"))
+```
+
+
+While the state with the most battle deaths in both wars is USSR, it is not the country that stayed in the war the longest. For most countries that participated in both wars, the number of days they were in the war increased from WWI to WWI. Some European countries such as France were in the WWII for a shorter amount of time than WWI while Germany stayed in WWII longer than it stayed in WWI. 
+
+
+## Part C
+
+What are the effects of wars on the economics, food production, population, and education of some countries? (We may focus on some countries like Japan, Russia, Germany, China, United Kingdom, France that both participated in WWI and WWII.)
