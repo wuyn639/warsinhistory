@@ -1,5 +1,6 @@
 # Data sources
 
+
 ## Sources
 
 We got our data from The Correlates of War (COW) Project by David Singer and Mel Small.
