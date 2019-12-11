@@ -627,7 +627,7 @@ world_wars <- rbind(world_war1, world_war2)
 
 world_wars$WarName <- as.factor(world_wars$WarName)
 
-write_csv(world_wars, "docs/data/clean/world_wars.csv")
+write_csv(world_wars, "data/clean/world_wars.csv")
 ```
 
 ```{r eval=FALSE}
