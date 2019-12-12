@@ -18,19 +18,24 @@ entities.
 
 Here is a summary of typology of wars defined by Singer and Small:
 
-I.	Inter-state wars (war type 1)
-II.	Extra-state wars
-  a.	Colonial-conflict with colony (war type 2)
-  b.	Imperial-state vs nonstate (war type 3)
-III.	Intra-state wars
-  a.	Civil Wars
-    i.	For central control (war type 4)
-    ii.	Over local issues (war type 5)
-  b.	Regional internal (war type 6)
-  c.	Intercommunal (war type 7)
-IV.	Non-state wars
-  a.	In nonstate territory (war type 8)
-  b.	Across state borders (war type 9)
+1. Inter-state wars (war type 1)
+
+2. Extra-state wars
+      + Colonial-conflict with colony (war type 2)
+      + Imperial-state vs nonstate (war type 3)
+      
+3. Intra-state wars
+      + Civil Wars
+      
+          * For central control (war type 4)
+          * Over local issues (war type 5)
+          
+      + Regional internal (war type 6)
+      + Intercommunal (war type 7)
+      
+4. Non-state wars
+      + In nonstate territory (war type 8)
+      + Across state borders (war type 9)
 
 
 ## Basic information

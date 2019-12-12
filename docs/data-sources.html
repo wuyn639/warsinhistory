@@ -24,7 +24,7 @@
 <meta name="author" content="Priyanka Lahoti, Hima Bindu Bhardwaj, Jasmine Bao, Yingnan Wu" />
 
 
-<meta name="date" content="2019-12-11" />
+<meta name="date" content="2019-12-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,12 +51,12 @@
 
 
 <script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.49.4/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.49.4/plotly-latest.min.js"></script>
 <link href="libs/parallel-coordinates-2.1.8/parcoords.css" rel="stylesheet" />
 <script src="libs/parcoords-binding-1.0.0/parcoords.js"></script>
 <script src="libs/d3-5.10.0/d3.min.js"></script>
@@ -86,8 +86,9 @@
 <li class="chapter" data-level="2.3" data-path="data-sources.html"><a href="data-sources.html#issues-and-problems"><i class="fa fa-check"></i><b>2.3</b> Issues and problems</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a><ul>
-<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#combining-data-sets"><i class="fa fa-check"></i><b>3.1</b> Combining data sets</a></li>
-<li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#group-by-variable"><i class="fa fa-check"></i><b>3.2</b> Group by variable</a></li>
+<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#cow-data"><i class="fa fa-check"></i><b>3.1</b> COW Data</a></li>
+<li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#choropleth-maps"><i class="fa fa-check"></i><b>3.2</b> choropleth maps</a></li>
+<li class="chapter" data-level="3.3" data-path="data-transformation.html"><a href="data-transformation.html#external-data"><i class="fa fa-check"></i><b>3.3</b> External Data</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a><ul>
@@ -136,30 +137,28 @@ Singer and Small have utilized a classification of wars that is based upon the s
 independent. In addition, the colonial people may resort to war to seek relief on a policy question, rather than seeking independence. In imperial wars, the system member fights an adversary that is, “an independent political entity that did not qualify for system membership because of serious limitations on its independence, a population insufficiency, or a failure of other states to recognize it as a legitimate member.” In practice, most of the imperial wars in this dataset involved a state’s attempt to colonize a previously independent geographic area, though extra-state wars can also be fought against non-territorially based
 entities.</p>
 <p>Here is a summary of typology of wars defined by Singer and Small:</p>
-<ol style="list-style-type: upper-roman">
-<li>Inter-state wars (war type 1)</li>
-<li>Extra-state wars</li>
-</ol>
-<ol style="list-style-type: lower-alpha">
+<ol style="list-style-type: decimal">
+<li><p>Inter-state wars (war type 1)</p></li>
+<li>Extra-state wars
+<ul>
 <li>Colonial-conflict with colony (war type 2)</li>
 <li>Imperial-state vs nonstate (war type 3)</li>
-</ol>
-<ol start="3" style="list-style-type: upper-roman">
-<li>Intra-state wars</li>
-</ol>
-<ol style="list-style-type: lower-alpha">
-<li>Civil Wars
-i. For central control (war type 4)
-ii. Over local issues (war type 5)</li>
+</ul></li>
+<li>Intra-state wars
+<ul>
+<li><p>Civil Wars</p>
+<ul>
+<li>For central control (war type 4)</li>
+<li>Over local issues (war type 5)</li>
+</ul></li>
 <li>Regional internal (war type 6)</li>
-<li>Intercommunal (war type 7)</li>
-</ol>
-<ol start="4" style="list-style-type: upper-roman">
-<li>Non-state wars</li>
-</ol>
-<ol style="list-style-type: lower-alpha">
+<li><p>Intercommunal (war type 7)</p></li>
+</ul></li>
+<li>Non-state wars
+<ul>
 <li>In nonstate territory (war type 8)</li>
 <li>Across state borders (war type 9)</li>
+</ul></li>
 </ol>
 </div>
 <div id="basic-information" class="section level2">
