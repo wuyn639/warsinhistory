@@ -1,4 +1,103 @@
 # Missing values
 
-Describe any patterns you discover in missing values.
-Test 1
+From the codebook, we know that -9 is used to encode variable with unknown values. Therefore, we need to encode all variables with value -9 as NA. Note that the value -8 encodes "not applicable" which is different from missing.
+
+```{r, include=FALSE}
+# mute all warnings and messgaes, and set codes not shown
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+# install and load the libraries
+if(!require("extracat")) { install.packages("extracat"); library("extracat")}
+if(!require("dplyr")) { install.packages("dplyr"); library("dplyr")}
+if(!require("tidyverse")) { install.packages("tidyverse"); library("tidyverse")}
+if(!require("maps")) { install.packages("maps"); library("maps")}
+if(!require("GGally")) { install.packages("GGally"); library("GGally")}
+if(!require("RColorBrewer")) { install.packages("RColorBrewer"); library("RColorBrewer")}
+if(!require("parcoords")) { install.packages("parcoords"); library("parcoords")}
+if(!require("gridExtra")) { install.packages("gridExtra"); library("gridExtra")}
+if(!require("cowplot")) { install.packages("cowplot"); library("cowplot")}
+if(!require("plotly")) { install.packages("plotly"); library("plotly")}
+if(!require("vcd")) { install.packages("vcd"); library("vcd")}
+if(!require("ggmosaic")) { install.packages("ggmosaic"); library("ggmosaic")}
+if(!require("ggthemes")) { install.packages("ggthemes"); library("ggthemes")}
+if(!require("naniar")) { install.packages("naniar"); library("naniar")}
+
+#Import data
+inter_state <- read.csv('data/raw/Inter-StateWarData_v4.0.csv')
+intra_state <- read.csv('data/raw/Intra-StateWarData_v4.1.csv')
+extra_state <- read.csv('data/raw/Extra-StateWarData_v4.0.csv')
+non_state <- read.csv('data/raw/Non-StateWarData_v4.0.csv')
+```
+
+Inter-state Wars Dataset
+```{r}
+#Convert the missing values to NA
+inter_state_withna <- replace_with_na_all(data = inter_state,
+                    condition = ~.x == -9)
+colSums(is.na(inter_state_withna)) %>%sort(decreasing =TRUE)
+#args(summary_table)
+#summary_table(inter_state_withna, colSums(is.na(inter_state_withna)))
+#sapply(inter_state_withna, function(x) sum(is.na(x)))
+```
+
+We can see the number of NAs in each column: there is only one variable--BatDeath(battle death) with missing value(1 missing).
+
+Figure 1: Visna Graph of Missing Data Pattern for Inter-state Wars Dataset
+```{r}
+visna(inter_state_withna,sort = "r") 
+```
+
+From the visna plot, we can observe that most rows have no variables missing. There is one row with BatDeath(battle death) data missing.
+
+Intra-state Wars Dataset
+```{r}
+#Convert the missing values to NA
+intra_state_withna <- replace_with_na_all(data = intra_state,
+                    condition = ~.x == -9)
+colSums(is.na(intra_state_withna)) %>%sort(decreasing =TRUE)
+```
+
+We can see the number of NAs in each column: the two variables with the most missing values are SideBDeaths(174 missing) and SideADeaths(171 missing).
+
+Figure 2: Visna Graph of Missing Data Pattern for Intra-state Wars Dataset
+```{r}
+visna(intra_state_withna,sort = "r")
+```
+
+We observe that most rows have no missing variables. The most common missing data pattern is having SideADeath and SideBDeath data missing. It's rare having more than three variables missing in this dataset. 
+
+Extra-state Wars Dataset
+```{r}
+#Convert the missing values to NA
+extra_state_withna <- replace_with_na_all(data = extra_state,
+                    condition = ~.x == -9)
+colSums(is.na(extra_state_withna)) %>%sort(decreasing =TRUE)
+```
+
+We can see the number of NAs in each column: the two variables with the most missing values are StartDay1(46 missing) and EndDay1(38 missing).
+
+Figure 3: Visna Graph of Missing Data Pattern for Extra-state Wars Dataset
+```{r}
+visna(extra_state_withna,sort = "r")
+```
+
+We observe that most rows have no missing variables. The most common missing data pattern is having StartDay1(the day on which sustained combat began) data missing. It's rare having more than two variables missing in this dataset. 
+
+Non-state Wars Dataset
+
+```{r}
+#Convert the missing values to NA
+non_state_withna <- replace_with_na_all(data = non_state,
+                    condition = ~.x == -9)
+colSums(is.na(non_state_withna)) %>%sort(decreasing =TRUE)
+```
+
+We can see the number of NAs in each column: the three variables with the most missing values are SideBDeaths(39 missing), SideADeaths(38 missing) and TotalCombatDeaths(32). 
+
+Figure 4: Visna Graph of Missing Data Pattern for Non-state Wars Dataset
+```{r}
+visna(non_state_withna,sort = "r")
+```
+
+We observe that there are more rows with missing data than without missing data. The most common missing data pattern is having SideADeath, SideBDeath and TotalCombatDeaths data missing. We also observe that if we have SideADeath, SideBDeath missing, then we often also have TotalCombatDeaths missing which makes sense since TotalCombatDeaths is the sum of SideADeath and SideBDeath. 
+
