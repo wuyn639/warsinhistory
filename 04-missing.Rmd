@@ -99,5 +99,5 @@ Figure 4: Visna Graph of Missing Data Pattern for Non-state Wars Dataset
 visna(non_state_withna,sort = "r")
 ```
 
-We observe that there are more rows with missing data than without missing data. The most common missing data pattern is having SideADeath, SideBDeath and TotalCombatDeaths data missing. We also observe that if we have SideADeath, SideBDeath missing, then we often also have TotalCombatDeaths missing which makes sense since TotalCombatDeaths is the sum of SideADeath and SideBDeath. 
+We observe that there are more rows with missing data than without missing data. The most common missing data pattern is having SideADeath, SideBDeath and TotalCombatDeaths data missing. We also observe that if we have SideADeaths, SideBDeaths missing, then we often also have TotalCombatDeaths missing which makes sense since TotalCombatDeaths is the sum of SideADeath and SideBDeath. 
 
