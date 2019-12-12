@@ -51,12 +51,12 @@
 
 
 <script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.1/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.49.4/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.49.4/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
 <link href="libs/parallel-coordinates-2.1.8/parcoords.css" rel="stylesheet" />
 <script src="libs/parcoords-binding-1.0.0/parcoords.js"></script>
 <script src="libs/d3-5.10.0/d3.min.js"></script>
@@ -98,6 +98,10 @@
 <li class="chapter" data-level="5.5" data-path="results.html"><a href="results.html#inter-state-wars-correlation-between-initiators-and-winners"><i class="fa fa-check"></i><b>5.5</b> Inter-state wars: Correlation between initiators and winners</a></li>
 <li class="chapter" data-level="5.6" data-path="results.html"><a href="results.html#world-war-i-and-world-war-ii"><i class="fa fa-check"></i><b>5.6</b> World War I and World War II</a></li>
 <li class="chapter" data-level="5.7" data-path="results.html"><a href="results.html#part-c"><i class="fa fa-check"></i><b>5.7</b> Part C</a></li>
+<li class="chapter" data-level="5.8" data-path="results.html"><a href="results.html#effects-of-wwi-on-the-real-gdp-per-capita-and-population"><i class="fa fa-check"></i><b>5.8</b> Effects of WWI on the real GDP per capita and Population</a></li>
+<li class="chapter" data-level="5.9" data-path="results.html"><a href="results.html#effects-of-wwii-on-the-real-gdp-per-capita-and-population"><i class="fa fa-check"></i><b>5.9</b> Effects of WWII on the real GDP per capita and Population</a></li>
+<li class="chapter" data-level="5.10" data-path="results.html"><a href="results.html#world-war-1"><i class="fa fa-check"></i><b>5.10</b> World War 1</a></li>
+<li class="chapter" data-level="5.11" data-path="results.html"><a href="results.html#world-war-2"><i class="fa fa-check"></i><b>5.11</b> World War 2</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
@@ -122,12 +126,15 @@
             <section class="normal" id="section-">
 <div id="interactive-component" class="section level1">
 <h1><span class="header-section-number">Chapter 6</span> Interactive component</h1>
-<p>Select one (or more) of your key findings to present in an interactive format. Be selective in the choices that you present to the user; the idea is that in 5-10 minutes, users should have a good sense of the question(s) that you are interested in and the trends you’ve identified in the data. In other words, they should understand the value of the analysis, be it business value, scientific value, general knowledge, etc.</p>
-<p>Interactive graphs must follow all of the best practices as with static graphs in terms of perception, labeling, accuracy, etc.</p>
-<p>You may choose the tool (D3, Shiny, or other) The complexity of your tool will be taken into account: we expect more complexity from a higher-level tool like Shiny than a lower-level tool like D3, which requires you to build a lot from scratch.</p>
-<p>Make sure that the user is clear on what the tool does and how to use it.</p>
-<p>It may be possible to include the interactive component directly in your report. If not, publish your graph somewhere on the web and provide a link in your report in the interactive section. The obvious choices are blockbuilder.org to create a block for D3, and shinyapps.io for Shiny apps but other options are fine. You are encouraged to share experiences on Piazza to help classmates with the publishing process.</p>
-<p>Note: the interactive component is worth approximately 25% of the final project grade. Therefore, do not spend 90% of your time on it… concentrate on the exploratory data analysis piece.</p>
+<p>Visualization:</p>
+<p>To better understand or obtain insights such as which countries were most active in the wars and with whom, we plotted the wars (World War 1 and World War 2) in a graphical manner. Each node in the graph represents a country which was a part of the war being visualized and each edge represents the fact that those two countries which are connected to the edge on either end, were involved in a war against each other.</p>
+<p>Usage of the app: The drop-down menu enables users to select if they want to visualize the countries involved in World War 1 or in World War 2. Once selected, the app graphically visualizes the countries. On clicking on a country, the countries it was involved in a war with, get highlighted and hence one can visually see the number of countries that were against and also which countries these were. The nodes are reorderable and can be moved on the screen. There is also an option to zoom in and out of the image for better visibility and inspection by the user.</p>
+<p>The theme of the app was changed from default to ‘united’ for better aesthetics.</p>
+<p>Packages Used:
+Shiny - Used for building and deploying the Shiny app locally
+Shinythemes - Used to change the theme of the app for better visual appeal/use
+ShinyWidgets - Used to change the background colour of the app
+VisNetwork, igraph - Used to plot the network graph</p>
 
 </div>
             </section>
