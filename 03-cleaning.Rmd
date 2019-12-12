@@ -1,6 +1,6 @@
 # Data transformation
 
-In this chapter, we discussed the process of getting the data into a form in which we could work with it in R.
+In this chapter, we discuss the process of getting the data into a form which we could easily work with in R.
 
 
 ## COW Data
