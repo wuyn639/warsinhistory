@@ -193,7 +193,7 @@ dfa2_extra <- rbind(dfa2_extra_sidea, dfa2_extra_sideb)
 
 
 
-Apart from which war types were the most common, it also seems interesting to explore what states participated most frequently in the wars, whether their participationg was "active"(they were initiators of the wars) or "passive"(they were not initiators of the wars). For this question, we did not take non-state wars into consideration because non-state wars are not about states or countries, as implied from the name "non-state". For *Figure 3*, after combining intra-state, extra-state and inter-state wars by state name, there are 160 states (rows) in total and we picked the first 80 states that were ever involved in the wars most frequently, to make cleveland plots more clear. Based on *Figure 3*, United Kingdom, France, China, Russia, and Ottoman Empire were involved in the wars more frequently, which is not a surprising finding considering these states' history and size. In addition, the numbers of wars in which United Kingdom and France participated are far more than that of the remaining states.
+Apart from which war types were the most common, it also seems interesting to explore what states participated most frequently in the wars, whether their participation was "active"(they were initiators of the wars) or "passive"(they were not initiators of the wars). For this question, we did not take non-state wars into consideration because non-state wars are not about states or countries, as implied from the name "non-state". For *Figure 3*, after combining intra-state, extra-state and inter-state wars by state name, there are 160 states (rows) in total and we picked the first 80 states that were ever involved in the wars most frequently, to make cleveland plots more clear. Based on *Figure 3*, United Kingdom, France, China, Russia, and Ottoman Empire were involved in the wars more frequently, which is not a surprising finding considering these states' history and size. In addition, the numbers of wars in which United Kingdom and France participated are far more than that of the remaining states.
 
 
 ```{r  fig.height=11, fig.width=7}
@@ -288,7 +288,7 @@ grid.arrange(b1, b2, b3,
 ## Number of war deaths
 
 
-A part we can never ignore about wars is the number of deaths caused. For this project, we only demonstrate the number of battle deaths [may need to be defined again here as a reminder to audience]. 
+A part we can never ignore about wars is the number of deaths caused. For this project, we only demonstrate the number of battle deaths, the battle-related combatant fatalities suffered by the state. 
 
 
 ```{r}

@@ -1,3 +1,7 @@
 # Conclusion
 
 Discuss limitations and future directions, lessons learned.
+
+
+
+As was discussed in the data section, there is limitation in all of our datasets.
