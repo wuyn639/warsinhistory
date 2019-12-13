@@ -259,7 +259,8 @@ b2 <- ggplot(dfa2_intra.g, aes(x = reorder(StateName, Count), y = Count)) +
   xlab("State Name") +
   ylab("Number of Wars") + 
   coord_flip() + 
-  ggtitle("Figure 5: Bar chart of number of\nintra-state wars\nfor each state") +
+  ggtitle("Figure 5: Bar chart of number of\nintra-state wars\nfor each state")+ 
+  scale_fill_manual(values=cbbPalette) +
   theme2
 
 dfa2_inter.g <- dfa2_inter %>%
@@ -273,7 +274,8 @@ b3 <- ggplot(dfa2_inter.g, aes(x = reorder(StateName, Count), y = Count)) +
   xlab("State Name") +
   ylab("Number of Wars") + 
   coord_flip() +
-  ggtitle("Figure 6: Bar chart of number of\ninter-state wars\nfor each state") +
+  ggtitle("Figure 6: Bar chart of number of\ninter-state wars\nfor each state") + 
+  scale_fill_manual(values=cbbPalette)+
   theme2
 ```
 
@@ -328,6 +330,7 @@ We first explored which war type caused the most number of battle deaths and it 
 plot_ly(dfa4, x = ~WarType, y = ~WarDeath, type = "bar") %>%
   layout(yaxis = list(title = 'Number of deaths'),
          xaxis = list(title = 'War type'),
+          colorscale='Viridis',
          title = 'Figure 7: Interactive bar chart of number of deaths for each war type')
 ```
 
@@ -357,6 +360,7 @@ ggplot(dfa5.4, aes(x = log(SumDeath), y = fct_reorder(WarName, SumDeath))) +
   ylab("War name") +
   ggtitle("Figure 8: Number of battle deaths\nfor each war") +
   scale_x_continuous(breaks = seq(0,20,0.5)) + 
+  scale_colour_colorblind()+ 
   theme_dotplot
 ```
 
@@ -378,11 +382,12 @@ dfa8.1 <- dfa8 %>%
 dfa8.1 <- dfa8.1[order(-dfa8.1$CountryBatDeath), ][1:60, ]
 
 ggplot(dfa8.1, aes(x = log(CountryBatDeath), y = fct_reorder(StateName, CountryBatDeath))) +
-  geom_point(color = "blue", size = 1.5) + 
+  geom_point(colour=cond, size = 1.5) + 
   xlab("Log of number of battle deaths") +
   ylab("State name") +
   ggtitle("Figure 9: Number of battle deaths for each state") +
   scale_x_continuous(breaks = seq(0,20,0.5)) + 
+  scale_colour_colorblind()+ 
   theme_dotplot
 ```
 
@@ -403,7 +408,7 @@ dfa9 <- merge(dfa2, dfa8, by="StateName") %>%
   filter(CountryBatDeath != 0)
 
 sp <- ggplot(dfa9, aes(y=log(CountryBatDeath), x=Count)) + 
-  geom_point(aes(text=StateName), color = "blue") +
+  geom_point(aes(text=StateName), color = cond) +
   xlab("Number of wars") +
   ylab("Log of number of total battle deaths") + 
   ggtitle("Figure 10: Number of battle deaths vs. Number of wars\nfor each state") + 
