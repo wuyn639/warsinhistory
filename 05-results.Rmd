@@ -382,7 +382,7 @@ dfa8.1 <- dfa8 %>%
 dfa8.1 <- dfa8.1[order(-dfa8.1$CountryBatDeath), ][1:60, ]
 
 ggplot(dfa8.1, aes(x = log(CountryBatDeath), y = fct_reorder(StateName, CountryBatDeath))) +
-  geom_point(colour=cond, size = 1.5) + 
+  geom_point(colour="blue", size = 1.5) + 
   xlab("Log of number of battle deaths") +
   ylab("State name") +
   ggtitle("Figure 9: Number of battle deaths for each state") +
@@ -408,7 +408,7 @@ dfa9 <- merge(dfa2, dfa8, by="StateName") %>%
   filter(CountryBatDeath != 0)
 
 sp <- ggplot(dfa9, aes(y=log(CountryBatDeath), x=Count)) + 
-  geom_point(aes(text=StateName), color = cond) +
+  geom_point(aes(text=StateName), color = "blue") +
   xlab("Number of wars") +
   ylab("Log of number of total battle deaths") + 
   ggtitle("Figure 10: Number of battle deaths vs. Number of wars\nfor each state") + 
