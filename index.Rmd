@@ -31,4 +31,5 @@ About the terms/datasets used in the project (*Typology of Wars*):
 2. Intra State Wars refer to wars that took place inside of countries (non state actors)
 Others terms used are military expenditure, GDP per capita, Human Development Index, Number of bettle deaths, etc which are self explanatory.
  More about these details are available in the upcoming chapter 2.
- *Note*: This project is color blind friendly.
+ 
+ *Note: This project is color blind friendly.*
