@@ -1,52 +1,54 @@
-This is a template for the EDAV final project. It is based on the template created with *File, New Project..., New Directory, Book Project using bookdown* in RStudio. 
+### 1. The Team
 
-## ABSOLUTE ESSENTIALS
+a) Who's on the team? (Include names and UNIs)
+* Priyanka Lahoti (UNI: pvl2111)
+* Hima Bindu Bhardwaj (UNI: hb2635)
+* Jasmine Bao (UNI: sb4320)
+* Yingnan Wu (UNI: yw3431)  
 
-*Follow these instructions and you will have a published bookdown book in less than five minutes.*
 
-### Copy this template
 
-- [ ] 1. Click the green "Use this template" button above.  DO NOT FORK THE REPO.
+b) How do you plan to divide up the work? (Grading is on a group basis. The point of asking is to encourage you to think about this.)
+* Priyanka Lahoti: Question a) and b)
+* Hima Bindu Bhardwaj: Collecting datasets and Question c)
+* Jasmine Bao: Collecting datasets and Question c)
+* Yingnan Wu: Question a) and b)
 
-- [ ] 2. Choose a descriptive name for your repo, such as "federalbudget" or "AIDSdeaths".  (If you change your mind before you do any work, delete your new repo and start over.)
 
-- [ ] 3. In the Description field, write: "Bookdown source files for EDAV final project".
 
-### Clone the repo
+### 2. The Questions
 
-- [ ] 1. Clone your new repo with *File, New Project..., Version Control, Git* in RStudio.
+List three questions that you hope you will be able to answer from your research.
 
-### Edit some key files
+* General visualization explorations of wars, such as:
+    + what types of wars happened most frequently,
+    + which country initiated inter-state wars most frequently, 
+    + which war type caused the most number of deaths,  
+    + what wars caused the most number of deaths, 
+    + is the number of deaths correlated to whether the country is an initiator of an inter-state war or not, 
+    + is there a pattern between initiators and winners of inter-state wars, 
+    + what countries had most losses of human lives due to the war, 
+    + what countries participated most actively in the wars, 
+    + is there a pattern of the starting month of all wars, etc.
 
-- [ ] 1. In `index.Rmd`, change YOUR TITLE HERE to your title.
+* What are the similarities and differences between World War I and World War II? (e.g., How were the global food prices affected during WW1 and WW2 time periods?)
 
-- [ ] 2. In `index.Rmd`, change YOUR NAMES HERE to your names.
+* What are the effects of wars on the economics, food production, population, and education of some countries? (We may focus on some countries like Japan, Russia, Germany, China, United Kingdom, France that both participated in WWI and WWII.)  
 
-- [ ] 3. In `_bookdown.yml`, change YOUR GITHUB USERNAME to your GitHub username in the two places it appears.
 
-- [ ] 4. In `_bookdown.yml`, change YOUR GITHUB REPO to your GitHub repo name in the two places it appears.
 
-- [ ] 5. In `_output.yml`, change YOUR SHORT TITLE to a shortened version of your title. (Leave the "after:" line indicating that the book was published with bookdown as is.)
 
-### Render the book
+### 3. Which output format do you plan to use to submit the project?
 
-- [ ] 1. Install **bookdown** with `install.packages("bookdown")`. If you already have it, update to version 0.16 (2019-11-22).
+**bookdown book**
 
-- [ ] 2. Render locally with `bookdown::render_book("index.Rmd")`.
 
-- [ ] 3. Use `browseURL("docs/index.html")` to view your book locally (or just open `index.html` in a browser).
 
-- [ ] 4. If it looks good, commit and push all changed files to GitHub. 
+### 4. The Data
 
-(You will need to repeat this sequence every time you wish to update the book online.)
+What is your data source?  What is your method for importing data? Please be specific. Provide relevant information such as any obstacles you're encountering and what you plan to do to overcome them.
 
-### Set up GitHub Pages
 
-- [ ] 1. On the home page of your repo, click Settings. Scroll down to the GitHub pages section and change **Source** to **master branch /docs folder**.  Above the **Source** line, a bar will appear with your book's URL. The bar will initially be blue and indicate that your book is *ready* to be published and will change to green once it is published. Copy the URL. (Note that sometimes there is a delay until your book actually appears at that URL. If it doesn't appear after a few minutes, try making a small change locally, rendering the book, and pushing the changes to trigger a deploy.)
+Our data is from [The Correlates of War Project](http://www.correlatesofwar.org/), a project that seeks to facilitate the collection, dissemination, and use of accurate and reliable quantitative data in international relations. There are four data sets which are about extra-state wars, inter-state wars, intra-state wars, and non-state wars respectively. Each data set is available as a `csv` file and comes with a codebook that defines each variable clearly. Therefore, our method of importing data is simply downloading the datasets and importing into RStudio with `read.csv()` function. 
 
-- [ ] 2. Click the edit button on the top of the home page of the repo and paste your book URL into the **Website** field that appears on the right.
-
-At some point before you turn in your project, delete the content of this **README** and add a short description of your project with a link to the book URL.
-
-For additional features, consult the official guide to **bookdown**: https://bookdown.org/yihui/bookdown
-
+In addition, we plan to merge other data sets about economics into our analysis, especially for the third question in Part 2 above. Our population and real GDP per capital data is from the [Maddison Project Database](https://www.rug.nl/ggdc/historicaldevelopment/maddison/releases/maddison-project-database-2018) which provides information on comparative economic growth and income levels over the very long run. Specifically, this dataset includes data on real GDP per capita in 2011 US dollars and population for the two world wars and is available in csv format.
