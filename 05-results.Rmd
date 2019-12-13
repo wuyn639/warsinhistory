@@ -876,7 +876,7 @@ ggplot(school_enrolment,aes(Year, y = SchoolEnrolment, colour = Entity, group = 
   geom_line() +
   labs(title = "Figure 22: Trends in Primary School enrolment in countries in WW1", y = "Enrolment", x = "") + 
   theme(plot.title = element_text(hjust = 0.5, size=13)) +
-  scale_color_discrete(breaks=c("France", "Japan", "Bulgaria", "Germany", "Belgium", "Greece",
+  scale_color_viridis(discrete = TRUE, breaks=c("France", "Japan", "Bulgaria", "Germany", "Belgium", "Greece",
                                 "Romania", "Russia", "Portugal", "Italy", "Tuekey" ))
 ```
 
@@ -894,7 +894,7 @@ ggplot(HDI_table,aes(Year, y = HDI, colour = Entity)) +
   geom_line() +
   labs(title = "Figure 23: Trends in Human Development Index in countries in WW1", y = "HDI Value", x = "") +
   theme(plot.title = element_text(hjust = 0.5, size=13)) +  
-  scale_color_discrete(breaks = c("Germany", "France", "Belgium", "Japan", "Italy", 
+  scale_color_viridis(discrete = TRUE,breaks = c("Germany", "France", "Belgium", "Japan", "Italy", 
                                   "Greece", "Portugal", "Bulgaria", "Romania", "Turkey", "Russia"))
 
 HDI_table <- subset(HDI_table, Year >= min(world_war1$StartYear1)-15)
@@ -904,7 +904,7 @@ ggplot(HDI_table,aes(Year, y = HDI, colour = Entity)) +
 
   labs(title = "Figure 24: Trends in Human Development Index in countries \n 15 years before and after WW1", y = "HDI Value", x = "") + 
   theme(plot.title = element_text(hjust = 0.5, size=13)) +
-  scale_color_discrete(breaks = c("Germany", "Belgium", "France", "Japan", "Italy",
+  scale_color_viridis(discrete = TRUE,breaks = c("Germany", "Belgium", "France", "Japan", "Italy",
                                   "Greece", "Bulgaria", "Romania", "Russia", "Portugal", "Turkey"))
 
 ```
@@ -931,7 +931,7 @@ WW2_subset = WW2%>%filter(country %in% c("United States", "Former USSR", "United
 p1 <- ggplot(WW2_subset, aes(year, rgdpnapc, color = country),frequency =1) + geom_line() +
     ggtitle("Figure 25:1935 - 1949 Real GDP Per Capita in 2011 US dollar") +
     scale_x_continuous(breaks=seq(1935, 1949, 1)) +
-    scale_color_discrete(breaks=c("United States","United Kingdom", "Germany", "France", 
+    scale_color_viridis(discrete = TRUE,breaks=c("United States","United Kingdom", "Germany", "France", 
                                   "Former USSR", "Japan")) +
     geom_vline(xintercept = 1939) +
     annotate("text", x = 1938,y = 0, label = "WWII Begins") + 
@@ -943,7 +943,7 @@ p1 <- ggplot(WW2_subset, aes(year, rgdpnapc, color = country),frequency =1) + ge
 p2 <- ggplot(WW2_subset, aes(year, pop, color = country)) + geom_line() +
     ggtitle("Figure 26:1935 - 1949 Population") +
     scale_x_continuous(breaks=seq(1935, 1949, 1)) +
-    scale_color_discrete(breaks=c("Former USSR","United States", "Japan", "Germany", 
+    scale_color_viridis(discrete = TRUE,breaks=c("Former USSR","United States", "Japan", "Germany", 
                                   "United Kingdom", "France")) +
     geom_vline(xintercept = 1939) +
     annotate("text", x = 1938,y = 0, label = "WWII Begins" )+ 
@@ -997,6 +997,7 @@ world_war2 <- world_war2 %>%
 military_expenditure <- subset(military_expenditure_main, Entity %in% world_war2$StateName)
   ggplot(military_expenditure,aes(Year, y = MilitaryExpenditure, colour = Entity, group = Entity)) +
   geom_line() +
+   scale_color_viridis(discrete = TRUE, option = "D") +
   labs(title = "Figure 27: Trends in Military Expenditures of countries in WW2", y = "Expenditure", x = "") +
     theme(plot.title = element_text(hjust = 0.5, size=13))
   
@@ -1005,6 +1006,7 @@ military_expenditure <- subset(military_expenditure_main, Entity %in% world_war2
 military_expenditure <- subset(military_expenditure, Year >= min(world_war2$StartYear1)-10)
 military_expenditure <- subset(military_expenditure, Year <= max(world_war2$EndYear1)+10)
  ggplot(military_expenditure,aes(Year, y = MilitaryExpenditure, colour = Entity, group = Entity)) +
+   scale_color_viridis(discrete = TRUE, option = "D")+
   geom_line() +
 
   labs(title = "Figure 28: Trends in Military Expenditures of countries in WW2 \n (from before and after 10 years of WW2)", y = "Expenditure", x = "") +
@@ -1024,6 +1026,7 @@ school_enrolment <- subset(primary_school_main, Entity %in% world_war2$StateName
 school_enrolment <- subset(school_enrolment, Year >= min(world_war2$StartYear1)-10)
 school_enrolment <- subset(school_enrolment, Year <= max(world_war2$EndYear1)+10)
 ggplot(school_enrolment,aes(Year, y = SchoolEnrolment, colour = Entity, group = Entity)) +
+   scale_color_viridis(discrete = TRUE, option = "D")+
   geom_line() +
   labs(title = "Figure 29: Trends in Primary School enrolment in countries in WW2", y = "Enrolment", x = "") +
   theme(plot.title = element_text(hjust = 0.5, size=13))
@@ -1037,6 +1040,7 @@ To explore the effects of World War 2 over children's education, the above graph
 ```{r}
 HDI_table <- subset(HDI_main, Entity %in% world_war2$StateName)
 ggplot(HDI_table,aes(Year, y = HDI, colour = Entity)) +
+   scale_color_viridis(discrete = TRUE, option = "D")+
   geom_line() +
   labs(title = "Figure 30: Trends in Human Development Index in countries in WW2", y = "HDI Value", x = "") +
   theme(plot.title = element_text(hjust = 0.5, size=13))
@@ -1044,6 +1048,7 @@ ggplot(HDI_table,aes(Year, y = HDI, colour = Entity)) +
 HDI_table <- subset(HDI_table, Year >= min(world_war2$StartYear1)-10)
 HDI_table <- subset(HDI_table, Year <= max(world_war2$EndYear1)+10)
 ggplot(HDI_table,aes(Year, y = HDI, colour = Entity)) +
+   scale_color_viridis(discrete = TRUE, option = "D")+
   geom_line() +
   labs(title = "Figure 31: Trends in Human Development Index in countries \n 5 years before and after WW2", y = "HDI Value", x = "") +
   theme(plot.title = element_text(hjust = 0.5, size=13))
