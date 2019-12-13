@@ -51,12 +51,12 @@
 
 
 <script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.49.4/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.49.4/plotly-latest.min.js"></script>
 <link href="libs/parallel-coordinates-2.1.8/parcoords.css" rel="stylesheet" />
 <script src="libs/parcoords-binding-1.0.0/parcoords.js"></script>
 <script src="libs/d3-5.10.0/d3.min.js"></script>
@@ -94,6 +94,7 @@
 </ul></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a><ul>
+
 <li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#number-of-wars-by-type"><i class="fa fa-check"></i><b>5.1</b> Number of wars by type</a></li>
 <li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#number-of-wars-by-state"><i class="fa fa-check"></i><b>5.2</b> Number of wars by state</a></li>
 <li class="chapter" data-level="5.3" data-path="results.html"><a href="results.html#number-of-war-deaths"><i class="fa fa-check"></i><b>5.3</b> Number of War deaths</a></li>
@@ -105,6 +106,7 @@
 <li class="chapter" data-level="5.9" data-path="results.html"><a href="results.html#effects-of-wwii-on-the-real-gdp-per-capita-and-population"><i class="fa fa-check"></i><b>5.9</b> Effects of WWII on the real GDP per capita and Population</a></li>
 <li class="chapter" data-level="5.10" data-path="results.html"><a href="results.html#world-war-1"><i class="fa fa-check"></i><b>5.10</b> World War 1</a></li>
 <li class="chapter" data-level="5.11" data-path="results.html"><a href="results.html#world-war-2"><i class="fa fa-check"></i><b>5.11</b> World War 2</a></li>
+
 </ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
@@ -143,7 +145,7 @@
 ##           0</code></pre>
 <p>We can see the number of NAs in each column: there is only one variable–BatDeath(battle death) with missing value(1 missing).</p>
 <p>Figure 1: Visna Graph of Missing Data Pattern for Inter-state Wars Dataset
-<img src="finalproj_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<img src="finalproj_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <p>From the visna plot, we can observe that most rows have no variables missing. There is one row with BatDeath(battle death) data missing.</p>
 <p>Intra-state Wars Dataset</p>
 <pre><code>## SideBDeaths SideADeaths   StartDay1     EndDay1 StartMonth1   EndMonth1 
@@ -158,7 +160,7 @@
 ##           0           0           0           0</code></pre>
 <p>We can see the number of NAs in each column: the two variables with the most missing values are SideBDeaths(174 missing) and SideADeaths(171 missing).</p>
 <p>Figure 2: Visna Graph of Missing Data Pattern for Intra-state Wars Dataset
-<img src="finalproj_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<img src="finalproj_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 <p>We observe that most rows have no missing variables. The most common missing data pattern is having SideADeath and SideBDeath data missing. It’s rare having more than three variables missing in this dataset.</p>
 <p>Extra-state Wars Dataset</p>
 <pre><code>##      StartDay1        EndDay1       BatDeath      EndMonth1 NonStateDeaths 
@@ -175,7 +177,7 @@
 ##              0              0              0</code></pre>
 <p>We can see the number of NAs in each column: the two variables with the most missing values are StartDay1(46 missing) and EndDay1(38 missing).</p>
 <p>Figure 3: Visna Graph of Missing Data Pattern for Extra-state Wars Dataset
-<img src="finalproj_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<img src="finalproj_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <p>We observe that most rows have no missing variables. The most common missing data pattern is having StartDay1(the day on which sustained combat began) data missing. It’s rare having more than two variables missing in this dataset.</p>
 <p>Non-state Wars Dataset</p>
 <pre><code>##       SideBDeaths       SideADeaths TotalCombatDeaths          StartDay 
@@ -194,7 +196,7 @@
 ##                 0</code></pre>
 <p>We can see the number of NAs in each column: the three variables with the most missing values are SideBDeaths(39 missing), SideADeaths(38 missing) and TotalCombatDeaths(32).</p>
 <p>Figure 4: Visna Graph of Missing Data Pattern for Non-state Wars Dataset
-<img src="finalproj_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<img src="finalproj_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <p>We observe that there are more rows with missing data than without missing data. The most common missing data pattern is having SideADeath, SideBDeath and TotalCombatDeaths data missing. We also observe that if we have SideADeaths, SideBDeaths missing, then we often also have TotalCombatDeaths missing which makes sense since TotalCombatDeaths is the sum of SideADeath and SideBDeath.</p>
 
 </div>

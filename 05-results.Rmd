@@ -1,6 +1,6 @@
 # Results
 
-Provide a short nontechnical summary of the most revealing findings of your analysis written for a nontechnical audience. Take extra care to clean up your graphs, ensuring that best practices for presentation are followed, as described in the audience ready style section below.
+In this chapter, we gave a summary of findings for our analysis. In gereneal, there are three subsections, which are general exploratory data visualization, focous on World War I and World War II, and linkage to external indicative statistics such as GDP per capita, population, and military expenditure. For all plots, colors are color-vision-deficiency-friendly by using tested palettes.
 
 
 ```{r, include=FALSE}
@@ -25,9 +25,11 @@ if(!require("viridis")) { install.packages("viridis"); library("viridis")}
 ```
 
 
-## Number of wars by type
+## General EDAV
 
-To begin with our analysis, we first explored **what types of wars happened most frequently** as the original war data sets are divided by 4 war types: intra-state, inter-state, extra-state, and non-state wars. We observe from *Figure 1* that intra-state wars happened the most with  over 400 occurences throghout history, followed by inter-state wars, then extra-state wars with non-state wars being the least common war type. Considering that the scale of inter-state wars is usually larger than scale of intra-state wars, the larger number of occurences of intra-state wars is expected and non-state wars are the least common with least occurrences. In addition, according to *Figure 2* and definitions of wars types, we found that:  
+### Number of wars  by type
+
+To begin with our analysis, we first explored **what types of wars happened most frequently** as the original war data sets are divided by 4 war types: intra-state, inter-state, extra-state, and non-state wars. We observe from *Figure 1* that intra-state wars happened the most with over 400 occurences throghout history, followed by inter-state wars, then extra-state wars with non-state wars being the least common war type. Considering that the scale of inter-state wars is usually larger than scale of intra-state wars, the larger number of occurences of intra-state wars is expected and non-state wars are the least common with least occurrences. In addition, according to *Figure 2* and definitions of wars types, we found that:  
 
 * Within extra-state wars, two thirds of extra-state wars are imperial and one third of extra-state wars are colonial.
 * Inter-state wars are not divided into further categories.
@@ -131,7 +133,7 @@ grid.arrange(p1, p2, legend,
 ```
 
 
-## Number of wars by state
+### Number of wars by state
 
 ```{r}
 country_codes <- read.csv('data/raw/COW country codes.csv')
@@ -285,7 +287,9 @@ grid.arrange(b1, b2, b3,
 
 
 
-## Number of War deaths
+
+### Number of war deaths
+
 
 
 A part we can never ignore about wars is the number of deaths caused. For this project, we only demonstrate the number of battle deaths, the battle-related combatant fatalities suffered by the state. 
@@ -386,10 +390,10 @@ Germany's high ranking is unexpected considering its population but also makes s
 
 
 
-## Correlation between number of wars and number of battle deaths
+### Correlation between wars and death counts
 
 
-From the precious exploraty data visualizations, it is reasonable to infer there should be a correlation between the number of wars and number of battle deaths for states. As a result, in this part we explored in more details for this question of the relationship between two categorical variables.  
+From the previous exploraty data visualizations, it is reasonable to infer there should be a correlation between the number of wars and number of battle deaths for states. As a result, in this part we explored in more details for this question of the relationship between two categorical variables.  
 
 
 ```{r}
@@ -437,20 +441,26 @@ ggplot(dfa9, aes(y=log(CountryBatDeath), x=Count)) +
 
 
 
-## Inter-state wars: Correlation between initiators and winners
+### Inter-state wars: Correlation between initiators and winners
 
 
-We might think more initiators lose the war they initiated(thinking about WWI and WWII) but the mosaic plot *Figure 12* tells us that there does not seem to be a pattern between initiators and winners of inter-state wars. For winners of a war, a higher percentage are non-initiators. For losers of a war, a higher percentage of participants are non-initiators. If more initiators truly lose the war than non-initiators, we would expect a higher percentage of losers to be initiators which is the opposite case. 
+We might think more initiators lose the war they initiated (thinking about Gernaby in WWI and WWII) and to deal with this initiative, we made the mosaic plot *Figure 12*. First of all, there are fewer initiators than non-initiators and there are slightly more winners than losers for all wars. In addition, few wars ended up as tied. For winners of a war, there are more non-initiators. For losers of a war, a higher percentage of states are non-initiators. If more initiators truly lose the war than non-initiators, we would expect a higher percentage of losers to be initiators which is the opposite case. 
+
 
 
 ```{r}
-dfa7 <- inter_state %>% select(WarNum, WarName, WarType, ccode, StateName, Side, Initiator, Outcome, BatDeath) %>%
-  mutate(Initiator = as.factor(Initiator), Outcome = as.factor(Outcome), BatDeath = as.numeric(BatDeath))
+dfa7 <- inter_state %>% 
+  select(WarNum, WarName, WarType, ccode, StateName, Side, Initiator, Outcome, BatDeath) %>%
+  filter(Outcome == 1 | Outcome == 2 | Outcome == 3) %>%
+  mutate(Initiator = as.factor(Initiator), Outcome = as.factor(Outcome), BatDeath = as.numeric(BatDeath)) 
 
-# not sure how to change the font size of this mosaic plot
+lnames <- list(Initiator = c("Yes", "No"), Outcome = c("Winner", "Loser", "Tied"))
+
 vcd::mosaic(Initiator ~ Outcome, 
             data = dfa7,
-            main = "Figure 12: Mosaic plot between Outcome versus Initiator")
+            set_labels=lnames, 
+            main = "Figure 12: Mosaic plot between Outcome versus Initiator",
+            shade=T)
 ```
 
 
@@ -485,13 +495,12 @@ ggplotly(sp2, tooltip = c("text"))
 
 
 
-```{r}
-dfa6 <- inter_state %>% select(StartYear1, Initiator, Outcome, BatDeath)
+Parallel coordinate plots can be used to visualize outliers in a dataset. In the below parallel coordinate plot, we can see that USSR seems to be an outlier: it has way higher battle deaths than every other country that participated in the war. There seems to be a trend for non-initiators to have lower battle deaths, however USSR doesn't follow this trend. USSR was not an initiator but has the highest number of battle deaths.
 
-# need to add caption
-# not sure if we need StartYear1
-# need more explanations
-# not sure why Initiator is not a factor and if it should be fixed
+
+```{r}
+dfa6 <- inter_state %>% select(Initiator, Outcome, BatDeath) %>% mutate(Initiator = as.factor(Initiator))
+
 parcoords(dfa6, 
           rownames=FALSE,
           brushMode="1D-axes",
@@ -506,8 +515,9 @@ Parallel coordinate plots can be used to visualize outliers in a dataset. In the
 
 ## World War I and World War II
 
-[Why do we focus on WWI and WWII specifically?]
-From the cleveland dot plot, we see that WWI and WWII are greater in scale than any other war which is not surprising. The natural move now is to analyze the effect of those two wars on different indicators such as gdp and education. 
+In *Figure 8*, we notice the two wars with most number of deaths are World War I and World War II, which correspond to the two most famous wars in history all over the world. Therefore, we decided to focus in there two world wars for the following analysis.  
+
+
 
 ```{r}
 df1=inter_state%>%group_by(StateName)%>%summarise(total_deaths=sum(BatDeath))
@@ -545,7 +555,9 @@ ggplot(df1, aes(map_id = StateName)) +
 ```
 
 
-Germany, China and Russia are the three countries with the most number of total deaths in all inter-state wars(ranked in that same order). South American Countries, Canada and Australia are among the countries with the least number of total battle deaths. 
+
+Based on *Figure 15*, Germany, China and Russia are the three countries with the most number of total deaths in all inter-state wars(in that same order). South American Countries, Canada and Australia are among the countries with the least number of total battle deaths. 
+
 
 
 
@@ -693,12 +705,16 @@ ggplot(world_wars, aes(map_id = StateName)) +
 While the state with the most battle deaths in both wars is USSR, it is not the country that stayed in the war the longest. For most countries that participated in both wars, the number of days they were in the war increased from WWI to WWI. Some European countries such as France were in the WWII for a shorter amount of time than WWI while Germany stayed in WWII longer than it stayed in WWI. 
 
 
-## Part C
+## External statistics
+
+Wars do not only result in a large number of casualties but also impose effects on a wide range of aspects such as GDP pertica, population, living standards of cilvilians, military expensiture, education, etc. Again, we only focus on states like Japan, Russia, Germany, China, United Kingdom, France that participated both in WWI and WWII.
+
+### World War I
+
+#### Real GDP per capita and population
 
 
-What are the effects of wars on the economics, food production, population, and education of some countries? (We may focus on some countries like Japan, Russia, Germany, China, United Kingdom, France that both participated in WWI and WWII.)
 
-## Effects of WWI on the real GDP per Capita and Population
 ```{r}
 #read in data
 gdp_pop=read.csv('data/raw/Raw_GDP_Pop_Data.csv')
@@ -709,11 +725,13 @@ WW1=gdp_pop%>%filter(year>= 1910 & year <=1922)
 WW2 = gdp_pop%>%filter(year>= 1935 & year <=1949)
 ```
 
-```{r}
+```{r warning=FALSE}
+theme3 = theme(plot.title = element_text(hjust = 0.5, size=13))
+
 WW1_subset = WW1%>%filter(country %in% c("United States", "Former USSR", "United Kingdom", "France", "Germany", "Japan"))
 #WW1_subset <- na.omit(WW1_subset)
 p1 <- ggplot(WW1_subset, aes(year, rgdpnapc, color = country),frequency =1) + geom_line() +
-    ggtitle("Figure 1a: 1910 -1920 Real GDP Per Capita in 2011 US dollar") +
+    ggtitle("Figure 18: 1910 -1920 Real GDP Per Capita in 2011 US dollar") +
     scale_x_continuous(breaks=seq(1910, 1922, 1)) +
     scale_color_discrete(breaks=c("United States","United Kingdom", "Germany", "France", 
                                   "Former USSR", "Japan")) +
@@ -722,11 +740,10 @@ p1 <- ggplot(WW1_subset, aes(year, rgdpnapc, color = country),frequency =1) + ge
     geom_vline(xintercept = 1918) +
     annotate("text", x = 1919, y= 0, label = "WWI Ends" )+ 
     labs (x = "Year", y = "Real GDP Per Capita") +
-    theme(legend.title = element_blank(),
-          plot.title = element_text(hjust = 0.5, size=16))
+    theme3
 
 p2 <- ggplot(WW1_subset, aes(year, pop, color = country)) + geom_line() +
-    ggtitle("Figure 1b:1910 -1922 Population") +
+    ggtitle("Figure 19:1910 -1922 Population") +
     scale_x_continuous(breaks=seq(1910, 1922, 1)) +
     scale_color_discrete(breaks=c("Former USSR","United States", "Germany", "Japan",
                                   "United Kingdom", "France")) +
@@ -735,82 +752,35 @@ p2 <- ggplot(WW1_subset, aes(year, pop, color = country)) + geom_line() +
     geom_vline(xintercept = 1918) +
     annotate("text", x = 1919, y= 0, label = "WWI Ends" ) + 
     labs (x = "Year", y = "Population") +
-    theme(legend.title = element_blank(),
-          plot.title = element_text(hjust = 0.5, size=16))
-```
-```{r fig.width=18, fig.height=6, warning = FALSE}
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
-grid.arrange(p1, p2, 
-             ncol=2, nrow = 1, 
-             widths = c(8,8), 
-             heights = c(4))
+    theme3
+
+
+p1
 ```
 
-Real GDP per Capita during WWI
 
-At the time of WWI, UK and US had the highest leve of real GDP per capita while Japan and USSR had the lowest. While US suffered a drop in real GDP per capita before WWI, its real GDP per capita actually increased during the war but dipped down again in 1919. UK's real GDP per capita plateaued during the war but dropped significantly after the war. Germany suffered a drop in real GDP per capita before WWI and its real GDP per capita during WWI was also at a plateau and dropped even more immediately after the war is over before finally bouncing back in 1919. Japan's real GDP per capita steadily increased from 1910 to 1922. The USSR's real GDP per capita dropped significantly during the war and stayed at the same level it was at at the end of the war until 1922. France's real GDP per capita increased until 1916 but dropped significantly during the last two years of the war before bouncing back after the war. 
 
-Population during WWI
+**Real GDP per capita during WWI:**
+
+At the time of WWI, UK and US had the highest leve of real GDP per capita while Japan and USSR had the lowest.While US suffered a drop in real GDP per capita before WWI, its real GDP per capita actually increased during the war but dipped down again in 1919. UK's real GDP per capita plateaued during the war but dropped significantly after the war. Germany suffered a drop in real GDP per capita before WWI and its real GDP per capita during WWI was also at a plateau and dropped even more immediately after the war is over before finally bouncing back in 1919. Japan's real GDP per capita steadily increased from 1910 to 1922. The USSR's real GDP per capita dropped significantly during the war and stayed at the same level it was at at the end of the war until 1922. France's real GDP per capita increased until 1916 but dropped significantly during the last two years of the war before bouncing back after the war. 
+
+
+```{r}
+p2
+```
+
+
+
+
+**Population during WWI:**
+
+
 
 It should be noted that USSR's population data is only present for the years 1913, 1920-1922. It is possible that the values are missing due to the fact that USSR wasn't a state until early 1920s. 
 Population for US and Japan steadily increased from 1910 to 1922 and seems to be completely unaffected by the war. Population for Germany and UK stayed around the same during the war before dropping a little after the war.France's population dropped during the war and increased slightly after the war.
 
 
-## Effects of WWII on the real GDP per capita and Population
 ```{r}
-WW2_subset = WW2%>%filter(country %in% c("United States", "Former USSR", "United Kingdom", "France", "Germany", "Japan"))
-
-p1 <- ggplot(WW2_subset, aes(year, rgdpnapc, color = country),frequency =1) + geom_line() +
-    ggtitle("Figure 2a:1935 - 1949 Real GDP Per Capita in 2011 US dollar") +
-    scale_x_continuous(breaks=seq(1935, 1949, 1)) +
-    scale_color_discrete(breaks=c("United States","United Kingdom", "Germany", "France", 
-                                  "Former USSR", "Japan")) +
-    geom_vline(xintercept = 1939) +
-    annotate("text", x = 1938,y = 0, label = "WWII Begins") + 
-    geom_vline(xintercept = 1945) +
-    annotate("text", x = 1946, y= 0, label = "WWI Ends") + 
-    labs (x = "Year", y = "Real GDP Per Capita") +
-    theme(legend.title = element_blank(),
-          plot.title = element_text(hjust = 0.5, size=16))
-
-p2 <- ggplot(WW2_subset, aes(year, pop, color = country)) + geom_line() +
-    ggtitle("Figure 2b:1935 - 1949 Population") +
-    scale_x_continuous(breaks=seq(1935, 1949, 1)) +
-    scale_color_discrete(breaks=c("Former USSR","United States", "Japan", "Germany", 
-                                  "United Kingdom", "France")) +
-    geom_vline(xintercept = 1939) +
-    annotate("text", x = 1938,y = 0, label = "WWII Begins" )+ 
-    geom_vline(xintercept = 1945) +
-    annotate("text", x = 1946, y= 0, label = "WWII Ends")+ 
-    labs (x = "Year", y = "Population") +
-    theme(legend.title = element_blank(),
-          plot.title = element_text(hjust = 0.5, size=16))
-```
-```{r fig.width=18, fig.height=6}
-grid.arrange(p1, p2, 
-             ncol=2, nrow = 1, 
-             widths = c(8,8), 
-             heights = c(4))
-```
-
-**Real GDP per capita during WWII**
-
-Real GDP per capita for Germany, U.S. and U.K. were very similar in 1935 and they were the countreis with the highest real GDP per capita. During most part of WWII real GDP per capita for those three increased steadily, while all dropping towards the end of the war with different magnitude of the drop. Germany experienced a significant drop in real GDP per capita, where it dropped to only 1/3 of where it was at starting from 1944. France also experienced a significant drop in real GDP per capita at the start of the war, at the end of the war, it dropped to only 1/2 of where it was at before war. 
-
-**Population during WWII**
-
-While USSR had the highest population among the 6 countries, it also experienced the decrease in population after the war starts. Germany and France also experienced a drop in population after the war starts but the magnitude of the drop isn't as significant as that of USSR. Population for US and Japan increased steadily over the period 1935-1949 while population for UK stayed around the same. All countries‘ population went back to increasing about one year after the war ends. 
-
-Comparison
-
-WWII seems to have a greater negative effect on real GDP per capita for countries like Germany and France as we can see from the size of the drop, wile GDP per capita for U.S. increased more during WWII than WWI. WWI and WWII seem to have similar effects on population for countries except for former USSR. Since most population data for USSR during the WWI is missing, it's impossible for us the make comparision on how the effects of WWI and WWII differ on USSR's population. It's quite surprising that population in most countries don't seem to be affected by the wars, for example, Japan's population steadily increased during both wars
-
-
-
-```{r}
-inter_state=read.csv('data/raw/Inter-StateWarData_v4.0.csv')
-intra_state=read.csv('data/raw/Intra-StateWarData_v4.1.csv')
-Extra_state=read.csv('data/raw/Extra-StateWarData_v4.0.csv')
 military_expenditure_main = read.csv('data/raw/military-expenditure-as-a-share-of-gdp.csv')
 colnames(military_expenditure_main)[4] <- "MilitaryExpenditure"
 primary_school_main = read.csv('data/raw/primary-enrollment-selected-countries.csv')
@@ -827,7 +797,7 @@ colnames(HDI_main)[4] <- "HDI"
 <!-- ``` -->
 
 
-## World War 1
+#### Military expenditure trends
 
 ```{r}
 #world_war1:: Years: 1914-1918
@@ -840,8 +810,8 @@ world_war1$StateName=as.character(world_war1$StateName)
 #maps
 world <- map_data("world")
 world_war1 <- world_war1 %>%
-  ## Recode certain entries
-  mutate(StateName = recode(str_trim(StateName), "United States of America" = "USA",
+## Recode certain entries
+mutate(StateName = recode(str_trim(StateName), "United States of America" = "USA",
                             "United Kingdom" = "UK"))
 ```
 
@@ -854,30 +824,48 @@ world_war1['number_of_days']=world_war1['end_date']-world_war1['start_date']
 
 
 
-**Military Expenditure Trends**
 
-```{r}
-library(ggplot2)
+
+
+```{r message=FALSE}
+# The palette with grey:
+cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
 military_expenditure <- subset(military_expenditure_main, Entity %in% world_war1$StateName)
   ggplot(military_expenditure,aes(Year, y = MilitaryExpenditure, colour = Entity, group = Entity)) +
   geom_line() +
-   scale_color_viridis(discrete = TRUE, option = "D")+
-  labs(title = "Trends in Military Expenditures of countries in WW1", y = "Expenditure", x = "")
+  scale_color_viridis(discrete = TRUE, option = "D", breaks=c("Russia", "Germany", "Italy", "Japan", "France",
+                                                              "Bulgaria", "Austria-Hungary", "Portugal", 
+                                                              "Belgium", "Greece", "Romania"))+
+  labs(title = "Figure 20: Trends in Military Expenditures of countries in WW1", y = "Expenditure", x = "") +
+  theme(plot.title = element_text(hjust = 0.5, size=13))
+    
   
-  library(ggplot2)
+
 military_expenditure <- subset(military_expenditure_main, Entity %in% world_war1$StateName)
 military_expenditure <- subset(military_expenditure, Year >= min(world_war1$StartYear1)-10)
 military_expenditure <- subset(military_expenditure, Year <= max(world_war1$EndYear1)+10)
- ggplot(military_expenditure,aes(Year, y = MilitaryExpenditure, colour = Entity, group = Entity)) + 
+
+ggplot(military_expenditure,aes(Year, y = MilitaryExpenditure, colour = Entity, group = Entity)) + 
   geom_line() +
-   scale_color_viridis(discrete = TRUE, option = "D")+
-  labs(title = "Trends in Military Expenditures of countries in WW1 \n (from before and after 10 years of WW1)", y = "Expenditure", x = "")
+
+  labs(title = "Figure 21: Trends in Military Expenditures of countries in WW1 \n (from before and after 10 years of WW1)", y = "Expenditure", x = "") +
+  theme(plot.title = element_text(hjust = 0.5, size=13)) +
+  scale_color_viridis(discrete = TRUE, option = "D", breaks=c("Russia", "Germany", "France", "Bulgaria", "Italy", 
+                                 "Japan", "Austria-Hungary", "Portugal", "Belgium", "Greece"))
+
 ```
 
-The above two graphs were plotted to gather insights regarding the military expenditure of the countries that were involved in World War 1. There are two graphs here - one shows the expenditure by the countries spanning over the years present in the dataset (~1825 - ~2006) and the second spans 10 years before and after the war under consideration. As one would expect, the military expenditure spiked in a very steep manner during the war years. World War 1 spanned over the years of 1914 - 1917 and we can see sharp increase in the military expenditure during these years, especially by countries like Russia, Austria-Hungary and Germany. In the first graph, we can also observe the increase in military expenditure during time periods ~1940. This time period was actually when World War 2 took place which justifies the spikes. Not surprisingly, the countries that show high increase in their military expenditure were also the most active during the wars.
+
+The above two graphs were plotted to gather insights regarding the military expenditure of the countries that were involved in world war 1. There are two graphs here - one shows the expenditure by the countries spanning over the years present in the dataset (~1825 - ~2006) and the second spans 10 years before and after the war under consideration. As one would expect, the military expenditure spiked in a very steep manner during the war years. World War 1 spanned over the years of 1914 - 1917 and we can see sharp increase in the military expenditure during these years, especially by countries like Russia, Austria-Hungary and Germany. In the first graph, we can also observe the increase in military expenditure during time periods ~1940. This time period was actually when World War 2 took place which justifies the spikes. Not surprisingly, the countries that show high increase in their military expenditure were also the most active during the wars.
+
 These graphs are easy to read by those with colorblindness as they have been plotted using the viridis color palette.
 
-Primary School Enrolment Percentage Trends
+
+
+#### Primary school enrollment percentage trends
+
+
 
 ```{r}
 school_enrolment <- subset(primary_school_main, Entity %in% world_war1$StateName)
@@ -885,25 +873,42 @@ school_enrolment <- subset(school_enrolment, Year >= min(world_war1$StartYear1)-
 school_enrolment <- subset(school_enrolment, Year <= max(world_war1$EndYear1)+10)
 ggplot(school_enrolment,aes(Year, y = SchoolEnrolment, colour = Entity, group = Entity)) +
   geom_line() +
-  labs(title = "Trends in Primary School enrolment in countries in WW1", y = "Enrolment", x = "")
+  labs(title = "Figure 22: Trends in Primary School enrolment in countries in WW1", y = "Enrolment", x = "") + 
+  theme(plot.title = element_text(hjust = 0.5, size=13)) +
+  scale_color_discrete(breaks=c("France", "Japan", "Bulgaria", "Germany", "Belgium", "Greece",
+                                "Romania", "Russia", "Portugal", "Italy", "Tuekey" ))
 ```
 
-We wanted to explore if the education of children was starkly affected due to the world wars in the countries that actively took part in the wars. Hence, we used a dataset that contained the primary school enrollment of kids in the countries that were active in the wars. As can be clearly seen from the graph, in most of the countries, there is a downfall of the values in the time period 1914-1917. Children in countries such as Russia and Greece were severely affected. The nations' focus had surely shifted from welfare and education of kids to wars. Surprisingly, we found that the primary school enrollment in Germany was unaffected and had been increasing steadily.  
 
-Human Development Index Trends
+
+We wanted to explore if the education of children was starkly affected due to the world wars in the countries that actively took part in the wars. Hence, we used a dataset that contained the primary school enrolment of kids in the countries that were active in the wars. As can be clearly seen from the graph, in most of the countries, there is a downfall of the values in the time period 1914-1917. Children in countries such as Russia and Greece were severely affected. The nations' focus had surely shifted from welfare and education of kids to wars. Surprisingly, we found that the primary school enrolment in Germany was unaffected and had been increasing steadily.  
+
+
+#### Human development index trends
+
 
 ```{r}
 HDI_table <- subset(HDI_main, Entity %in% world_war1$StateName)
 ggplot(HDI_table,aes(Year, y = HDI, colour = Entity)) +
   geom_line() +
-  labs(title = "Trends in Human Development Index in countries in WW1", y = "HDI Value", x = "")
+  labs(title = "Figure 23: Trends in Human Development Index in countries in WW1", y = "HDI Value", x = "") +
+  theme(plot.title = element_text(hjust = 0.5, size=13)) +  
+  scale_color_discrete(breaks = c("Germany", "France", "Belgium", "Japan", "Italy", 
+                                  "Greece", "Portugal", "Bulgaria", "Romania", "Turkey", "Russia"))
 
 HDI_table <- subset(HDI_table, Year >= min(world_war1$StartYear1)-15)
 HDI_table <- subset(HDI_table, Year <= max(world_war1$EndYear1)+15)
 ggplot(HDI_table,aes(Year, y = HDI, colour = Entity)) +
   geom_line() +
-  labs(title = "Trends in Human Development Index in countries \n 15 years before and after WW1", y = "HDI Value", x = "")
+
+  labs(title = "Figure 24: Trends in Human Development Index in countries \n 15 years before and after WW1", y = "HDI Value", x = "") + 
+  theme(plot.title = element_text(hjust = 0.5, size=13)) +
+  scale_color_discrete(breaks = c("Germany", "Belgium", "France", "Japan", "Italy",
+                                  "Greece", "Bulgaria", "Romania", "Russia", "Portugal", "Turkey"))
+
 ```
+
+
 
 The above shown plots were an attempt to analyze the affect of World War 1 on the human development index. The Human Development Index (HDI) is an index that measures key dimensions of human development. The three key dimensions are:1
 – A long and healthy life – measured by life expectancy.
@@ -911,7 +916,66 @@ The above shown plots were an attempt to analyze the affect of World War 1 on th
 – And a decent standard of living – measured by Gross National Income per capita (adjusted for the price level of the country.
 We plotted the trends of HDI over the years present in the dataset and also near to the time period of World War 1. We found that there was no considerable effect of World War 1 on human development index.
 
-## World War 2
+
+
+
+### World War II
+
+
+#### Real GDP per capita and population
+
+```{r}
+WW2_subset = WW2%>%filter(country %in% c("United States", "Former USSR", "United Kingdom", "France", "Germany", "Japan"))
+
+p1 <- ggplot(WW2_subset, aes(year, rgdpnapc, color = country),frequency =1) + geom_line() +
+    ggtitle("Figure 25:1935 - 1949 Real GDP Per Capita in 2011 US dollar") +
+    scale_x_continuous(breaks=seq(1935, 1949, 1)) +
+    scale_color_discrete(breaks=c("United States","United Kingdom", "Germany", "France", 
+                                  "Former USSR", "Japan")) +
+    geom_vline(xintercept = 1939) +
+    annotate("text", x = 1938,y = 0, label = "WWII Begins") + 
+    geom_vline(xintercept = 1945) +
+    annotate("text", x = 1946, y= 0, label = "WWII Ends") + 
+    labs (x = "Year", y = "Real GDP Per Capita") +
+    theme3
+
+p2 <- ggplot(WW2_subset, aes(year, pop, color = country)) + geom_line() +
+    ggtitle("Figure 26:1935 - 1949 Population") +
+    scale_x_continuous(breaks=seq(1935, 1949, 1)) +
+    scale_color_discrete(breaks=c("Former USSR","United States", "Japan", "Germany", 
+                                  "United Kingdom", "France")) +
+    geom_vline(xintercept = 1939) +
+    annotate("text", x = 1938,y = 0, label = "WWII Begins" )+ 
+    geom_vline(xintercept = 1945) +
+    annotate("text", x = 1946, y= 0, label = "WWII Ends")+ 
+    labs (x = "Year", y = "Population") +
+    theme3
+
+p1
+```
+
+
+
+**Real GDP per capita during WWII:**
+
+Real GDP per capita for Germany, U.S. and U.K. were very similar in 1935 and they were the countreis with the highest real GDP per capita. During most part of WWII real GDP per capita for those three increased steadily, while all dropping towards the end of the war with different magnitude of the drop. Germany experienced a significant drop in real GDP per capita, where it dropped to only 1/3 of where it was at starting from 1944. France also experienced a significant drop in real GDP per capita at the start of the war, at the end of the war, it dropped to only 1/2 of where it was at before war. 
+
+```{r}
+p2
+```
+
+
+**Population during WWII:**
+
+While USSR had the highest population among the 6 countries, it also experienced the decrease in population after the war starts. Germany and France also experienced a drop in population after the war starts but the magnitude of the drop isn't as significant as that of USSR. Population for US and Japan increased steadily over the period 1935-1949 while population for UK stayed around the same. All countries‘ population went back to increasing about one year after the war ends. 
+
+
+**Comparison between WWI and WWII:**
+
+WWII seems to have a greater negative effect on real GDP per capita for countries like Germany and France as we can see from the size of the drop, wile GDP per capita for U.S. increased more during WWII than WWI. WWI and WWII seem to have similar effects on population for countries except for former USSR. Since most population data for USSR during the WWI is missing, it's impossible for us the make comparision on how the effects of WWI and WWII differ on USSR's population. It's quite surprising that population in most countries don't seem to be affected by the wars, for example, Japan's population steadily increased during both wars.
+
+
+
 ```{r}
 #world_war2:: Years: 1939-1945
 world_war2=inter_state%>%filter(WarName=='World War II')
@@ -925,27 +989,34 @@ world_war2 <- world_war2 %>%
 
 ```
 
-Military Expenditure Trends
+#### Military expenditure trends
 
 ```{r}
-library(ggplot2)
+
 military_expenditure <- subset(military_expenditure_main, Entity %in% world_war2$StateName)
   ggplot(military_expenditure,aes(Year, y = MilitaryExpenditure, colour = Entity, group = Entity)) +
   geom_line() +
-  labs(title = "Trends in Military Expenditures of countries in WW2", y = "Expenditure", x = "")
+  labs(title = "Figure 27: Trends in Military Expenditures of countries in WW2", y = "Expenditure", x = "") +
+    theme(plot.title = element_text(hjust = 0.5, size=13))
   
-  library(ggplot2)
+
 military_expenditure <- subset(military_expenditure_main, Entity %in% world_war2$StateName)
 military_expenditure <- subset(military_expenditure, Year >= min(world_war2$StartYear1)-10)
 military_expenditure <- subset(military_expenditure, Year <= max(world_war2$EndYear1)+10)
  ggplot(military_expenditure,aes(Year, y = MilitaryExpenditure, colour = Entity, group = Entity)) +
   geom_line() +
-  labs(title = "Trends in Military Expenditures of countries in WW2 \n (from before and after 10 years of WW2)", y = "Expenditure", x = "")
+
+  labs(title = "Figure 28: Trends in Military Expenditures of countries in WW2 \n (from before and after 10 years of WW2)", y = "Expenditure", x = "") +
+   theme(plot.title = element_text(hjust = 0.5, size=13))
+
+
 ```
 
 The above two are plots of military expenditure trends of countries involved in World War 2, similar to the one for World War 1. First plot shows the expenditure from 1820s - 2006 and the second shows near to the time period of world war 2. We can see sharp increase in military expenditures of certain countries such as Italy, France, etc. There are some lines which are no continuous which correspond to missing data. Certain military expenditures data are not present in the dataset used. 
 
-Primary School Enrolment Percentage Trends
+
+#### Primary school enrolment percentage trends
+
 
 ```{r}
 school_enrolment <- subset(primary_school_main, Entity %in% world_war2$StateName)
@@ -953,24 +1024,30 @@ school_enrolment <- subset(school_enrolment, Year >= min(world_war2$StartYear1)-
 school_enrolment <- subset(school_enrolment, Year <= max(world_war2$EndYear1)+10)
 ggplot(school_enrolment,aes(Year, y = SchoolEnrolment, colour = Entity, group = Entity)) +
   geom_line() +
-  labs(title = "Trends in Primary School enrolment in countries in WW2", y = "Enrolment", x = "")
+  labs(title = "Figure 29: Trends in Primary School enrolment in countries in WW2", y = "Enrolment", x = "") +
+  theme(plot.title = element_text(hjust = 0.5, size=13))
 ```
 
 To explore the effects of World War 2 over children's education, the above graph was plotted. In contrast with the graph of World War 1, this graph concerning countries involved in World War 2 does not show clear and significant patterns.Certain countries like China and Canada saw an increase in primary school enrollment whereas some other countries like Australia and Italy saw a decrease.
 
-Human Development Index Trends
+
+
+#### Human development index trends
 ```{r}
 HDI_table <- subset(HDI_main, Entity %in% world_war2$StateName)
 ggplot(HDI_table,aes(Year, y = HDI, colour = Entity)) +
   geom_line() +
-  labs(title = "Trends in Human Development Index in countries in WW2", y = "HDI Value", x = "")
+  labs(title = "Figure 30: Trends in Human Development Index in countries in WW2", y = "HDI Value", x = "") +
+  theme(plot.title = element_text(hjust = 0.5, size=13))
 
 HDI_table <- subset(HDI_table, Year >= min(world_war2$StartYear1)-10)
 HDI_table <- subset(HDI_table, Year <= max(world_war2$EndYear1)+10)
 ggplot(HDI_table,aes(Year, y = HDI, colour = Entity)) +
   geom_line() +
-  labs(title = "Trends in Human Development Index in countries \n 5 years before and after WW2", y = "HDI Value", x = "")
+  labs(title = "Figure 31: Trends in Human Development Index in countries \n 5 years before and after WW2", y = "HDI Value", x = "") +
+  theme(plot.title = element_text(hjust = 0.5, size=13))
 
 ```
 
-Similar to the results observed in the graph of HDI for countries involved in World War 1, here as well there are no observable or clear patterns to the changes in HDI for the time period of World War 2. 
+
+Similar to the results observed in the graph of HDI for countries involved in World War I, here as well there are no observable or clear patterns to the changes in HDI for the time period of World War II. 
