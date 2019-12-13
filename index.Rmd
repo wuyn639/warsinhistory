@@ -25,4 +25,8 @@ Remnants of WW2 In the Pacific:
 
 https://earth.google.com/web/@2.11911094,-176.05298846,-4785.58516043a,11790687.0755d,35y,0h,0t,0r/data=CjASLhIgYzBjZDY0YzBjYmRhMTFlODlmNDYwNzE1NjE5ZDE0MWMiCnZveV9zcGxhc2g
 
+About the terms/datasets used in the project (*Typology of Wars*):
 
+1. Inter State Wars refer to all the wars that took place between different countries of the world. For example, World WAr 1 and World War 2 are two specific inter state wars.
+2. Intra State Wars refer to wars that took place inside of countries (non state actors)
+Others terms used are military expenditure, GDP per capita, Human Development Index, Number of bettle deaths, etc which are self explanatory.
