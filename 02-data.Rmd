@@ -62,158 +62,71 @@ Human Development Index dataset contains data regarding the Human Development In
 
 ## Format 
 
-All data we found for this project came in csv format.
+All data we found for this project came in `csv` format.
 
 ## Variables
 
 **Correlates of War**
 
-WarNum - the number assigned to the war
 
-WarName - the name given to the war
-
-WarType: 1 = Inter-state war
-         2 = Colonial War
-         3 = Imperial War
-         4 = Civil war for central control
-         5 = Civil war over local issues
-         6 = Regional internal
-         7 = Intercommunal
-         8 = wars between or among non-state entities that take place in non-state territory
-         9 = wars between NSAs that take place across state borders
-
-Ccode – the System Membership number (or Country Code) for the state participant
-
-Ccode1 – the System Membership number (or Country Code) for the participant on Side
-A of the war; -8 = Not Applicable (the participant is not a state) or there is no
-additional state on Side A
-
-CcodeA – the Country Code or System Membership number for the participant on Side A
-of the war; -8 = Not Applicable (the participant is not a state)
-
-State Name - the name of the System Member
-
-StartMonth1 - the month in which sustained combat began: -9 = month unknown
-
-StartDay1 - the day on which sustained combat began: -9 = day unknown
-
-StartYear1 - the year in which sustained combat began: -9 = year is unknown
-
-EndMonth1 - the month in which sustained combat ended, or the month of the last major
-engagement after which fatalities declined below the war fatality threshold: -7 = war ongoing as if 12/31/2007, -9 = month unknown
-
-EndDay1- the day on which sustained combat ended, or the day after the last major
-engagement after which fatalities declined below the war fatality threshold: -7 =
-war ongoing as if 12/31/2007, -9 = day unknown
-
-EndYear1 - the year in which sustained combat ended, or the year of the last major
-engagement after which fatalities declined below the war fatality threshold: -7 =
-war ongoing as if 12/31/2007, -9 = year unknown
-
-StartMonth2 - after a break in the fighting, the month in which sustained combat
-resumes: -9 = month unknown, -8 = not applicable
-
-StartDay2- after a break in the fighting, the day on which sustained combat resumes: -9 =
-month unknown, -8 = not applicable
-
-StartYear2 - after a break in the fighting, the year in which sustained combat resumes: -9
-= year unknown, -8 = not applicable
-
-EndMonth2 - after fighting resumes, the month in which sustained combat ended, or the
-month of the last major engagement after which fatalities declined below the war
-fatality threshold: -7 = war ongoing as if 12/31/2007, -9 = month unknown, -8 =
-not applicable
-
-EndDay2- after fighting resumes, the day on which sustained combat ended, or the day
-after the last major engagement after which fatalities declined below the war
-fatality threshold: -7 = war ongoing as if 12/31/2007, -9 = day unknown, -8 = not
-applicable
-
-EndYear2 - after fighting resumes, the year in which sustained combat ended, or the year
-of the last major engagement after which fatalities declined below the war fatality
-threshold: -7 = war ongoing as if 12/31/2007, -9 = year unknown, -8 = not
-applicable
-
-TransFrom - the WarNum of a preceding war that was transformed into this inter-state war: -8 = Not applicable
-
-Interven – was there an additional state that intervened in the war? 0 = no, 1 = yes
-
-WhereFought - Region(s) where combat involving the state occurred.
-1 = W. Hemisphere
-2 = Europe
-4 = Africa
-6 = Middle East
-7 = Asia
-9 = Oceania
-11 = Europe & Middle East
-12 = Europe & Asia
-13 = W. Hemisphere & Asia
-14 = Europe, Africa & Middle East
-15 = Europe, Africa, Middle East, & Asia
-16 = Africa, Middle East, Asia & Oceania
-17 = Asia & Oceania
-18 = Africa & Middle East
-19 = Europe, Africa, Middle East, Asia & Oceania
-
-Initiator - whether the state initiated the war(some datasets encoded this variable differently)
-1 = Yes
-2 = No
-
-TransTo - the WarNum of the war that this war transformed into, -8 = Not applicable
-
-Outcome: 
-1 = Winner
-2 = Loser
-3 = Compromise/Tied
-4 = The war was transformed into another type of war
-5 = The war is ongoing as of 12/31/2007
-6 = Stalemate
-7 = Conflict continues at below war level
-8 = changed sides
-
-SideADeaths - the battle-related combatant fatalities suffered by the Side A participant: -
-8 = not applicable, -9= data unknown
-
-SideBDeaths - the battle-related combatant fatalities suffered by the Side B participant: -8
-= not applicable, -9= data unknown
-
-TotalCombatDeaths - the combination of Side A Deaths and Side B. Deaths. If the
-specific fatalities of the Sides are unknown, a total combatant fatality figure may
-be provided, -9 = data unknown
-
-BatDeaths - the battle-related combatant fatalities suffered by the state: -9 = data unknown
-
-NonState Deaths - the battle-related combatant fatalities suffered by the nonstate participant: -8 = not applicable (deaths reported only in the record for the initial
-state participant, not in the record for the intervening state(s), -9= data unknown
-Version - Version of the data = 4.0 
+Variables         | Description
+----------------- | ------------------------------------------------------------------------------------------------
+WarNum            | the number assigned to the war
+WarName           | the name given to the war
+WarType           | 1 = Inter-state war; 2 = Colonial War; 3 = Imperial War; 4 = Civil war for central control; 5 = Civil war over local issues; 6 = Regional internal; 7 = Intercommunal; 8 = wars between or among non-state entities that take place in non-state territory； 9 = wars between NSAs that take place across state borders
+Ccode             | the System Membership number (or Country Code) for the state participant
+Ccode1            | the System Membership number (or Country Code) for the participant on Side A of the war; -8 = Not Applicable (the participant is not a state) or there is no additional state on Side A
+CcodeA            | the Country Code or System Membership number for the participant on Side A of the war; -8 = Not Applicable (the participant is not a state)
+State Name        | the name of the System Member
+StartMonth1       | the month in which sustained combat began: -9 = month unknown
+StartDay1         | the day on which sustained combat began: -9 = day unknown
+StartYear1        | the year in which sustained combat began: -9 = year is unknown
+EndMonth1         | the month in which sustained combat ended: -7 = war ongoing as if 12/31/2007, -9 = month unknown
+EndDay1           | the day on which sustained combat ended: -7 = war ongoing as if 12/31/2007, -9 = day unknown
+EndYear1          | the year in which sustained combat ended: -7 = war ongoing as if 12/31/2007, -9 = year unknown
+StartMonth2       | after a break in the fighting, the month in which sustained combat resumes: -9 = month unknown, -8 = not applicable
+StartDay2         | after a break in the fighting, the day on which sustained combat resumes: -9 = month unknown, -8 = not applicable
+StartYear2        | after a break in the fighting, the year in which sustained combat resumes: -9 = year unknown, -8 = not applicable
+EndMonth2         | after fighting resumes, the month in which sustained combat ended, or the month of the last major engagement after which fatalities declined below the war fatality threshold: -7 = war ongoing as if 12/31/2007, -9 = month unknown, -8 = not applicable
+EndDay2           | after fighting resumes, the day on which sustained combat ended, or the day after the last major engagement after which fatalities declined below the war fatality threshold: -7 = war ongoing as if 12/31/2007, -9 = day unknown, -8 = not applicable
+EndYear2          | after fighting resumes, the year in which sustained combat ended, or the year of the last major engagement after which fatalities declined below the war fatality threshold: -7 = war ongoing as if 12/31/2007, -9 = year unknown, -8 = not applicable
+TransFrom         | the WarNum of a preceding war that was transformed into this inter-state war: -8 = Not applicable
+Interven          | was there an additional state that intervened in the war? 0 = no, 1 = yes
+WhereFought       | Region(s) where combat involving the state occurred.
+Initiator         | whether the state initiated the war(some datasets encoded this variable differently) 1 = Yes 2 = No
+TransTo           | the WarNum of the war that this war transformed into, -8 = Not applicable
+Outcome           | 1 = Winner; 2 = Loser; 3 = Compromise/Tied; 4 = The war was transformed into another type of war; 5 = The war is ongoing as of 12/31/2007; 6 = Stalemate; 7 = Conflict continues at below war level; 8 = changed sides
+SideADeaths       | the battle-related combatant fatalities suffered by the Side A participant: - 8 = not applicable, -9= data unknown
+SideBDeaths       | the battle-related combatant fatalities suffered by the Side B participant: -8 = not applicable, -9= data unknown
+TotalCombatDeaths | the combination of Side A Deaths and Side B. Deaths. If the specific fatalities of the Sides are unknown, a total combatant fatality figure may be provided, -9 = data unknown
+BatDeaths         | the battle-related combatant fatalities suffered by the state: -9 = data unknown
+NonState Deaths   | the battle-related combatant fatalities suffered by the nonstate participant: -8 = not applicable, -9= data unknown
+Version           | Version of the data = 4.0 
 
 
 
 **Maddison Project Database 2018**
 
-countrycode - 3-letter ISO country code
+Variables      | Description
+-------------- | --------------------------
+countrycode    | 3-letter ISO country code
+country        | Country name
+year           | Year
+cgdppc         | Real GDP per capita in 2011US dollars, multiple benchmarks 
+rgdpnapc       | Real GDP per capita in 2011US dollars, 2011 benchmark 
+pop            | Population, mid-year (thousands)
+i_cig          | observation is extrapolated (0), benchmark (1), or interpolated (2)
+i_bm           | For benchmark observations: 1: ICP PPP estimates, 2: Historical income benchmarks, 3: Real wages and urbanization, 4: Multiple of subsistence, 5: Braithwaite (1968) PPPs
 
-country -	Country name
 
-year - Year
-
-cgdppc- Real GDP per capita in 2011US$, multiple benchmarks 
-
-rgdpnapc - Real GDP per capita in 2011US$, 2011 benchmark 
-
-pop	- Population, mid-year (thousands)
-
-i_cig - observation is extrapolated (0), benchmark (1), or interpolated (2)
-
-i_bm -	For benchmark observations: 1: ICP PPP estimates, 2: Historical income benchmarks, 3: Real wages and urbanization, 4: Multiple of subsistence, 5: Braithwaite (1968) PPPs
-
-## Additonal Information on Correlates of War
+## Additonal Information
 
 For inter-state war dataset, most wars have multiple rows of observations, where the number of rows is the number of participants of that war. For instance, the Franco-Spanish War is between Spain and France and there is one row of observation for each participating country. 
 
 For intra-state war dataset and extra-state war dataset, most wars also have multiple rows of observations, where the number of rows is the maximum number of participants on either side of that war. For instance, Ottoman Empire is on side A of the Greek Independence War and side B consists of Greeks, United Kingdom, France and Russia. Therefore, the number of rows got is 4 for Greek Independence War. We also note that in the case that one side has fewer participants than the other, the participants will not be repeated but will be coded as -8(not applicable). For the same example as above, side A only has Ottoman Empire and Ottoman Empire is in one row while the other three rows on the same war has -8 for side A, instead of repeating Ottoman Empire. 
 
 For non-state war dataset, each war only has one row of observation. 
+
 
 ## Issues with Datasets
 

@@ -596,6 +596,7 @@ world <- map_data("world") %>%
 
 Russia <- map_data("world") %>% filter(region == "Russia")
 world <- rbind(world, Russia)
+write.csv(world, "data/clean/world_updated.csv")
 ```
 
 
