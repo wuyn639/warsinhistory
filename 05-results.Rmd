@@ -513,6 +513,7 @@ parcoords(dfa6,
 
 Parallel coordinate plots can be used to visualize outliers in a dataset. In the above parallel coordinate plot, we can see that USSR seems to be an outlier: it has way higher battle deaths than every other country that participated in the war. There seems to be a trend for non-initiators to have lower battle deaths, however USSR doesn't follow this trend. USSR was not an initiator but has the highest number of battle deaths.
 
+
 ## World War I and World War II
 
 In *Figure 8*, we notice the two wars with most number of deaths are World War I and World War II, which correspond to the two most famous wars in history all over the world. Therefore, we decided to focus in there two world wars for the following analysis.  
