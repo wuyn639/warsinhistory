@@ -143,7 +143,7 @@
 ##           0</code></pre>
 <p>We can see the number of NAs in each column: there is only one variable–BatDeath(battle death) with missing value(1 missing).</p>
 <p>Figure 1: Visna Graph of Missing Data Pattern for Inter-state Wars Dataset
-<img src="finalproj_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<img src="finalproj_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>From the visna plot, we can observe that most rows have no variables missing. There is one row with BatDeath(battle death) data missing.</p>
 <p>Intra-state Wars Dataset</p>
 <pre><code>## SideBDeaths SideADeaths   StartDay1     EndDay1 StartMonth1   EndMonth1 
@@ -158,7 +158,7 @@
 ##           0           0           0           0</code></pre>
 <p>We can see the number of NAs in each column: the two variables with the most missing values are SideBDeaths(174 missing) and SideADeaths(171 missing).</p>
 <p>Figure 2: Visna Graph of Missing Data Pattern for Intra-state Wars Dataset
-<img src="finalproj_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<img src="finalproj_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>We observe that most rows have no missing variables. The most common missing data pattern is having SideADeath and SideBDeath data missing. It’s rare having more than three variables missing in this dataset.</p>
 <p>Extra-state Wars Dataset</p>
 <pre><code>##      StartDay1        EndDay1       BatDeath      EndMonth1 NonStateDeaths 
@@ -175,7 +175,7 @@
 ##              0              0              0</code></pre>
 <p>We can see the number of NAs in each column: the two variables with the most missing values are StartDay1(46 missing) and EndDay1(38 missing).</p>
 <p>Figure 3: Visna Graph of Missing Data Pattern for Extra-state Wars Dataset
-<img src="finalproj_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<img src="finalproj_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>We observe that most rows have no missing variables. The most common missing data pattern is having StartDay1(the day on which sustained combat began) data missing. It’s rare having more than two variables missing in this dataset.</p>
 <p>Non-state Wars Dataset</p>
 <pre><code>##       SideBDeaths       SideADeaths TotalCombatDeaths          StartDay 
@@ -194,7 +194,7 @@
 ##                 0</code></pre>
 <p>We can see the number of NAs in each column: the three variables with the most missing values are SideBDeaths(39 missing), SideADeaths(38 missing) and TotalCombatDeaths(32).</p>
 <p>Figure 4: Visna Graph of Missing Data Pattern for Non-state Wars Dataset
-<img src="finalproj_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<img src="finalproj_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>We observe that there are more rows with missing data than without missing data. The most common missing data pattern is having SideADeath, SideBDeath and TotalCombatDeaths data missing. We also observe that if we have SideADeaths, SideBDeaths missing, then we often also have TotalCombatDeaths missing which makes sense since TotalCombatDeaths is the sum of SideADeath and SideBDeath.</p>
 
 </div>
