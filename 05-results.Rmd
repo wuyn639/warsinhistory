@@ -221,6 +221,7 @@ ggplot(dfa2.1, aes(x = Count, y = fct_reorder(StateName, Count))) +
   ylab("State Name") +
   ggtitle("Figure 3: Number of wars for each state") +
   scale_x_continuous(breaks = seq(0,87,3)) + 
+  scale_colour_colorblind()+ 
   theme_dotplot 
 ```
 
@@ -243,7 +244,8 @@ b1 <- ggplot(dfa2_extra.g, aes(x = reorder(StateName, Count), y = Count)) +
   xlab("State Name") +
   ylab("Number of Wars") +
   coord_flip() + 
-  ggtitle("Figure 4: Bar chart of number of\nextra-state wars\nfor each state") +
+  ggtitle("Figure 4: Bar chart of number of\nextra-state wars\nfor each state") + 
+  scale_fill_manual(values=cbbPalette)+
   theme2
 
 dfa2_intra.g <- dfa2_intra %>%
