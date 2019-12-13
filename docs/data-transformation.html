@@ -84,7 +84,7 @@
 <li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#sources"><i class="fa fa-check"></i><b>2.1</b> Sources</a></li>
 <li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#format"><i class="fa fa-check"></i><b>2.2</b> Format</a></li>
 <li class="chapter" data-level="2.3" data-path="data-sources.html"><a href="data-sources.html#variables"><i class="fa fa-check"></i><b>2.3</b> Variables</a></li>
-<li class="chapter" data-level="2.4" data-path="data-sources.html"><a href="data-sources.html#additonal-information"><i class="fa fa-check"></i><b>2.4</b> Additonal Information</a></li>
+<li class="chapter" data-level="2.4" data-path="data-sources.html"><a href="data-sources.html#additional-information"><i class="fa fa-check"></i><b>2.4</b> Additional Information</a></li>
 <li class="chapter" data-level="2.5" data-path="data-sources.html"><a href="data-sources.html#issues-with-datasets"><i class="fa fa-check"></i><b>2.5</b> Issues with Datasets</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a><ul>
@@ -154,11 +154,11 @@
 <ul>
 <li><p>we can then safely add BatDeath and NonStateDeaths as total BatDeath</p></li>
 <li><p>if ccode1 is valid, add new row (WarNum, WarName, WarType, StateName=SideA,ccode=ccode1, BatDeath) to data frame sideA;</p></li>
-<li><p>if ccode2 is valid, add new row (WarNum, WarName, WarType, StateName=SideB,ccode=ccode2, BatDeath) to data frame sideb;</p></li>
+<li><p>if ccode2 is valid, add new row (WarNum, WarName, WarType, StateName=SideB,ccode=ccode2, BatDeath) to data frame sideB;</p></li>
 <li><p>row-bind sideA and sideB to form extra-state data frame with 6 variables WarNum, WarName, WarType, StateName, ccode, BatDeath.</p></li>
 </ul>
 <p><strong>Non-state</strong>: these wars are not about countries or states, and thus we did not take them into consideration in this particular case.</p>
-<p>Note that valid here means the ccode is not negative based on the codebook of COW and it exists in another data set provided by COW of a list of state and correspondong codes. Furthermore, all numbers of deaths were cleaned to become numbers.</p>
+<p>Note that valid here means the ccode is not negative based on the codebook of COW and it exists in another data set provided by COW of a list of state and corresponding codes. Furthermore, all numbers of deaths were cleaned to become numbers.</p>
 </div>
 <div id="choropleth-maps" class="section level2">
 <h2><span class="header-section-number">3.2</span> Choropleth maps</h2>

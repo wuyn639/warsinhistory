@@ -29,7 +29,7 @@ if(!require("viridis")) { install.packages("viridis"); library("viridis")}
 
 ### Number of wars  by type
 
-To begin with our analysis, we first explored **what types of wars happened most frequently** as the original war data sets are divided by 4 war types: intra-state, inter-state, extra-state, and non-state wars. We observe from *Figure 1* that intra-state wars happened the most with over 400 occurences throghout history, followed by inter-state wars, then extra-state wars with non-state wars being the least common war type. Considering that the scale of inter-state wars is usually larger than scale of intra-state wars, the larger number of occurences of intra-state wars is expected and non-state wars are the least common with least occurrences. In addition, according to *Figure 2* and definitions of wars types, we found that:  
+To begin with our analysis, we first explored **what types of wars happened most frequently** as the original war data sets are divided by 4 war types: intra-state, inter-state, extra-state, and non-state wars. We observe from *Figure 1* that intra-state wars happened the most with over 400 occurrences throughout history, followed by inter-state wars, then extra-state wars with non-state wars being the least common war type. Considering that the scale of inter-state wars is usually larger than scale of intra-state wars, the larger number of occurrences of intra-state wars is expected and non-state wars are the least common with least occurrences. In addition, according to *Figure 2* and definitions of wars types, we found that:  
 
 * Within extra-state wars, two thirds of extra-state wars are imperial and one third of extra-state wars are colonial.
 * Inter-state wars are not divided into further categories.
@@ -277,7 +277,7 @@ b3 <- ggplot(dfa2_inter.g, aes(x = reorder(StateName, Count), y = Count)) +
 ```
 
 
-When we look into each war type, there is new information based on *Figure 4*, *Figure 5*, and *Figure 6*. United Kingdom only appeared to be most involved in extra-state wars, which is resonable in terms of its colonization before 19th century. France and Spain rank second and thrid for participating in extra-state wars as states that developed in the First Industrial Revolution and seeked colonial expansion. China has most intra-state wars with Ottoman Empire and Russia rank as second and third, which may be related to state's larger population and longer history. Finally, France, United States of America, and United Kingdom have been involved in most inter-state wars. There is another point worth noticing that there are many more intra-state and inter-state wars than extra-state wars for each state, corresponding to the findings in *Figure 1*.
+When we look into each war type, there is new information based on *Figure 4*, *Figure 5*, and *Figure 6*. United Kingdom only appeared to be most involved in extra-state wars, which is reasonable in terms of its colonization before 19th century. France and Spain rank second and third for participating in extra-state wars as states that developed in the First Industrial Revolution and seeked colonial expansion. China has most intra-state wars with Ottoman Empire and Russia rank as second and third, which may be related to state's larger population and longer history. Finally, France, United States of America, and United Kingdom have been involved in most inter-state wars. There is another point worth noticing that there are many more intra-state and inter-state wars than extra-state wars for each state, corresponding to the findings in *Figure 1*.
 
 
 ```{r fig.height=9, fig.width=15}
@@ -397,7 +397,7 @@ Germany's high ranking is unexpected considering its population but also makes s
 ### Correlation between wars and death counts
 
 
-From the previous exploraty data visualizations, it is reasonable to infer there should be a correlation between the number of wars and number of battle deaths for states. As a result, in this part we explored in more details for this question of the relationship between two categorical variables.  
+From the previous exploratory data visualizations, it is reasonable to infer there should be a correlation between the number of wars and number of battle deaths for states. As a result, in this part we explored in more details for this question of the relationship between two categorical variables.  
 
 
 ```{r}
@@ -719,7 +719,7 @@ While the state with the most battle deaths in both wars is USSR, it is not the 
 
 ## External statistics
 
-Wars do not only result in a large number of casualties but also impose effects on a wide range of aspects such as GDP pertica, population, living standards of cilvilians, military expensiture, education, etc. Again, we only focus on states like Japan, Russia, Germany, China, United Kingdom, France that participated both in WWI and WWII.
+Wars do not only result in a large number of casualties but also impose effects on a wide range of aspects such as GDP pertica, population, living standards of civilians, military expenditure, education, etc. Again, we only focus on states like Japan, Russia, Germany, China, United Kingdom, France that participated both in WWI and WWII.
 
 ### World War I
 
@@ -774,7 +774,7 @@ p1
 
 **Real GDP per capita during WWI:**
 
-At the time of WWI, UK and US had the highest leve of real GDP per capita while Japan and USSR had the lowest.While US suffered a drop in real GDP per capita before WWI, its real GDP per capita actually increased during the war but dipped down again in 1919. UK's real GDP per capita plateaued during the war but dropped significantly after the war. Germany suffered a drop in real GDP per capita before WWI and its real GDP per capita during WWI was also at a plateau and dropped even more immediately after the war is over before finally bouncing back in 1919. Japan's real GDP per capita steadily increased from 1910 to 1922. The USSR's real GDP per capita dropped significantly during the war and stayed at the same level it was at at the end of the war until 1922. France's real GDP per capita increased until 1916 but dropped significantly during the last two years of the war before bouncing back after the war. 
+At the time of WWI, UK and US had the highest level of real GDP per capita while Japan and USSR had the lowest.While US suffered a drop in real GDP per capita before WWI, its real GDP per capita actually increased during the war but dipped down again in 1919. UK's real GDP per capita plateaued during the war but dropped significantly after the war. Germany suffered a drop in real GDP per capita before WWI and its real GDP per capita during WWI was also at a plateau and dropped even more immediately after the war is over before finally bouncing back in 1919. Japan's real GDP per capita steadily increased from 1910 to 1922. The USSR's real GDP per capita dropped significantly during the war and stayed at the same level it was at at the end of the war until 1922. France's real GDP per capita increased until 1916 but dropped significantly during the last two years of the war before bouncing back after the war. 
 
 
 ```{r}
@@ -885,10 +885,10 @@ school_enrolment <- subset(school_enrolment, Year >= min(world_war1$StartYear1)-
 school_enrolment <- subset(school_enrolment, Year <= max(world_war1$EndYear1)+10)
 ggplot(school_enrolment,aes(Year, y = SchoolEnrolment, colour = Entity, group = Entity)) +
   geom_line() +
-  labs(title = "Figure 22: Trends in Primary School enrolment in countries in WW1", y = "Enrolment", x = "") + 
+  labs(title = "Figure 22: Trends in Primary School enrollment in countries in WW1", y = "Enrollment", x = "") + 
   theme(plot.title = element_text(hjust = 0.5, size=13)) +
   scale_color_viridis(discrete = TRUE, breaks=c("France", "Japan", "Bulgaria", "Germany", "Belgium", "Greece",
-                                "Romania", "Russia", "Portugal", "Italy", "Tuekey" ))
+                                "Romania", "Russia", "Portugal", "Italy", "Turkey" ))
 ```
 
 
@@ -970,7 +970,7 @@ p1
 
 **Real GDP per capita during WWII:**
 
-Real GDP per capita for Germany, U.S. and U.K. were very similar in 1935 and they were the countreis with the highest real GDP per capita. During most part of WWII real GDP per capita for those three increased steadily, while all dropping towards the end of the war with different magnitude of the drop. Germany experienced a significant drop in real GDP per capita, where it dropped to only 1/3 of where it was at starting from 1944. France also experienced a significant drop in real GDP per capita at the start of the war, at the end of the war, it dropped to only 1/2 of where it was at before war. 
+Real GDP per capita for Germany, U.S. and U.K. were very similar in 1935 and they were the countries with the highest real GDP per capita. During most part of WWII real GDP per capita for those three increased steadily, while all dropping towards the end of the war with different magnitude of the drop. Germany experienced a significant drop in real GDP per capita, where it dropped to only 1/3 of where it was at starting from 1944. France also experienced a significant drop in real GDP per capita at the start of the war, at the end of the war, it dropped to only 1/2 of where it was at before war. 
 
 ```{r}
 p2
@@ -984,7 +984,7 @@ While USSR had the highest population among the 6 countries, it also experienced
 
 **Comparison between WWI and WWII:**
 
-WWII seems to have a greater negative effect on real GDP per capita for countries like Germany and France as we can see from the size of the drop, wile GDP per capita for U.S. increased more during WWII than WWI. WWI and WWII seem to have similar effects on population for countries except for former USSR. Since most population data for USSR during the WWI is missing, it's impossible for us the make comparision on how the effects of WWI and WWII differ on USSR's population. It's quite surprising that population in most countries don't seem to be affected by the wars, for example, Japan's population steadily increased during both wars.
+WWII seems to have a greater negative effect on real GDP per capita for countries like Germany and France as we can see from the size of the drop, wile GDP per capita for U.S. increased more during WWII than WWI. WWI and WWII seem to have similar effects on population for countries except for former USSR. Since most population data for USSR during the WWI is missing, it's impossible for us the make comparison on how the effects of WWI and WWII differ on USSR's population. It's quite surprising that population in most countries don't seem to be affected by the wars, for example, Japan's population steadily increased during both wars.
 
 
 

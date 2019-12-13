@@ -53,7 +53,7 @@ Link: https://www.rug.nl/ggdc/historicaldevelopment/maddison/releases/maddison-p
 
 Our World in Data is a collaborative effort between the University of Oxford, who are the scientific editors of the website content; and the non-profit organization Global Change Data Lab, which publishes and maintains the website and the data tools. This is as part of the Oxford Martin Program on Global Development.
 
-Primary School Enrollment dataset contains data regarding the primary school enrolment of various countries. The variables included in the dataset are CountryName, CountryCode, year and percentage enrolment in primary schools of the country.
+Primary School Enrollment dataset contains data regarding the primary school enrollment of various countries. The variables included in the dataset are CountryName, CountryCode, year and percentage enrollment in primary schools of the country.
 
 Military Expenditure dataset contains data regarding military expenditure (as a share of GDP) of various countries over different years. The variables included in the dataset are CountryName, CountryCode, year and military expenditure as a share of GDP over the years.
 
@@ -119,7 +119,7 @@ i_cig          | observation is extrapolated (0), benchmark (1), or interpolated
 i_bm           | For benchmark observations: 1: ICP PPP estimates, 2: Historical income benchmarks, 3: Real wages and urbanization, 4: Multiple of subsistence, 5: Braithwaite (1968) PPPs
 
 
-## Additonal Information
+## Additional Information
 
 For inter-state war dataset, most wars have multiple rows of observations, where the number of rows is the number of participants of that war. For instance, the Franco-Spanish War is between Spain and France and there is one row of observation for each participating country. 
 
@@ -138,6 +138,6 @@ There is no war data after 2010 so the war dataset is not exactly up to date. Th
 
 While this dataset seems to be the most extensive as it comes to historic data on real GDP per capita and population, some of the data are extrapolated.  
 
-**Primary School Enrolment, Military Expenditure as a share of GDP, Human Development Index**
+**Primary School Enrollment, Military Expenditure as a share of GDP, Human Development Index**
 
 All of them don't have data regarding all countries involved in World War 1 (or 2). We chose those countries that were a part of WW1 or WW2 (but all were not present). Another issue was that even if countries were available, data concerning them for all years were not available. We could only analyze those that matched the timeline of WW1 and WW2. 

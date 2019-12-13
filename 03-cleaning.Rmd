@@ -34,7 +34,7 @@ there are no wars with both SideA and SideB existing, which means each row repre
   
   * if ccode1 is valid, add new row (WarNum, WarName, WarType, StateName=SideA,ccode=ccode1, BatDeath) to data frame sideA;
   
-  * if ccode2 is valid, add new row (WarNum, WarName, WarType, StateName=SideB,ccode=ccode2, BatDeath) to data frame sideb;
+  * if ccode2 is valid, add new row (WarNum, WarName, WarType, StateName=SideB,ccode=ccode2, BatDeath) to data frame sideB;
   
   * row-bind sideA and sideB to form extra-state data frame with 6 variables WarNum, WarName, WarType, StateName, ccode, BatDeath.
   
@@ -42,7 +42,7 @@ there are no wars with both SideA and SideB existing, which means each row repre
 **Non-state**: these wars are not about countries or states, and thus we did not take them into consideration in this particular case.  
 
 
-Note that valid here means the ccode is not negative based on the codebook of COW and it exists in another data set provided by COW of a list of state and correspondong codes. Furthermore, all numbers of deaths were cleaned to become numbers.
+Note that valid here means the ccode is not negative based on the codebook of COW and it exists in another data set provided by COW of a list of state and corresponding codes. Furthermore, all numbers of deaths were cleaned to become numbers.
 
 ## Choropleth maps
 

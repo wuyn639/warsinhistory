@@ -20,8 +20,8 @@ As was discussed in the data section, there were some limitations in our dataset
 
 *Future Scope*:
 
-- More work can be done trying to find out why certain countries wonm lost and initiated wars. More supplementary datasets such as technological development, higher education status, study on political climate of countries, etc can be used.
+- More work can be done trying to find out why certain countries who lost and initiated wars. More supplementary datasets such as technological development, higher education status, study on political climate of countries, etc can be used.
 
 - Our current study focuses on comparison of effect of different wars on countries. In future, to shine some light on the negative and avoidable impacts of wars, a comparative study between two countries- one of them involved in wars and other not, can be done to draw conclusions as to the state of development of these countries given their involvement in wars.
 
-- Our datasets also contained information about the location of wars. A study on the geographical location of war sites and its affect on neighbouring geographical areas and population can be done.
+- Our datasets also contained information about the location of wars. A study on the geographical location of war sites and its affect on neighboring geographical areas and population can be done.
