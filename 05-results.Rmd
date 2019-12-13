@@ -1,6 +1,6 @@
 # Results
 
-In this chapter, we gave a summary of findings for our analysis. In gereneal, there are three subsections, which are general exploratory data visualization, focous on World War I and World War II, and linkage to external indicative statistics such as GDP per capita, population, and military expenditure. For all plots, colors are color-vision-deficiency-friendly by using tested palettes.
+In this chapter, we give a summary of findings for our analysis. In general, there are three subsections, which are general exploratory data visualization, focus on World War I and World War II, and linkage to external indicative statistics such as GDP per capita, population, and military expenditure. For all plots, colors are color-vision-deficiency-friendly by using tested palettes.
 
 
 ```{r, include=FALSE}
@@ -195,7 +195,7 @@ dfa2_extra <- rbind(dfa2_extra_sidea, dfa2_extra_sideb)
 
 
 
-Apart from which war types were the most common, it also seems interesting to explore what states participated most frequently in the wars, whether their participation was "active"(they were initiators of the wars) or "passive"(they were not initiators of the wars). For this question, we did not take non-state wars into consideration because non-state wars are not about states or countries, as implied from the name "non-state". For *Figure 3*, after combining intra-state, extra-state and inter-state wars by state name, there are 160 states (rows) in total and we picked the first 80 states that were ever involved in the wars most frequently, to make cleveland plots more clear. Based on *Figure 3*, United Kingdom, France, China, Russia, and Ottoman Empire were involved in the wars more frequently, which is not a surprising finding considering these states' history and size. In addition, the numbers of wars in which United Kingdom and France participated are far more than that of the remaining states.
+Apart from which war types were the most common, it also seems interesting to explore what states participated most frequently in the wars, whether their participation was "active"(they were initiators of the wars) or "passive"(they were non initiators of the wars). For this question, we did not take non-state wars into consideration because non-state wars are not about states or countries, as implied from the name "non-state". For *Figure 3*, after combining intra-state, extra-state and inter-state wars by state name, there are 160 states (rows) in total and we picked the first 80 states that were ever involved in the wars most frequently, to make cleveland plots more clear. Based on *Figure 3*, United Kingdom, France, China, Russia, and Ottoman Empire were involved in the wars more frequently, which is not a surprising finding considering these states' history and size. In addition, the numbers of wars in which United Kingdom and France participated are far more than that of the remaining states.
 
 
 ```{r  fig.height=11, fig.width=7}
@@ -280,7 +280,7 @@ b3 <- ggplot(dfa2_inter.g, aes(x = reorder(StateName, Count), y = Count)) +
 ```
 
 
-When we look into each war type, there is new information based on *Figure 4*, *Figure 5*, and *Figure 6*. United Kingdom only appeared to be most involved in extra-state wars, which is resonable in terms of its colonization before 19th century. France and Spain rank second and thrid for participating in extra-state wars as states that developed in the First Industrial Revolution and seeked colonial expansion. China has most intra-state wars with Ottoman Empire and Russia rank as second and third, which may be related to state's larger population and longer history. Finally, France, United States of America, and United Kingkom have been involved in most inter-state wars. There is another point worth notice that are much more intra-state and inter-state wars than extra-state wars for each state, corresponding to the findings in *Figure 1*.
+When we look into each war type, there is new information based on *Figure 4*, *Figure 5*, and *Figure 6*. United Kingdom only appeared to be most involved in extra-state wars, which is resonable in terms of its colonization before 19th century. France and Spain rank second and thrid for participating in extra-state wars as states that developed in the First Industrial Revolution and seeked colonial expansion. China has most intra-state wars with Ottoman Empire and Russia rank as second and third, which may be related to state's larger population and longer history. Finally, France, United States of America, and United Kingdom have been involved in most inter-state wars. There is another point worth noticing that there are many more intra-state and inter-state wars than extra-state wars for each state, corresponding to the findings in *Figure 1*.
 
 
 ```{r fig.height=9, fig.width=15}
@@ -296,7 +296,7 @@ grid.arrange(b1, b2, b3,
 
 
 
-A part we can never ignore about wars is the number of deaths caused. For this project, we only demonstrate the number of battle deaths, the battle-related combatant fatalities suffered by the state. 
+A part we can never ignore about wars is the number of deaths caused. Here, we demonstrate the number of battle deaths, the battle-related combatant fatalities suffered by the state. 
 
 
 ```{r}
@@ -323,7 +323,7 @@ dfa4 <- rbind(dfa4_extra, dfa4_inter, dfa4_intra, dfa4_non) %>%
 ```
 
 
-We first explored which war type caused the most number of battle deaths and it can be observed from *Figure 7* the war type is **inter-state** wars, with a number over 30 million standing out among all other types.  
+We first explore which war type caused the most number of battle deaths and it can be observed from *Figure 7* the war type is **inter-state** wars, with a number over 30 million standing out among all other types.  
 
 
 ```{r}
@@ -337,7 +337,7 @@ plot_ly(dfa4, x = ~WarType, y = ~WarDeath, type = "bar") %>%
 
 Now please think of one war in history that you believe caused most battle deaths and scroll down to *Figure 8* to check your answer. 
 
-Notice that we took log of the number of battle deaths due to the large number. The two wars with most humanity losses are World War II and World War I and the number of deaths for World War II (over 16.5 million) is almost twice of the number for World War I (about 8 million). This might be one of the reasons that these are the two most famous wars in history. Another war causing a large number of deaths is Iran-Iraq war (about 1.5 million), but an obvious break of link between world wars and other wars can be seen clearly.  
+Notice that we took log of the number of battle deaths due to the large number. The two wars with most human losses are World War II and World War I and the number of deaths for World War II (over 16.5 million) is almost twice of the number for World War I (about 8 million). This might be one of the reasons that these are the two most famous wars in history. Another war causing a large number of deaths is Iran-Iraq war (about 1.5 million), but an obvious break of link between world wars and other wars can be seen clearly.  
 
 
 
@@ -418,7 +418,7 @@ ggplotly(sp, tooltip = c("text"))
 ```
 
 
-There seems to be a very week positive correlation between number of wars a country participated in and the number of total battle deaths in those wars based on *Figure 10* and *Figure 11*. While France and UK participated in the most wars, with France participating in more than 60 wars and UK participating in more than 80 wars, their battle deaths are still lower than Germany, USSR, China and Russia, even though those countries/states are in way fewer wars. While France and Japan have around the same total battle deaths, those deaths were from fewer than 20 wars for Japan while for France, those deaths were from more than 60 wars. Germany and USSR participated in under 20 wars but their total battle deaths were higher than any other countries.
+There seems to be a very weak positive correlation between number of wars a country participated in and the number of total battle deaths in those wars based on *Figure 10* and *Figure 11*. While France and UK participated in the most wars, with France participating in more than 60 wars and UK participating in more than 80 wars, their battle deaths are still lower than Germany, USSR, China and Russia, even though those countries/states are in way fewer wars. While France and Japan have around the same total battle deaths, those deaths were from fewer than 20 wars for Japan while for France, those deaths were from more than 60 wars. Germany and USSR participated in under 20 wars but their total battle deaths were higher than any other countries.
 
 
 
@@ -451,7 +451,7 @@ ggplot(dfa9, aes(y=log(CountryBatDeath), x=Count)) +
 ### Inter-state wars: Correlation between initiators and winners
 
 
-We might think more initiators lose the war they initiated (thinking about Gernaby in WWI and WWII) and to deal with this initiative, we made the mosaic plot *Figure 12*. First of all, there are fewer initiators than non-initiators and there are slightly more winners than losers for all wars. In addition, few wars ended up as tied. For winners of a war, there are more non-initiators. For losers of a war, a higher percentage of states are non-initiators. If more initiators truly lose the war than non-initiators, we would expect a higher percentage of losers to be initiators which is the opposite case. 
+We might think more initiators lose the war they initiated (thinking about Germany in WWI and WWII) and to deal with this initiative, we made the mosaic plot *Figure 12*. First of all, there are fewer initiators than non-initiators and there are slightly more winners than losers for all wars. In addition, few wars ended up as tied. For winners of a war, there are more non-initiators. For losers of a war, a higher percentage of states are non-initiators. If more initiators truly lose the war than non-initiators, we would expect a higher percentage of losers to be initiators which is the opposite case. 
 
 
 
@@ -523,7 +523,7 @@ Parallel coordinate plots can be used to visualize outliers in a dataset. In the
 
 ## World War I and World War II
 
-In *Figure 8*, we notice the two wars with most number of deaths are World War I and World War II, which correspond to the two most famous wars in history all over the world. Therefore, we decided to focus in there two world wars for the following analysis.  
+In *Figure 8*, we notice the two wars with most number of deaths are World War I and World War II, which correspond to the two most famous wars in history of the world. Therefore, we decided to focus on these two world wars for the following analysis.  
 
 
 
