@@ -651,6 +651,12 @@ world_wars$WarName <- as.factor(world_wars$WarName)
 write_csv(world_wars, "data/clean/world_wars.csv")
 ```
 
+```{r}
+write.csv(world_war1, "data/clean/world_war1.csv")
+write.csv(world_war2, "data/clean/world_war2.csv")
+```
+
+
 ```{r eval=FALSE}
 world2 <- map_data("world") %>% filter(region == "Bosnia and Herzegovina")
 for (val in unique(world_war1$StateName) ) {

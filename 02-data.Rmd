@@ -5,7 +5,7 @@
 
 **Correlates of War**
 
-We got our main war data from The Correlates of War (COW) Project by David Singer and Mel Small. Singer and Small have utilized a classification of wars that is based upon the status of territorial entities, in particular focusing on those that are classified as members of the inter-state system (referred to as “states”). 
+We got our main war data from [The Correlates of War (COW) Project by David Singer and Mel Small](https://correlatesofwar.org/). Singer and Small have utilized a classification of wars that is based upon the status of territorial entities, in particular focusing on those that are classified as members of the inter-state system (referred to as “states”). 
 
 Inter-state wars were those that were conducted between or among members of the interstate system. For example, World War I and World War II would be considered inter-state wars. 
 
