@@ -84,13 +84,12 @@
 <li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#sources"><i class="fa fa-check"></i><b>2.1</b> Sources</a></li>
 <li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#format"><i class="fa fa-check"></i><b>2.2</b> Format</a></li>
 <li class="chapter" data-level="2.3" data-path="data-sources.html"><a href="data-sources.html#variables"><i class="fa fa-check"></i><b>2.3</b> Variables</a></li>
-<li class="chapter" data-level="2.4" data-path="data-sources.html"><a href="data-sources.html#additonal-information-on-correlates-of-war"><i class="fa fa-check"></i><b>2.4</b> Additonal Information on Correlates of War</a></li>
+<li class="chapter" data-level="2.4" data-path="data-sources.html"><a href="data-sources.html#additonal-information"><i class="fa fa-check"></i><b>2.4</b> Additonal Information</a></li>
 <li class="chapter" data-level="2.5" data-path="data-sources.html"><a href="data-sources.html#issues-with-datasets"><i class="fa fa-check"></i><b>2.5</b> Issues with Datasets</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a><ul>
-<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#cow-data"><i class="fa fa-check"></i><b>3.1</b> COW Data</a></li>
-<li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#choropleth-maps"><i class="fa fa-check"></i><b>3.2</b> choropleth maps</a></li>
-<li class="chapter" data-level="3.3" data-path="data-transformation.html"><a href="data-transformation.html#external-data"><i class="fa fa-check"></i><b>3.3</b> External Data</a></li>
+<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#cow-data"><i class="fa fa-check"></i><b>3.1</b> COW data</a></li>
+<li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#choropleth-maps"><i class="fa fa-check"></i><b>3.2</b> Choropleth maps</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a><ul>
@@ -177,112 +176,199 @@ The Maddison Project Database provides information on comparative economic growt
 </div>
 <div id="format" class="section level2">
 <h2><span class="header-section-number">2.2</span> Format</h2>
-<p>All data we found for this project came in csv format.</p>
+<p>All data we found for this project came in <code>csv</code> format.</p>
 </div>
 <div id="variables" class="section level2">
 <h2><span class="header-section-number">2.3</span> Variables</h2>
 <p><strong>Correlates of War</strong></p>
-<p>WarNum - the number assigned to the war</p>
-<p>WarName - the name given to the war</p>
-<p>WarType: 1 = Inter-state war
-2 = Colonial War
-3 = Imperial War
-4 = Civil war for central control
-5 = Civil war over local issues
-6 = Regional internal
-7 = Intercommunal
-8 = wars between or among non-state entities that take place in non-state territory
-9 = wars between NSAs that take place across state borders</p>
-<p>Ccode – the System Membership number (or Country Code) for the state participant</p>
-<p>Ccode1 – the System Membership number (or Country Code) for the participant on Side
-A of the war; -8 = Not Applicable (the participant is not a state) or there is no
-additional state on Side A</p>
-<p>CcodeA – the Country Code or System Membership number for the participant on Side A
-of the war; -8 = Not Applicable (the participant is not a state)</p>
-<p>State Name - the name of the System Member</p>
-<p>StartMonth1 - the month in which sustained combat began: -9 = month unknown</p>
-<p>StartDay1 - the day on which sustained combat began: -9 = day unknown</p>
-<p>StartYear1 - the year in which sustained combat began: -9 = year is unknown</p>
-<p>EndMonth1 - the month in which sustained combat ended, or the month of the last major
-engagement after which fatalities declined below the war fatality threshold: -7 = war ongoing as if 12/31/2007, -9 = month unknown</p>
-<p>EndDay1- the day on which sustained combat ended, or the day after the last major
-engagement after which fatalities declined below the war fatality threshold: -7 =
-war ongoing as if 12/31/2007, -9 = day unknown</p>
-<p>EndYear1 - the year in which sustained combat ended, or the year of the last major
-engagement after which fatalities declined below the war fatality threshold: -7 =
-war ongoing as if 12/31/2007, -9 = year unknown</p>
-<p>StartMonth2 - after a break in the fighting, the month in which sustained combat
-resumes: -9 = month unknown, -8 = not applicable</p>
-<p>StartDay2- after a break in the fighting, the day on which sustained combat resumes: -9 =
-month unknown, -8 = not applicable</p>
-<p>StartYear2 - after a break in the fighting, the year in which sustained combat resumes: -9
-= year unknown, -8 = not applicable</p>
-<p>EndMonth2 - after fighting resumes, the month in which sustained combat ended, or the
-month of the last major engagement after which fatalities declined below the war
-fatality threshold: -7 = war ongoing as if 12/31/2007, -9 = month unknown, -8 =
-not applicable</p>
-<p>EndDay2- after fighting resumes, the day on which sustained combat ended, or the day
-after the last major engagement after which fatalities declined below the war
-fatality threshold: -7 = war ongoing as if 12/31/2007, -9 = day unknown, -8 = not
-applicable</p>
-<p>EndYear2 - after fighting resumes, the year in which sustained combat ended, or the year
-of the last major engagement after which fatalities declined below the war fatality
-threshold: -7 = war ongoing as if 12/31/2007, -9 = year unknown, -8 = not
-applicable</p>
-<p>TransFrom - the WarNum of a preceding war that was transformed into this inter-state war: -8 = Not applicable</p>
-<p>Interven – was there an additional state that intervened in the war? 0 = no, 1 = yes</p>
-<p>WhereFought - Region(s) where combat involving the state occurred.
-1 = W. Hemisphere
-2 = Europe
-4 = Africa
-6 = Middle East
-7 = Asia
-9 = Oceania
-11 = Europe &amp; Middle East
-12 = Europe &amp; Asia
-13 = W. Hemisphere &amp; Asia
-14 = Europe, Africa &amp; Middle East
-15 = Europe, Africa, Middle East, &amp; Asia
-16 = Africa, Middle East, Asia &amp; Oceania
-17 = Asia &amp; Oceania
-18 = Africa &amp; Middle East
-19 = Europe, Africa, Middle East, Asia &amp; Oceania</p>
-<p>Initiator - whether the state initiated the war(some datasets encoded this variable differently)
-1 = Yes
-2 = No</p>
-<p>TransTo - the WarNum of the war that this war transformed into, -8 = Not applicable</p>
-<p>Outcome:
-1 = Winner
-2 = Loser
-3 = Compromise/Tied
-4 = The war was transformed into another type of war
-5 = The war is ongoing as of 12/31/2007
-6 = Stalemate
-7 = Conflict continues at below war level
-8 = changed sides</p>
-<p>SideADeaths - the battle-related combatant fatalities suffered by the Side A participant: -
-8 = not applicable, -9= data unknown</p>
-<p>SideBDeaths - the battle-related combatant fatalities suffered by the Side B participant: -8
-= not applicable, -9= data unknown</p>
-<p>TotalCombatDeaths - the combination of Side A Deaths and Side B. Deaths. If the
-specific fatalities of the Sides are unknown, a total combatant fatality figure may
-be provided, -9 = data unknown</p>
-<p>BatDeaths - the battle-related combatant fatalities suffered by the state: -9 = data unknown</p>
-<p>NonState Deaths - the battle-related combatant fatalities suffered by the nonstate participant: -8 = not applicable (deaths reported only in the record for the initial
-state participant, not in the record for the intervening state(s), -9= data unknown
-Version - Version of the data = 4.0</p>
+<table>
+<colgroup>
+<col width="15%" />
+<col width="84%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variables</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>WarNum</td>
+<td>the number assigned to the war</td>
+</tr>
+<tr class="even">
+<td>WarName</td>
+<td>the name given to the war</td>
+</tr>
+<tr class="odd">
+<td>WarType</td>
+<td>1 = Inter-state war; 2 = Colonial War; 3 = Imperial War; 4 = Civil war for central control; 5 = Civil war over local issues; 6 = Regional internal; 7 = Intercommunal; 8 = wars between or among non-state entities that take place in non-state territory； 9 = wars between NSAs that take place across state borders</td>
+</tr>
+<tr class="even">
+<td>Ccode</td>
+<td>the System Membership number (or Country Code) for the state participant</td>
+</tr>
+<tr class="odd">
+<td>Ccode1</td>
+<td>the System Membership number (or Country Code) for the participant on Side A of the war; -8 = Not Applicable (the participant is not a state) or there is no additional state on Side A</td>
+</tr>
+<tr class="even">
+<td>CcodeA</td>
+<td>the Country Code or System Membership number for the participant on Side A of the war; -8 = Not Applicable (the participant is not a state)</td>
+</tr>
+<tr class="odd">
+<td>State Name</td>
+<td>the name of the System Member</td>
+</tr>
+<tr class="even">
+<td>StartMonth1</td>
+<td>the month in which sustained combat began: -9 = month unknown</td>
+</tr>
+<tr class="odd">
+<td>StartDay1</td>
+<td>the day on which sustained combat began: -9 = day unknown</td>
+</tr>
+<tr class="even">
+<td>StartYear1</td>
+<td>the year in which sustained combat began: -9 = year is unknown</td>
+</tr>
+<tr class="odd">
+<td>EndMonth1</td>
+<td>the month in which sustained combat ended: -7 = war ongoing as if 12/31/2007, -9 = month unknown</td>
+</tr>
+<tr class="even">
+<td>EndDay1</td>
+<td>the day on which sustained combat ended: -7 = war ongoing as if 12/31/2007, -9 = day unknown</td>
+</tr>
+<tr class="odd">
+<td>EndYear1</td>
+<td>the year in which sustained combat ended: -7 = war ongoing as if 12/31/2007, -9 = year unknown</td>
+</tr>
+<tr class="even">
+<td>StartMonth2</td>
+<td>after a break in the fighting, the month in which sustained combat resumes: -9 = month unknown, -8 = not applicable</td>
+</tr>
+<tr class="odd">
+<td>StartDay2</td>
+<td>after a break in the fighting, the day on which sustained combat resumes: -9 = month unknown, -8 = not applicable</td>
+</tr>
+<tr class="even">
+<td>StartYear2</td>
+<td>after a break in the fighting, the year in which sustained combat resumes: -9 = year unknown, -8 = not applicable</td>
+</tr>
+<tr class="odd">
+<td>EndMonth2</td>
+<td>after fighting resumes, the month in which sustained combat ended, or the month of the last major engagement after which fatalities declined below the war fatality threshold: -7 = war ongoing as if 12/31/2007, -9 = month unknown, -8 = not applicable</td>
+</tr>
+<tr class="even">
+<td>EndDay2</td>
+<td>after fighting resumes, the day on which sustained combat ended, or the day after the last major engagement after which fatalities declined below the war fatality threshold: -7 = war ongoing as if 12/31/2007, -9 = day unknown, -8 = not applicable</td>
+</tr>
+<tr class="odd">
+<td>EndYear2</td>
+<td>after fighting resumes, the year in which sustained combat ended, or the year of the last major engagement after which fatalities declined below the war fatality threshold: -7 = war ongoing as if 12/31/2007, -9 = year unknown, -8 = not applicable</td>
+</tr>
+<tr class="even">
+<td>TransFrom</td>
+<td>the WarNum of a preceding war that was transformed into this inter-state war: -8 = Not applicable</td>
+</tr>
+<tr class="odd">
+<td>Interven</td>
+<td>was there an additional state that intervened in the war? 0 = no, 1 = yes</td>
+</tr>
+<tr class="even">
+<td>WhereFought</td>
+<td>Region(s) where combat involving the state occurred.</td>
+</tr>
+<tr class="odd">
+<td>Initiator</td>
+<td>whether the state initiated the war(some datasets encoded this variable differently) 1 = Yes 2 = No</td>
+</tr>
+<tr class="even">
+<td>TransTo</td>
+<td>the WarNum of the war that this war transformed into, -8 = Not applicable</td>
+</tr>
+<tr class="odd">
+<td>Outcome</td>
+<td>1 = Winner; 2 = Loser; 3 = Compromise/Tied; 4 = The war was transformed into another type of war; 5 = The war is ongoing as of 12/31/2007; 6 = Stalemate; 7 = Conflict continues at below war level; 8 = changed sides</td>
+</tr>
+<tr class="even">
+<td>SideADeaths</td>
+<td>the battle-related combatant fatalities suffered by the Side A participant: - 8 = not applicable, -9= data unknown</td>
+</tr>
+<tr class="odd">
+<td>SideBDeaths</td>
+<td>the battle-related combatant fatalities suffered by the Side B participant: -8 = not applicable, -9= data unknown</td>
+</tr>
+<tr class="even">
+<td>TotalCombatDeaths</td>
+<td>the combination of Side A Deaths and Side B. Deaths. If the specific fatalities of the Sides are unknown, a total combatant fatality figure may be provided, -9 = data unknown</td>
+</tr>
+<tr class="odd">
+<td>BatDeaths</td>
+<td>the battle-related combatant fatalities suffered by the state: -9 = data unknown</td>
+</tr>
+<tr class="even">
+<td>NonState Deaths</td>
+<td>the battle-related combatant fatalities suffered by the nonstate participant: -8 = not applicable, -9= data unknown</td>
+</tr>
+<tr class="odd">
+<td>Version</td>
+<td>Version of the data = 4.0</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Maddison Project Database 2018</strong></p>
-<p>countrycode - 3-letter ISO country code</p>
-<p>country - Country name</p>
-<p>year - Year</p>
-<p>cgdppc- Real GDP per capita in 2011US$, multiple benchmarks</p>
-<p>rgdpnapc - Real GDP per capita in 2011US$, 2011 benchmark</p>
-<p>pop - Population, mid-year (thousands)</p>
-<p>i_cig - observation is extrapolated (0), benchmark (1), or interpolated (2)</p>
-<p>i_bm - For benchmark observations: 1: ICP PPP estimates, 2: Historical income benchmarks, 3: Real wages and urbanization, 4: Multiple of subsistence, 5: Braithwaite (1968) PPPs</p>
+<table>
+<colgroup>
+<col width="35%" />
+<col width="65%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variables</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>countrycode</td>
+<td>3-letter ISO country code</td>
+</tr>
+<tr class="even">
+<td>country</td>
+<td>Country name</td>
+</tr>
+<tr class="odd">
+<td>year</td>
+<td>Year</td>
+</tr>
+<tr class="even">
+<td>cgdppc</td>
+<td>Real GDP per capita in 2011US dollars, multiple benchmarks</td>
+</tr>
+<tr class="odd">
+<td>rgdpnapc</td>
+<td>Real GDP per capita in 2011US dollars, 2011 benchmark</td>
+</tr>
+<tr class="even">
+<td>pop</td>
+<td>Population, mid-year (thousands)</td>
+</tr>
+<tr class="odd">
+<td>i_cig</td>
+<td>observation is extrapolated (0), benchmark (1), or interpolated (2)</td>
+</tr>
+<tr class="even">
+<td>i_bm</td>
+<td>For benchmark observations: 1: ICP PPP estimates, 2: Historical income benchmarks, 3: Real wages and urbanization, 4: Multiple of subsistence, 5: Braithwaite (1968) PPPs</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="additonal-information-on-correlates-of-war" class="section level2">
-<h2><span class="header-section-number">2.4</span> Additonal Information on Correlates of War</h2>
+<div id="additonal-information" class="section level2">
+<h2><span class="header-section-number">2.4</span> Additonal Information</h2>
 <p>For inter-state war dataset, most wars have multiple rows of observations, where the number of rows is the number of participants of that war. For instance, the Franco-Spanish War is between Spain and France and there is one row of observation for each participating country.</p>
 <p>For intra-state war dataset and extra-state war dataset, most wars also have multiple rows of observations, where the number of rows is the maximum number of participants on either side of that war. For instance, Ottoman Empire is on side A of the Greek Independence War and side B consists of Greeks, United Kingdom, France and Russia. Therefore, the number of rows got is 4 for Greek Independence War. We also note that in the case that one side has fewer participants than the other, the participants will not be repeated but will be coded as -8(not applicable). For the same example as above, side A only has Ottoman Empire and Ottoman Empire is in one row while the other three rows on the same war has -8 for side A, instead of repeating Ottoman Empire.</p>
 <p>For non-state war dataset, each war only has one row of observation.</p>

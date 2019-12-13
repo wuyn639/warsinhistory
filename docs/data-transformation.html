@@ -84,13 +84,12 @@
 <li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#sources"><i class="fa fa-check"></i><b>2.1</b> Sources</a></li>
 <li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#format"><i class="fa fa-check"></i><b>2.2</b> Format</a></li>
 <li class="chapter" data-level="2.3" data-path="data-sources.html"><a href="data-sources.html#variables"><i class="fa fa-check"></i><b>2.3</b> Variables</a></li>
-<li class="chapter" data-level="2.4" data-path="data-sources.html"><a href="data-sources.html#additonal-information-on-correlates-of-war"><i class="fa fa-check"></i><b>2.4</b> Additonal Information on Correlates of War</a></li>
+<li class="chapter" data-level="2.4" data-path="data-sources.html"><a href="data-sources.html#additonal-information"><i class="fa fa-check"></i><b>2.4</b> Additonal Information</a></li>
 <li class="chapter" data-level="2.5" data-path="data-sources.html"><a href="data-sources.html#issues-with-datasets"><i class="fa fa-check"></i><b>2.5</b> Issues with Datasets</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a><ul>
-<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#cow-data"><i class="fa fa-check"></i><b>3.1</b> COW Data</a></li>
-<li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#choropleth-maps"><i class="fa fa-check"></i><b>3.2</b> choropleth maps</a></li>
-<li class="chapter" data-level="3.3" data-path="data-transformation.html"><a href="data-transformation.html#external-data"><i class="fa fa-check"></i><b>3.3</b> External Data</a></li>
+<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#cow-data"><i class="fa fa-check"></i><b>3.1</b> COW data</a></li>
+<li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#choropleth-maps"><i class="fa fa-check"></i><b>3.2</b> Choropleth maps</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a><ul>
@@ -132,32 +131,35 @@
 <h1><span class="header-section-number">Chapter 3</span> Data transformation</h1>
 <p>In this chapter, we discuss the process of getting the data into a form which we could easily work with in R.</p>
 <div id="cow-data" class="section level2">
-<h2><span class="header-section-number">3.1</span> COW Data</h2>
+<h2><span class="header-section-number">3.1</span> COW data</h2>
 <p>The 4 data sets we downloaded as csv files from COW website are clean with each variable defined clearly. Generally, for each question we are interested in exploring, we selected the related variables only and transformed them into the format for plotting, by dplyr package functions such as mutate(), select(), filter(), group_by(), summarise() and tidyr package functions like gather() and spread(). For example, to answer what types of wars happened most frequently, for each data set, we first added one column for its general war type, and then selected <code>WarNum</code>, <code>WarName</code>, and <code>WarType</code>, and finally combined 4 data frames by row. Specially, we changed the <code>WarType</code> as a factor to war type plus brief description. For another instance, to answer which states suffered from most losses of human beings in battles, we picked state name and number of battle death for each data set, and changed the data type of number of battle deaths into uniform numeric data type without comma. Then we replaced negative number of battle deaths with <code>NA</code>. Then the cleaned data is ready for row binding and the last step includes grouping by state and counting the sum of deaths for each state. Other data transformation processes are similar except for selection of different set of columns.</p>
 <p>In order to answer some other questions incorporating both states and wars, for example, what states had most which type of wars, we performed more steps before combining by rows. It should be noticed that data sets of non-state wars, intra-state wars, and extra-state wars has each war as one row, which means there would be at least two states or sides for each row. Thus, in the three data sets, war name and war code are unique. On the other hand, in the inter-state data set, the <strong>combination</strong> of war name (war code) and state name is unique, which means one wars may range across multiple rows with each row recording information of one state involved in that war. It is the major different between these two kinds of data sets and we transformed data sets of intra-state, extra-state, and non-state wars into the format of data for inter-state wars. In other words, after the transformation, when all wars appear in one dataset, the pair of (WarName, StateName) is unique. The transformation algorithm is described below:</p>
-<p><strong>Intra-state</strong>:
-if a war appears with two sides, then:<br />
-* if CcodeA is valid, add new row (WarNum, WarName, WarType, StateName=sideA, ccode=CcodeA, BatDeath = SideADeaths) to data frame sideA;
-* if CcodeB is valid, add new row (WarNum, WarName, WarType, StateName=sideB, ccode=CcodeB, BatDeath = SideBDeaths) to data frame sideB;
-* row-bind sideA and sideB to form intra-state data frame with 6 variables WarNum, WarName, WarType, StateName, ccode, BatDeath.</p>
-<p><strong>Inter-state</strong>:
-if ccode is valid, then
-* add new row (WarNum, WarName, Type, StateName, ccode, BatDeath) to data frame inter-state with 6 variables WarNum, WarName, WarType, StateName, ccode, BatDeath.</p>
-<p><strong>Extra-state</strong>:
-there are no wars with both SideA and SideB existing, which means each row represents a war with one side record and then:
-* we can then safely add BatDeath and NonStateDeaths as total BatDeath
-* if ccode1 is valid, add new row (WarNum, WarName, WarType, StateName=SideA,ccode=ccode1, BatDeath) to data frame sideA;
-* if ccode2 is valid, add new row (WarNum, WarName, WarType, StateName=SideB,ccode=ccode2, BatDeath) to data frame sideb;
-* row-bind sideA and sideB to form extra-state data frame with 6 variables WarNum, WarName, WarType, StateName, ccode, BatDeath.</p>
+<p><strong>Intra-state</strong>:</p>
+<p>if a war appears with two sides, then:</p>
+<ul>
+<li><p>if CcodeA is valid, add new row (WarNum, WarName, WarType, StateName=sideA, ccode=CcodeA, BatDeath = SideADeaths) to data frame sideA;</p></li>
+<li><p>if CcodeB is valid, add new row (WarNum, WarName, WarType, StateName=sideB, ccode=CcodeB, BatDeath = SideBDeaths) to data frame sideB;</p></li>
+<li><p>row-bind sideA and sideB to form intra-state data frame with 6 variables WarNum, WarName, WarType, StateName, ccode, BatDeath.</p></li>
+</ul>
+<p><strong>Inter-state</strong>:</p>
+<p>if ccode is valid, then</p>
+<ul>
+<li>add new row (WarNum, WarName, Type, StateName, ccode, BatDeath) to data frame inter-state with 6 variables WarNum, WarName, WarType, StateName, ccode, BatDeath.</li>
+</ul>
+<p><strong>Extra-state</strong>:</p>
+<p>there are no wars with both SideA and SideB existing, which means each row represents a war with one side record and then:</p>
+<ul>
+<li><p>we can then safely add BatDeath and NonStateDeaths as total BatDeath</p></li>
+<li><p>if ccode1 is valid, add new row (WarNum, WarName, WarType, StateName=SideA,ccode=ccode1, BatDeath) to data frame sideA;</p></li>
+<li><p>if ccode2 is valid, add new row (WarNum, WarName, WarType, StateName=SideB,ccode=ccode2, BatDeath) to data frame sideb;</p></li>
+<li><p>row-bind sideA and sideB to form extra-state data frame with 6 variables WarNum, WarName, WarType, StateName, ccode, BatDeath.</p></li>
+</ul>
 <p><strong>Non-state</strong>: these wars are not about countries or states, and thus we did not take them into consideration in this particular case.</p>
 <p>Note that valid here means the ccode is not negative based on the codebook of COW and it exists in another data set provided by COW of a list of state and correspondong codes. Furthermore, all numbers of deaths were cleaned to become numbers.</p>
 </div>
 <div id="choropleth-maps" class="section level2">
-<h2><span class="header-section-number">3.2</span> choropleth maps</h2>
+<h2><span class="header-section-number">3.2</span> Choropleth maps</h2>
 <p>When plotting choropleth maps, we found there are some states or countries that currently do not exist and consequently do not appear in R’s world map data set, such as USSR. To deal with this issue, we recoded all countries that were in USSR during World War II as USSR and added those countries that still exist now into world data again. As a result, the world data set now should contain the geology data of all countries we have.</p>
-</div>
-<div id="external-data" class="section level2">
-<h2><span class="header-section-number">3.3</span> External Data</h2>
 
 </div>
 </div>
