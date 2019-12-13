@@ -245,7 +245,6 @@ b1 <- ggplot(dfa2_extra.g, aes(x = reorder(StateName, Count), y = Count)) +
   ylab("Number of Wars") +
   coord_flip() + 
   ggtitle("Figure 4: Bar chart of number of\nextra-state wars\nfor each state") + 
-  scale_fill_manual(values=cbbPalette)+
   theme2
 
 dfa2_intra.g <- dfa2_intra %>%
@@ -260,7 +259,6 @@ b2 <- ggplot(dfa2_intra.g, aes(x = reorder(StateName, Count), y = Count)) +
   ylab("Number of Wars") + 
   coord_flip() + 
   ggtitle("Figure 5: Bar chart of number of\nintra-state wars\nfor each state")+ 
-  scale_fill_manual(values=cbbPalette) +
   theme2
 
 dfa2_inter.g <- dfa2_inter %>%
@@ -275,7 +273,6 @@ b3 <- ggplot(dfa2_inter.g, aes(x = reorder(StateName, Count), y = Count)) +
   ylab("Number of Wars") + 
   coord_flip() +
   ggtitle("Figure 6: Bar chart of number of\ninter-state wars\nfor each state") + 
-  scale_fill_manual(values=cbbPalette)+
   theme2
 ```
 
