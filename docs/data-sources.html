@@ -24,7 +24,7 @@
 <meta name="author" content="Priyanka Lahoti, Hima Bindu Bhardwaj, Jasmine Bao, Yingnan Wu" />
 
 
-<meta name="date" content="2019-12-12" />
+<meta name="date" content="2019-12-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -83,15 +83,23 @@
 <li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a><ul>
 <li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#sources"><i class="fa fa-check"></i><b>2.1</b> Sources</a></li>
 <li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#format"><i class="fa fa-check"></i><b>2.2</b> Format</a></li>
-<li class="chapter" data-level="2.3" data-path="data-sources.html"><a href="data-sources.html#variables"><i class="fa fa-check"></i><b>2.3</b> Variables</a></li>
-<li class="chapter" data-level="2.4" data-path="data-sources.html"><a href="data-sources.html#additional-information"><i class="fa fa-check"></i><b>2.4</b> Additional Information</a></li>
-<li class="chapter" data-level="2.5" data-path="data-sources.html"><a href="data-sources.html#issues-with-datasets"><i class="fa fa-check"></i><b>2.5</b> Issues with Datasets</a></li>
+<li class="chapter" data-level="2.3" data-path="data-sources.html"><a href="data-sources.html#variables"><i class="fa fa-check"></i><b>2.3</b> Variables</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="data-sources.html"><a href="data-sources.html#correlates-of-war"><i class="fa fa-check"></i><b>2.3.1</b> Correlates of War</a></li>
+<li class="chapter" data-level="2.3.2" data-path="data-sources.html"><a href="data-sources.html#maddison-project-database-2018"><i class="fa fa-check"></i><b>2.3.2</b> Maddison Project Database 2018</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="data-sources.html"><a href="data-sources.html#additional-information"><i class="fa fa-check"></i><b>2.4</b> Additional information</a></li>
+<li class="chapter" data-level="2.5" data-path="data-sources.html"><a href="data-sources.html#issues-with-data-sets"><i class="fa fa-check"></i><b>2.5</b> Issues with data sets</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a><ul>
 <li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#cow-data"><i class="fa fa-check"></i><b>3.1</b> COW data</a></li>
 <li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#choropleth-maps"><i class="fa fa-check"></i><b>3.2</b> Choropleth maps</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
+<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a><ul>
+<li class="chapter" data-level="4.1" data-path="missing-values.html"><a href="missing-values.html#inter-state-wars-dataset"><i class="fa fa-check"></i><b>4.1</b> Inter-state Wars Dataset</a></li>
+<li class="chapter" data-level="4.2" data-path="missing-values.html"><a href="missing-values.html#intra-state-wars-dataset"><i class="fa fa-check"></i><b>4.2</b> Intra-state Wars Dataset</a></li>
+<li class="chapter" data-level="4.3" data-path="missing-values.html"><a href="missing-values.html#extra-state-wars-dataset"><i class="fa fa-check"></i><b>4.3</b> Extra-state Wars Dataset</a></li>
+<li class="chapter" data-level="4.4" data-path="missing-values.html"><a href="missing-values.html#non-state-wars-dataset"><i class="fa fa-check"></i><b>4.4</b> Non-state Wars Dataset</a></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a><ul>
 <li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#general-edav"><i class="fa fa-check"></i><b>5.1</b> General EDAV</a><ul>
 <li class="chapter" data-level="5.1.1" data-path="results.html"><a href="results.html#number-of-wars-by-type"><i class="fa fa-check"></i><b>5.1.1</b> Number of wars by type</a></li>
@@ -183,7 +191,8 @@ The Maddison Project Database provides information on comparative economic growt
 </div>
 <div id="variables" class="section level2">
 <h2><span class="header-section-number">2.3</span> Variables</h2>
-<p><strong>Correlates of War</strong></p>
+<div id="correlates-of-war" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> Correlates of War</h3>
 <table>
 <colgroup>
 <col width="15%" />
@@ -286,7 +295,7 @@ The Maddison Project Database provides information on comparative economic growt
 </tr>
 <tr class="odd">
 <td>Initiator</td>
-<td>whether the state initiated the war(some datasets encoded this variable differently) 1 = Yes 2 = No</td>
+<td>whether the state initiated the war 1 = Yes 2 = No</td>
 </tr>
 <tr class="even">
 <td>TransTo</td>
@@ -322,7 +331,9 @@ The Maddison Project Database provides information on comparative economic growt
 </tr>
 </tbody>
 </table>
-<p><strong>Maddison Project Database 2018</strong></p>
+</div>
+<div id="maddison-project-database-2018" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> Maddison Project Database 2018</h3>
 <table>
 <colgroup>
 <col width="35%" />
@@ -370,20 +381,21 @@ The Maddison Project Database provides information on comparative economic growt
 </tbody>
 </table>
 </div>
+</div>
 <div id="additional-information" class="section level2">
-<h2><span class="header-section-number">2.4</span> Additional Information</h2>
+<h2><span class="header-section-number">2.4</span> Additional information</h2>
 <p>For inter-state war dataset, most wars have multiple rows of observations, where the number of rows is the number of participants of that war. For instance, the Franco-Spanish War is between Spain and France and there is one row of observation for each participating country.</p>
 <p>For intra-state war dataset and extra-state war dataset, most wars also have multiple rows of observations, where the number of rows is the maximum number of participants on either side of that war. For instance, Ottoman Empire is on side A of the Greek Independence War and side B consists of Greeks, United Kingdom, France and Russia. Therefore, the number of rows got is 4 for Greek Independence War. We also note that in the case that one side has fewer participants than the other, the participants will not be repeated but will be coded as -8(not applicable). For the same example as above, side A only has Ottoman Empire and Ottoman Empire is in one row while the other three rows on the same war has -8 for side A, instead of repeating Ottoman Empire.</p>
 <p>For non-state war dataset, each war only has one row of observation.</p>
 </div>
-<div id="issues-with-datasets" class="section level2">
-<h2><span class="header-section-number">2.5</span> Issues with Datasets</h2>
+<div id="issues-with-data-sets" class="section level2">
+<h2><span class="header-section-number">2.5</span> Issues with data sets</h2>
 <p><strong>Correlates of War</strong></p>
 <p>There is no war data after 2010 so the war dataset is not exactly up to date. There is only one observation for type 9 war data which is the non-state wars between non-state armed groups that take place across state borders. Furthermore, the battle death data is only an estimate: they utilized a 3:1 ratio of wounded to killed in order to calculate the number of battle-related deaths when only casualty estimates are available. However, the dataset is quite extensive with data dating back to the 16th century and other sources also only provide estimated values for death. This dataset still provides us with plenty insights on the relative magnitude of the costs of war participation.</p>
 <p><strong>Maddison Project Database 2018</strong></p>
 <p>While this dataset seems to be the most extensive as it comes to historic data on real GDP per capita and population, some of the data are extrapolated.</p>
 <p><strong>Primary School Enrollment, Military Expenditure as a share of GDP, Human Development Index</strong></p>
-<p>All of them don’t have data regarding all countries involved in World War 1 (or 2). We chose those countries that were a part of WW1 or WW2 (but all were not present). Another issue was that even if countries were available, data concerning them for all years were not available. We could only analyze those that matched the timeline of WW1 and WW2.</p>
+<p>All of them don’t have data regarding all countries involved in World War I (or II). We chose those countries that were a part of WWI or WWII (but all were not present). Another issue was that even if countries were available, data concerning them for all years were not available. We could only analyze those that matched the timeline of WWI and WWII.</p>
 
 </div>
 </div>

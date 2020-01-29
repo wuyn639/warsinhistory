@@ -29,7 +29,7 @@ extra_state <- read.csv('data/raw/Extra-StateWarData_v4.0.csv')
 non_state <- read.csv('data/raw/Non-StateWarData_v4.0.csv')
 ```
 
-**Inter-state Wars Dataset**
+## Inter-state Wars Dataset
 ```{r}
 #Convert the missing values to NA
 inter_state_withna <- replace_with_na_all(data = inter_state,
@@ -44,7 +44,7 @@ visna(inter_state_withna,sort = "r")
 From the visna plot, we can observe that most rows have no variables missing. There is one row with BatDeath(battle death) data missing.
 
 
-**Intra-state Wars Dataset**
+## Intra-state Wars Dataset
 ```{r}
 #Convert the missing values to NA
 intra_state_withna <- replace_with_na_all(data = intra_state,
@@ -59,7 +59,7 @@ visna(intra_state_withna,sort = "r")
 We observe that most rows have no missing variables. The most common missing data pattern is having SideADeath and SideBDeath data missing. It's rare having more than three variables missing in this dataset. 
 
 
-**Extra-state Wars Dataset**
+## Extra-state Wars Dataset
 ```{r}
 #Convert the missing values to NA
 extra_state_withna <- replace_with_na_all(data = extra_state,
@@ -75,7 +75,7 @@ visna(extra_state_withna,sort = "r")
 We observe that most rows have no missing variables. The most common missing data pattern is having StartDay1(the day on which sustained combat began) data missing. It's rare having more than two variables missing in this dataset. 
 
 
-**Non-state Wars Dataset**
+## Non-state Wars Dataset
 
 ```{r}
 #Convert the missing values to NA

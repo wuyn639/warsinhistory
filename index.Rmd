@@ -7,22 +7,17 @@ site: bookdown::bookdown_site
 
 # Introduction
 
-This project aims at exploring the effects and characteristics of different wars in history, with a special focus on World War 1 and World War 2. There are several reasons to engage in the careful study of history of wars. It can be used to better understand our heritage and the challenges faced and overcame by previous generations. It can remind us of the true cost of war and act as a staunch warning against recklessly engaging in needless military conflict. Through this project, we specifically look for trends and effects on education, military expenditures, human development index, etc of countries that were engaged in war, in addition to exploring their general characteristics. We also compare the effects of different wars on countries. 
+This project aims at exploring the effects and characteristics of different wars in history, with a special focus on World War 1 and World War 2. There are several reasons to engage in the careful study of history of wars. It can be used to better understand our heritage and the challenges faced and overcame by previous generations. It can remind us of the true cost of war and act as a staunch warning against recklessly engaging in needless military conflict. Through this project, we specifically look for trends and effects on education, military expenditures, human development index, etc of countries that were engaged in war, in addition to exploring their general characteristics. We also compare the effects of different wars on countries. The GitHub repository of our codes can be found [here](https://github.com/wuyn639/warsinhistory).
 
 
-The following demonstrations done by Google Voyager showcase the 10 key battles of the WW1, memorial sites of WW1 and remnants of WW2 in the pacific. The scale and aftermath of the two wars can be clearly seen through the demonstrations:
+The following demonstrations done by Google Voyager showcase the [10 key battles of the WW1](https://earth.google.com/web/@42.15682,12.110757,588a,16044031d,35y,0h,0t,0r/data=CjASLhIgYTJiOWU3YzdiYjRkMTFlODgzNDYxNzYyZTMyZDQ3MWQiCnZveV9zcGxhc2g), [memorial sites of WW1](https://earth.google.com/web/@2.11911094,-176.05298846,-4785.58516043a,11790687.0755d,35y,0h,0t,0r/data=CjASLhIgNDMxMzZkMGNjMzNmMTFlODk1OTkxOWQ3NmM5MTcwNzciCmdjc19saXN0XzA) and [remnants of WW2 in the pacific](https://earth.google.com/web/@2.11911094,-176.05298846,-4785.58516043a,11790687.0755d,35y,0h,0t,0r/data=CjASLhIgYzBjZDY0YzBjYmRhMTFlODlmNDYwNzE1NjE5ZDE0MWMiCnZveV9zcGxhc2g). The scale and aftermath of the two wars can be clearly seen through the demonstrations.
 
-1. [10 Key Battles of WW1](https://earth.google.com/web/@42.15682,12.110757,588a,16044031d,35y,0h,0t,0r/data=CjASLhIgYTJiOWU3YzdiYjRkMTFlODgzNDYxNzYyZTMyZDQ3MWQiCnZveV9zcGxhc2g)
 
-2. [WW1 Memorial Sites](https://earth.google.com/web/@2.11911094,-176.05298846,-4785.58516043a,11790687.0755d,35y,0h,0t,0r/data=CjASLhIgNDMxMzZkMGNjMzNmMTFlODk1OTkxOWQ3NmM5MTcwNzciCmdjc19saXN0XzA)
+About the terms/data sets used in the project (*Typology of Wars*):
 
-3. [Remnants of WW2 In the Pacific](https://earth.google.com/web/@2.11911094,-176.05298846,-4785.58516043a,11790687.0755d,35y,0h,0t,0r/data=CjASLhIgYzBjZDY0YzBjYmRhMTFlODlmNDYwNzE1NjE5ZDE0MWMiCnZveV9zcGxhc2g)
-
-About the terms/datasets used in the project (*Typology of Wars*):
-
-1. Inter State Wars refer to all the wars that took place between different countries of the world. For example, World War 1 and World War 2 are two specific inter state wars.
-2. Intra State Wars refer to wars that took place inside of countries (non state actors)
-Others terms used are military expenditure, GDP per capita, Human Development Index, Number of battle deaths, etc which are self explanatory.
- More about these details are available in the upcoming chapter 2.
+1. **Inter State Wars** refer to all the wars that took place between different countries of the world. For example, World War I and World War II are two specific inter state wars.
+2. **Intra State Wars** refer to wars that took place inside of countries (non state actors).
+3. Others terms used are military expenditure, GDP per capita, Human Development Index, Number of battle deaths, etc., which are self explanatory.
+4. More about these details are available in the upcoming chapter 2.
  
- *Note: This project is color blind friendly.*
+*Note: This project is color blind friendly.*
