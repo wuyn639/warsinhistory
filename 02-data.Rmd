@@ -66,7 +66,7 @@ All data we found for this project came in `csv` format.
 
 ## Variables
 
-**Correlates of War**
+### Correlates of War
 
 
 Variables         | Description
@@ -93,7 +93,7 @@ EndYear2          | after fighting resumes, the year in which sustained combat e
 TransFrom         | the WarNum of a preceding war that was transformed into this inter-state war: -8 = Not applicable
 Interven          | was there an additional state that intervened in the war? 0 = no, 1 = yes
 WhereFought       | Region(s) where combat involving the state occurred.
-Initiator         | whether the state initiated the war(some datasets encoded this variable differently) 1 = Yes 2 = No
+Initiator         | whether the state initiated the war 1 = Yes 2 = No
 TransTo           | the WarNum of the war that this war transformed into, -8 = Not applicable
 Outcome           | 1 = Winner; 2 = Loser; 3 = Compromise/Tied; 4 = The war was transformed into another type of war; 5 = The war is ongoing as of 12/31/2007; 6 = Stalemate; 7 = Conflict continues at below war level; 8 = changed sides
 SideADeaths       | the battle-related combatant fatalities suffered by the Side A participant: - 8 = not applicable, -9= data unknown
@@ -105,7 +105,7 @@ Version           | Version of the data = 4.0
 
 
 
-**Maddison Project Database 2018**
+### Maddison Project Database 2018
 
 Variables      | Description
 -------------- | --------------------------
@@ -119,7 +119,7 @@ i_cig          | observation is extrapolated (0), benchmark (1), or interpolated
 i_bm           | For benchmark observations: 1: ICP PPP estimates, 2: Historical income benchmarks, 3: Real wages and urbanization, 4: Multiple of subsistence, 5: Braithwaite (1968) PPPs
 
 
-## Additional Information
+## Additional information
 
 For inter-state war dataset, most wars have multiple rows of observations, where the number of rows is the number of participants of that war. For instance, the Franco-Spanish War is between Spain and France and there is one row of observation for each participating country. 
 
@@ -128,7 +128,7 @@ For intra-state war dataset and extra-state war dataset, most wars also have mul
 For non-state war dataset, each war only has one row of observation. 
 
 
-## Issues with Datasets
+## Issues with data sets
 
 **Correlates of War**
 
@@ -140,4 +140,4 @@ While this dataset seems to be the most extensive as it comes to historic data o
 
 **Primary School Enrollment, Military Expenditure as a share of GDP, Human Development Index**
 
-All of them don't have data regarding all countries involved in World War 1 (or 2). We chose those countries that were a part of WW1 or WW2 (but all were not present). Another issue was that even if countries were available, data concerning them for all years were not available. We could only analyze those that matched the timeline of WW1 and WW2. 
+All of them don't have data regarding all countries involved in World War I (or II). We chose those countries that were a part of WWI or WWII (but all were not present). Another issue was that even if countries were available, data concerning them for all years were not available. We could only analyze those that matched the timeline of WWI and WWII. 

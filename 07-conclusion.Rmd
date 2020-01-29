@@ -1,6 +1,5 @@
 # Conclusion
 
-Discuss limitations and future directions, lessons learned.
 
 Here are our most surprising findings:
 

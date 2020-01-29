@@ -24,7 +24,7 @@
 <meta name="author" content="Priyanka Lahoti, Hima Bindu Bhardwaj, Jasmine Bao, Yingnan Wu" />
 
 
-<meta name="date" content="2019-12-12" />
+<meta name="date" content="2019-12-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -83,15 +83,23 @@
 <li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a><ul>
 <li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#sources"><i class="fa fa-check"></i><b>2.1</b> Sources</a></li>
 <li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#format"><i class="fa fa-check"></i><b>2.2</b> Format</a></li>
-<li class="chapter" data-level="2.3" data-path="data-sources.html"><a href="data-sources.html#variables"><i class="fa fa-check"></i><b>2.3</b> Variables</a></li>
-<li class="chapter" data-level="2.4" data-path="data-sources.html"><a href="data-sources.html#additional-information"><i class="fa fa-check"></i><b>2.4</b> Additional Information</a></li>
-<li class="chapter" data-level="2.5" data-path="data-sources.html"><a href="data-sources.html#issues-with-datasets"><i class="fa fa-check"></i><b>2.5</b> Issues with Datasets</a></li>
+<li class="chapter" data-level="2.3" data-path="data-sources.html"><a href="data-sources.html#variables"><i class="fa fa-check"></i><b>2.3</b> Variables</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="data-sources.html"><a href="data-sources.html#correlates-of-war"><i class="fa fa-check"></i><b>2.3.1</b> Correlates of War</a></li>
+<li class="chapter" data-level="2.3.2" data-path="data-sources.html"><a href="data-sources.html#maddison-project-database-2018"><i class="fa fa-check"></i><b>2.3.2</b> Maddison Project Database 2018</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="data-sources.html"><a href="data-sources.html#additional-information"><i class="fa fa-check"></i><b>2.4</b> Additional information</a></li>
+<li class="chapter" data-level="2.5" data-path="data-sources.html"><a href="data-sources.html#issues-with-data-sets"><i class="fa fa-check"></i><b>2.5</b> Issues with data sets</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a><ul>
 <li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#cow-data"><i class="fa fa-check"></i><b>3.1</b> COW data</a></li>
 <li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#choropleth-maps"><i class="fa fa-check"></i><b>3.2</b> Choropleth maps</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
+<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a><ul>
+<li class="chapter" data-level="4.1" data-path="missing-values.html"><a href="missing-values.html#inter-state-wars-dataset"><i class="fa fa-check"></i><b>4.1</b> Inter-state Wars Dataset</a></li>
+<li class="chapter" data-level="4.2" data-path="missing-values.html"><a href="missing-values.html#intra-state-wars-dataset"><i class="fa fa-check"></i><b>4.2</b> Intra-state Wars Dataset</a></li>
+<li class="chapter" data-level="4.3" data-path="missing-values.html"><a href="missing-values.html#extra-state-wars-dataset"><i class="fa fa-check"></i><b>4.3</b> Extra-state Wars Dataset</a></li>
+<li class="chapter" data-level="4.4" data-path="missing-values.html"><a href="missing-values.html#non-state-wars-dataset"><i class="fa fa-check"></i><b>4.4</b> Non-state Wars Dataset</a></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a><ul>
 <li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#general-edav"><i class="fa fa-check"></i><b>5.1</b> General EDAV</a><ul>
 <li class="chapter" data-level="5.1.1" data-path="results.html"><a href="results.html#number-of-wars-by-type"><i class="fa fa-check"></i><b>5.1.1</b> Number of wars by type</a></li>
@@ -133,7 +141,8 @@
 <div id="missing-values" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> Missing values</h1>
 <p>From the codebook, we know that -9 is used to encode variable with unknown values. Therefore, we need to encode all variables with value -9 as NA. Note that the value -8 encodes “not applicable” which is different from missing.</p>
-<p><strong>Inter-state Wars Dataset</strong></p>
+<div id="inter-state-wars-dataset" class="section level2">
+<h2><span class="header-section-number">4.1</span> Inter-state Wars Dataset</h2>
 <div class="figure"><span id="fig:unnamed-chunk-3"></span>
 <img src="finalproj_files/figure-html/unnamed-chunk-3-1.png" alt="Visna Graph of Missing Data Pattern for Inter-state Wars Dataset" width="672" />
 <p class="caption">
@@ -141,7 +150,9 @@ Figure 4.1: Visna Graph of Missing Data Pattern for Inter-state Wars Dataset
 </p>
 </div>
 <p>From the visna plot, we can observe that most rows have no variables missing. There is one row with BatDeath(battle death) data missing.</p>
-<p><strong>Intra-state Wars Dataset</strong></p>
+</div>
+<div id="intra-state-wars-dataset" class="section level2">
+<h2><span class="header-section-number">4.2</span> Intra-state Wars Dataset</h2>
 <div class="figure"><span id="fig:unnamed-chunk-5"></span>
 <img src="finalproj_files/figure-html/unnamed-chunk-5-1.png" alt="Visna Graph of Missing Data Pattern for Intra-state Wars Dataset" width="672" />
 <p class="caption">
@@ -149,7 +160,9 @@ Figure 4.2: Visna Graph of Missing Data Pattern for Intra-state Wars Dataset
 </p>
 </div>
 <p>We observe that most rows have no missing variables. The most common missing data pattern is having SideADeath and SideBDeath data missing. It’s rare having more than three variables missing in this dataset.</p>
-<p><strong>Extra-state Wars Dataset</strong></p>
+</div>
+<div id="extra-state-wars-dataset" class="section level2">
+<h2><span class="header-section-number">4.3</span> Extra-state Wars Dataset</h2>
 <div class="figure"><span id="fig:unnamed-chunk-7"></span>
 <img src="finalproj_files/figure-html/unnamed-chunk-7-1.png" alt="Visna Graph of Missing Data Pattern for Extra-state Wars Dataset" width="672" />
 <p class="caption">
@@ -157,7 +170,9 @@ Figure 4.3: Visna Graph of Missing Data Pattern for Extra-state Wars Dataset
 </p>
 </div>
 <p>We observe that most rows have no missing variables. The most common missing data pattern is having StartDay1(the day on which sustained combat began) data missing. It’s rare having more than two variables missing in this dataset.</p>
-<p><strong>Non-state Wars Dataset</strong></p>
+</div>
+<div id="non-state-wars-dataset" class="section level2">
+<h2><span class="header-section-number">4.4</span> Non-state Wars Dataset</h2>
 <div class="figure"><span id="fig:unnamed-chunk-9"></span>
 <img src="finalproj_files/figure-html/unnamed-chunk-9-1.png" alt="Visna Graph of Missing Data Pattern for Non-state Wars Dataset" width="672" />
 <p class="caption">
@@ -166,6 +181,7 @@ Figure 4.4: Visna Graph of Missing Data Pattern for Non-state Wars Dataset
 </div>
 <p>We observe that there are more rows with missing data than without missing data. The most common missing data pattern is having SideADeath, SideBDeath and TotalCombatDeaths data missing. We also observe that if we have SideADeaths, SideBDeaths missing, then we often also have TotalCombatDeaths missing which makes sense since TotalCombatDeaths is the sum of SideADeath and SideBDeath.</p>
 
+</div>
 </div>
             </section>
 

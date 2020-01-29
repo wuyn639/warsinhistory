@@ -24,7 +24,7 @@
 <meta name="author" content="Priyanka Lahoti, Hima Bindu Bhardwaj, Jasmine Bao, Yingnan Wu" />
 
 
-<meta name="date" content="2019-12-12" />
+<meta name="date" content="2019-12-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -83,15 +83,23 @@
 <li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a><ul>
 <li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#sources"><i class="fa fa-check"></i><b>2.1</b> Sources</a></li>
 <li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#format"><i class="fa fa-check"></i><b>2.2</b> Format</a></li>
-<li class="chapter" data-level="2.3" data-path="data-sources.html"><a href="data-sources.html#variables"><i class="fa fa-check"></i><b>2.3</b> Variables</a></li>
-<li class="chapter" data-level="2.4" data-path="data-sources.html"><a href="data-sources.html#additional-information"><i class="fa fa-check"></i><b>2.4</b> Additional Information</a></li>
-<li class="chapter" data-level="2.5" data-path="data-sources.html"><a href="data-sources.html#issues-with-datasets"><i class="fa fa-check"></i><b>2.5</b> Issues with Datasets</a></li>
+<li class="chapter" data-level="2.3" data-path="data-sources.html"><a href="data-sources.html#variables"><i class="fa fa-check"></i><b>2.3</b> Variables</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="data-sources.html"><a href="data-sources.html#correlates-of-war"><i class="fa fa-check"></i><b>2.3.1</b> Correlates of War</a></li>
+<li class="chapter" data-level="2.3.2" data-path="data-sources.html"><a href="data-sources.html#maddison-project-database-2018"><i class="fa fa-check"></i><b>2.3.2</b> Maddison Project Database 2018</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="data-sources.html"><a href="data-sources.html#additional-information"><i class="fa fa-check"></i><b>2.4</b> Additional information</a></li>
+<li class="chapter" data-level="2.5" data-path="data-sources.html"><a href="data-sources.html#issues-with-data-sets"><i class="fa fa-check"></i><b>2.5</b> Issues with data sets</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a><ul>
 <li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#cow-data"><i class="fa fa-check"></i><b>3.1</b> COW data</a></li>
 <li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#choropleth-maps"><i class="fa fa-check"></i><b>3.2</b> Choropleth maps</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
+<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a><ul>
+<li class="chapter" data-level="4.1" data-path="missing-values.html"><a href="missing-values.html#inter-state-wars-dataset"><i class="fa fa-check"></i><b>4.1</b> Inter-state Wars Dataset</a></li>
+<li class="chapter" data-level="4.2" data-path="missing-values.html"><a href="missing-values.html#intra-state-wars-dataset"><i class="fa fa-check"></i><b>4.2</b> Intra-state Wars Dataset</a></li>
+<li class="chapter" data-level="4.3" data-path="missing-values.html"><a href="missing-values.html#extra-state-wars-dataset"><i class="fa fa-check"></i><b>4.3</b> Extra-state Wars Dataset</a></li>
+<li class="chapter" data-level="4.4" data-path="missing-values.html"><a href="missing-values.html#non-state-wars-dataset"><i class="fa fa-check"></i><b>4.4</b> Non-state Wars Dataset</a></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a><ul>
 <li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#general-edav"><i class="fa fa-check"></i><b>5.1</b> General EDAV</a><ul>
 <li class="chapter" data-level="5.1.1" data-path="results.html"><a href="results.html#number-of-wars-by-type"><i class="fa fa-check"></i><b>5.1.1</b> Number of wars by type</a></li>
@@ -136,25 +144,29 @@
 <h2><span class="header-section-number">6.1</span> Interactive networks</h2>
 <p>Link to the Shiny app: <a href="https://priyankalahoti.shinyapps.io/shinyapp/" class="uri">https://priyankalahoti.shinyapps.io/shinyapp/</a></p>
 <p>To better understand or obtain insights such as which countries were most active in the wars and with whom, we plotted the wars (World War 1 and World War 2) in a graphical manner. Each node in the graph represents a country which was a part of the war being visualized and each edge represents the fact that those two countries which are connected to the edge on either end, were involved in a war against each other.</p>
-<p>Usage of the app: The drop-down menu enables users to select if they want to visualize the countries involved in World War 1 or in World War 2. Once selected, the app graphically visualizes the countries. On clicking on a country, the countries it was involved in a war with, get highlighted and hence one can visually see the number of countries that were against and also which countries these were. The nodes can be reordered and can be dragged around on the screen. There is also an option to zoom in and out of the image for better visibility and inspection by the user.</p>
-<p>Packages Used:
-Shiny - Used for building and deploying the Shiny app locally
-Shinythemes - Used to change the theme of the app for better visual appeal/use
-ShinyWidgets - Used to change the background color of the app
-VisNetwork, igraph - Used to plot the network graph</p>
-<p>Observation: First of all, it is obvious that more countries participated in WW2 than WW1. The countries in the middle are more active(it is in war with a lot of other countries). For WW1, the four countries that are most active are Germany, Austria-Hungary, Turkey, Bulgaria. Austria-Hungary initiated WW1 and Germany, Turkey and Bulgaria are on the same side as Austria-Hungary. For WW2, France, Finland, Bulgaria, Italy, Germany, Romania, Hungary and Japan are the most active countries. They were all on the same side as the initiator Germany at one point during the war(France, Romania, Bulgaria and Italy switched sides once during WW2).</p>
+<p><strong>Usage of the app</strong>: The drop-down menu enables users to select if they want to visualize the countries involved in World War 1 or in World War 2. Once selected, the app graphically visualizes the countries. On clicking on a country, the countries it was involved in a war with, get highlighted and hence one can visually see the number of countries that were against and also which countries these were. The nodes can be reordered and can be dragged around on the screen. There is also an option to zoom in and out of the image for better visibility and inspection by the user.</p>
+<p><strong>Packages Used</strong>:</p>
+<ul>
+<li><p>Shiny - Used for building and deploying the Shiny app locally;</p></li>
+<li><p>Shinythemes - Used to change the theme of the app for better visual appeal/use;</p></li>
+<li><p>ShinyWidgets - Used to change the background color of the app;</p></li>
+<li><p>VisNetwork, igraph - Used to plot the network graph.</p></li>
+</ul>
+<p><strong>Observation</strong>: First of all, it is obvious that more countries participated in WWII than WWI. The countries in the middle are more active(it is in war with a lot of other countries). For WWI, the four countries that are most active are Germany, Austria-Hungary, Turkey, Bulgaria. Austria-Hungary initiated WWI and Germany, Turkey and Bulgaria are on the same side as Austria-Hungary. For WWII, France, Finland, Bulgaria, Italy, Germany, Romania, Hungary and Japan are the most active countries. They were all on the same side as the initiator Germany at one point during the war(France, Romania, Bulgaria and Italy switched sides once during WWII).</p>
 </div>
 <div id="interactive-choropleth-map" class="section level2">
 <h2><span class="header-section-number">6.2</span> Interactive choropleth map</h2>
 <p>Link to the Shiny app: <a href="https://priyankalahoti.shinyapps.io/shinyapp1/" class="uri">https://priyankalahoti.shinyapps.io/shinyapp1/</a></p>
 <p>We plotted the static world map for battle deaths for World War 1 and 2 back in chapter 5.2 in Figure 16. Considering that it might be a little difficult to read for some countries and we couldn’t see the actual figure for battle deaths, we decided to plot an interactive version in shiny app to help is better understand the battle deaths for countries that participated in those two wars.</p>
-<p>Usage of the app: The drop-down menu enables users to select if they want to visualize the countries involved in World War 1 or in World War 2. Once selected, the app graphically visualizes the countries. The app shows the same static graph as Figure 16 in 5.2 but when user hovers over the countries, if the country participated in that selected war, the battle death figure in thousands will show up and if the country did not participate in that selected war, it will show NA and will not have fill color.</p>
-<p>Packages Used:
-Shiny - Used for building and deploying the Shiny app locally
-ggiraph: Used to create an interactive graphic with a ggplot object to be used in shiny app</p>
-<p>Observation: First of all, we observe that more countries participated in WW2 than WW1. We can say more definitively that the overall battle death level is higher during WW1 than WW2, with USSR being the country with significantly more battle deaths than any other country in WW2. The three countries with the most battle death counts are: USSR, Germany and China: deaths in USSR is more than double the deaths in Germany and deaths in Germany is about double the deaths in China.</p>
-<p>We tried to make a cartogram according to the one in this <a href="http://lambert.nico.free.fr/tp/biblio/Dougeniketal1985.pdf">link</a>:. We put in around 6 hours of work but were unsuccessful because it requires a really hard algorithm we were unable to figure out in 6 hours.</p>
-<p>We also tried to make a dropdown menu that enables users to select if they want to visualize the countries involved in side A and side B. However, we were not successful in doing so as there exists some ambiguities: some countries(specifically, France, Romania, Bulgaria and Italy) changed sides once during WW2.</p>
+<p><strong>Usage of the app</strong>: The drop-down menu enables users to select if they want to visualize the countries involved in World War 1 or in World War 2. Once selected, the app graphically visualizes the countries. The app shows the same static graph as Figure 16 in 5.2 but when user hovers over the countries, if the country participated in that selected war, the battle death figure in thousands will show up and if the country did not participate in that selected war, it will show NA and will not have fill color.</p>
+<p><strong>Packages Used</strong>:</p>
+<ul>
+<li><p>Shiny - Used for building and deploying the Shiny app locally;</p></li>
+<li><p>ggiraph: Used to create an interactive graphic with a ggplot object to be used in shiny app.</p></li>
+</ul>
+<p><strong>Observation</strong>: First of all, we observe that more countries participated in WWII than WWI. We can say more definitively that the overall battle death level is higher during WWII than WWI, with USSR being the country with significantly more battle deaths than any other country in WWII. The three countries with the most battle death counts are: USSR, Germany and China: deaths in USSR is more than double the deaths in Germany and deaths in Germany is about double the deaths in China.</p>
+<p>We tried to make a cartogram according to the one in this <a href="http://lambert.nico.free.fr/tp/biblio/Dougeniketal1985.pdf">link</a>: We put in around 6 hours of work but were unsuccessful because it requires a really hard algorithm that we were unable to implement in another 6 hours.</p>
+<p>We also tried to make a dropdown menu that enables users to select if they want to visualize the countries involved in side A and side B. However, we were not successful in doing so as there exist some ambiguities: some countries (specifically, France, Romania, Bulgaria and Italy) changed sides once during WWII.</p>
 
 </div>
 </div>

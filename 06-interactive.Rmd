@@ -6,15 +6,19 @@ Link to the Shiny app: https://priyankalahoti.shinyapps.io/shinyapp/
 
 To better understand or obtain insights such as which countries were most active in the wars and with whom, we plotted the wars (World War 1 and World War 2) in a graphical manner. Each node in the graph represents a country which was a part of the war being visualized and each edge represents the fact that those two countries which are connected to the edge on either end, were involved in a war against each other. 
 
-Usage of the app: The drop-down menu enables users to select if they want to visualize the countries involved in World War 1 or in World War 2. Once selected, the app graphically visualizes the countries. On clicking on a country, the countries it was involved in a war with, get highlighted and hence one can visually see the number of countries that were against and also which countries these were. The nodes can be reordered and can be dragged around on the screen. There is also an option to zoom in and out of the image for better visibility and inspection by the user. 
+**Usage of the app**: The drop-down menu enables users to select if they want to visualize the countries involved in World War 1 or in World War 2. Once selected, the app graphically visualizes the countries. On clicking on a country, the countries it was involved in a war with, get highlighted and hence one can visually see the number of countries that were against and also which countries these were. The nodes can be reordered and can be dragged around on the screen. There is also an option to zoom in and out of the image for better visibility and inspection by the user. 
 
-Packages Used: 
-Shiny - Used for building and deploying the Shiny app locally
-Shinythemes - Used to change the theme of the app for better visual appeal/use
-ShinyWidgets - Used to change the background color of the app
-VisNetwork, igraph  - Used to plot the network graph
+**Packages Used**: 
 
-Observation: First of all, it is obvious that more countries participated in WW2 than WW1. The countries in the middle are more active(it is in war with a lot of other countries). For WW1, the four countries that are most active are Germany, Austria-Hungary, Turkey, Bulgaria. Austria-Hungary initiated WW1 and Germany, Turkey and Bulgaria are on the same side as Austria-Hungary.  For WW2, France, Finland, Bulgaria, Italy, Germany, Romania, Hungary and Japan are the most active countries. They were all on the same side as the initiator Germany at one point during the war(France, Romania, Bulgaria and Italy switched sides once during WW2). 
+* Shiny - Used for building and deploying the Shiny app locally;
+
+* Shinythemes - Used to change the theme of the app for better visual appeal/use;
+
+* ShinyWidgets - Used to change the background color of the app;
+
+* VisNetwork, igraph  - Used to plot the network graph.
+
+**Observation**: First of all, it is obvious that more countries participated in WWII than WWI. The countries in the middle are more active(it is in war with a lot of other countries). For WWI, the four countries that are most active are Germany, Austria-Hungary, Turkey, Bulgaria. Austria-Hungary initiated WWI and Germany, Turkey and Bulgaria are on the same side as Austria-Hungary.  For WWII, France, Finland, Bulgaria, Italy, Germany, Romania, Hungary and Japan are the most active countries. They were all on the same side as the initiator Germany at one point during the war(France, Romania, Bulgaria and Italy switched sides once during WWII). 
 
 ## Interactive choropleth map
 
@@ -23,14 +27,18 @@ Link to the Shiny app: https://priyankalahoti.shinyapps.io/shinyapp1/
 
 We plotted the static world map for battle deaths for World War 1 and 2 back in chapter 5.2 in Figure 16. Considering that it might be a little difficult to read for some countries and we couldn’t see the actual figure for battle deaths, we decided to plot an interactive version in shiny app to help is better understand the battle deaths for countries that participated in those two wars. 
 
-Usage of the app: The drop-down menu enables users to select if they want to visualize the countries involved in World War 1 or in World War 2. Once selected, the app graphically visualizes the countries. The app shows the same static graph as Figure 16 in 5.2 but when user hovers over the countries, if the country participated in that selected war, the battle death figure in thousands will show up and if the country did not participate in that selected war, it will show NA and will not have fill color. 
+**Usage of the app**: The drop-down menu enables users to select if they want to visualize the countries involved in World War 1 or in World War 2. Once selected, the app graphically visualizes the countries. The app shows the same static graph as Figure 16 in 5.2 but when user hovers over the countries, if the country participated in that selected war, the battle death figure in thousands will show up and if the country did not participate in that selected war, it will show NA and will not have fill color. 
 
-Packages Used: 
-Shiny - Used for building and deploying the Shiny app locally
-ggiraph: Used to create an interactive graphic with a ggplot object to be used in shiny app
+**Packages Used**: 
 
-Observation: First of all, we observe that more countries participated in WW2 than WW1. We can say more definitively that the overall battle death level is higher during WW1 than WW2, with USSR being the country with significantly more battle deaths than any other country in WW2. The three countries with the most battle death counts are: USSR, Germany and China: deaths in USSR is more than double the deaths in Germany and deaths in Germany is about double the deaths in China.
+* Shiny - Used for building and deploying the Shiny app locally;
 
-We tried to make a cartogram according to the one in this [link](http://lambert.nico.free.fr/tp/biblio/Dougeniketal1985.pdf):. We put in around 6 hours of work but were unsuccessful because it requires a really hard algorithm we were unable to figure out in 6 hours.
+* ggiraph: Used to create an interactive graphic with a ggplot object to be used in shiny app.
+
+
+**Observation**: First of all, we observe that more countries participated in WWII than WWI. We can say more definitively that the overall battle death level is higher during WWII than WWI, with USSR being the country with significantly more battle deaths than any other country in WWII. The three countries with the most battle death counts are: USSR, Germany and China: deaths in USSR is more than double the deaths in Germany and deaths in Germany is about double the deaths in China.
+
+We tried to make a cartogram according to the one in this [link](http://lambert.nico.free.fr/tp/biblio/Dougeniketal1985.pdf): We put in around 6 hours of work but were unsuccessful because it requires a really hard algorithm that we were unable to implement in another 6 hours.
  
-We also tried to make a dropdown menu that enables users to select if they want to visualize the countries involved in side A and side B. However, we were not successful in doing so as there exists some ambiguities: some countries(specifically, France, Romania, Bulgaria and Italy) changed sides once during WW2.
+We also tried to make a dropdown menu that enables users to select if they want to visualize the countries involved in side A and side B. However, we were not successful in doing so as there exist some ambiguities: some countries (specifically, France, Romania, Bulgaria and Italy) changed sides once during WWII.
+
