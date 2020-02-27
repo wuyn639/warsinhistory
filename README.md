@@ -1,6 +1,4 @@
-This project created visualizations with data of war records and combined external data sets of historic population, real GDP per capita, military expenditure, and human development index from multiple sources to explore the effects and characteristics of different wars in history. 
-
-The following are some example questions we are interested and would like answer through exploratory data analysis:
+This project created visualizations with data of war records and combined external data sets to explore the effects and characteristics of different wars in history. The following are some example questions we are interested and would like answer through exploratory data analysis:
 
 * General visualization explorations of wars, such as:
     + what types of wars happened most frequently,
